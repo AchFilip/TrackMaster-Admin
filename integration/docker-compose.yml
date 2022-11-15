@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+  backend:
+    image: ${APP_NAME}-backend:${APP_VERSION}
+    build: ../backend
+    container_name: ${APP_NAME}-backend
+    restart: always
+    depends_on:
+      - database
+    networks:
+      - integration-network
+    volumes:
+      - ./logs/backend:/backend/logs
+    environment:
+      - DB_HOST=database
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_ROOT_USERNAME=${DB_ROOT_USERNAME}
+      - DB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}      
+      - HOST=${HOST} 
+  frontend:
+    image: ${APP_NAME}-frontend:${APP_VERSION}
+    build:
+      context: ../frontend
+    container_name: ${APP_NAME}-frontend
+    restart: always
+    networks:
+      - integration-network
+
+  database:
+    image: mongo:4.2.1-bionic
+    container_name: ${APP_NAME}-database
+    restart: always
+    command:
+      - --auth
+      - --bind_ip_all
+      - --port=${DB_PORT}
+      - --setParameter=enableLocalhostAuthBypass=true
+      - --timeStampFormat=iso8601-utc
+    networks:
+      - integration-network
+    volumes:
+      - database-volume:/data/db
+      - ./logs/database:/var/log/mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - HOST=${HOST}
+
+networks:
+  integration-network:
+    name: ${APP_NAME}-integration-network
+
+volumes:
+  database-volume:
+    name: ${APP_NAME}-database-volume

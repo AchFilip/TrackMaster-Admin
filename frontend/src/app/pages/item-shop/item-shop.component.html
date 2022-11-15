@@ -1,0 +1,38 @@
+<div class="main-container">
+
+    <div class="item-browser">
+
+        <div class="item-browser-title">
+            <p>Item List</p>
+        </div>
+        <div class="item-browser-content row">
+            <item-preview
+                class="col-6 item-preview"
+                *ngFor="let item of items"
+                [self]=item
+                (onClick)="onItemClick($event)"
+            ></item-preview>
+        </div>
+
+    </div>
+
+
+    <div class="item-details">
+
+        <div class="row-container">
+            <img [src]="this.imagePath + this.selectedItem.image"> <!--"this.imagePath + this.selectedItem.image"> -->
+            <div>
+                <p>{{selectedItem.name}}</p>
+                <div class="stars-container"></div>
+            </div>
+        </div>
+        <div class="description-container">
+            {{selectedItem.description}}
+        </div>
+        <div class="button-container">
+            
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+<div class="main-container" (click)="onClick()">
+
+    <div [ngClass]="{'selected': this.self.selected}"></div>
+    <img [src]="this.imagePath + this.self.image">
+    <div class="title-container">
+        <p>{{this.self.name}}</p>
+    </div>
+
+</div>
