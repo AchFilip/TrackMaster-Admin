@@ -1,0 +1,33 @@
+.main-container{
+    background-color: #DAE2ED;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .grid{
+        background-color: black;
+        width: 95%;
+        height: 95%;
+        padding: 0px;
+    }
+
+    .mat-grid-list{
+        background-color: #FCFCFC;
+    }
+
+    .mat-grid-tile{
+    
+        // LET ME DO WHATEVER I WANT, SQUIIIIIRREL
+        ::ng-deep .mat-figure {
+            display: block !important; /* or whichever you need */
+        }
+    }
+    
+
+
+}
+
+

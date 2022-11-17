@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ItemShopComponent } from './pages/item-shop/item-shop.component';
 import { PhoneAppComponent } from './pages/phone-app/phone-app.component';
+import { WallComponent } from './pages/wall/wall.component';
 
 const routes: Routes = [
   // { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'item-shop', component: ItemShopComponent},
   { path: 'phone-app', component: PhoneAppComponent},
+  { path: 'wall', component: WallComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
