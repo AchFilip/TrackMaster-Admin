@@ -1,0 +1,44 @@
+@font-face{
+    font-family: 'Koulen';
+    src: url(/assets/fonts/Koulen-Regular.ttf);
+}
+
+body {
+    position: relative;
+    width: 390px;
+    height: 844px;
+
+    /* bgr */
+    background: linear-gradient(24.51deg,
+            #85A8C9 75.84%,
+            #AFC6DB 92.59%,
+            #FFFFFF 108.79%);
+}
+
+.logo-middle {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    left: 109px;
+    top: 252px;
+}
+p{
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+}
+.description{
+    position: absolute;
+    width: 248px;
+    height: 18px;
+    left: 150px;
+    top: 440px;
+
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
