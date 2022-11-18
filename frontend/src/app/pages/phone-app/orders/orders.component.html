@@ -1,1 +1,29 @@
-<p>orders works!</p>
+<div class="main-container">
+    <div class="user-info">
+        <img [src]="userPath"/>
+        <p>VOLANAKIS KOSTIS</p>
+    </div>
+    <div class="menu-orders">
+        <div class="boxes">
+            <div class="middle-box">
+                
+            </div>
+            <div class="top-box">
+                <img [src]="topIconPath"/>
+                <p>AVAILABLE ORDERS</p>
+            </div>
+            <div class="bottom-box">
+                <img [src]="bottomIconPath"/>
+                <p>AVAILABLE ORDERS</p>
+            </div>  
+        </div>
+    </div>
+    <div class = "bottom-buttons">
+        <button mat-button class="clear">
+            <p>CLEAR</p>
+        </button>
+        <button mat-button class="start">
+            <p>start</p>
+        </button>
+    </div>
+</div>
