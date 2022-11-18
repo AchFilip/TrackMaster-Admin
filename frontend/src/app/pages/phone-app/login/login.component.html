@@ -1,0 +1,10 @@
+<div class="main-container">
+    <img [src]="logoPath" class="logo-top"/>
+    <h1>LOGIN</h1>
+    <div class="login-box-attributes">
+        <input class="input-Box" matInput [value]="this.passCode" maxlength="20">
+    </div>
+    <button mat-button (click)="btnClick()">
+        <mat-icon class="proceed-arrow">arrow_forward_ios</mat-icon>  
+    </button>
+</div>

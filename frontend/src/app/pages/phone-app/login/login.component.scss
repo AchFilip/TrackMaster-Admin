@@ -1,0 +1,86 @@
+@font-face{
+    font-family: 'Koulen';
+    src: url(/assets/fonts/Koulen-Regular.ttf);
+}
+
+.main-container{
+
+    /* bgr */
+    background: linear-gradient(24.51deg,
+            #85A8C9 75.84%,
+            #AFC6DB 92.59%,
+            #FFFFFF 108.79%);
+
+    width:100vw;
+    height: 100vh;
+
+    input {
+        font-family: 'Koulen', sans-serif;
+        font-style: normal;
+    }
+
+    p{
+        font-family: 'Koulen', sans-serif;
+        font-style: normal;
+    }
+
+    h1{
+        font-family: 'Koulen', sans-serif;
+        font-style: normal;
+        color: white;
+        position: absolute;
+        width: 300px;
+        height: 58px;
+        left: 150px;
+        top: 346px;
+    }
+
+    .logo-top{
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        left: 104px;
+        top: 99px;
+    }
+
+    .inputTest{
+        position: absolute;
+        width: 300px;
+        height: 62px;
+        left: 45px;
+        top: 422px;
+    }
+
+    input{
+        font-size: 22px;
+        padding: 30px;
+    }
+
+    .login-box-attributes{
+        position: absolute;
+
+        left: 45px;
+        top: 422px;
+
+        .input-Box{
+            box-sizing: border-box;
+            
+            width: 300px;
+            height: 62px;
+            
+            background: #FFFFFF;
+            border: 1px solid #707070;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 90px;
+        }
+    }
+    
+    .proceed-arrow{
+        position: absolute;
+
+        left: 300px;
+        top: 422px;
+        
+        transform: scale(1.5);
+    }
+}

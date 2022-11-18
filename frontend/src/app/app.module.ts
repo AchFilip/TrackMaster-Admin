@@ -18,6 +18,8 @@ import { PhoneAppComponent } from './pages/phone-app/phone-app.component';
 import { MatGridListModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './pages/phone-app/login/login.component';
+import { OrdersComponent } from './pages/phone-app/orders/orders.component';
 
 
 
@@ -29,6 +31,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     ItemShopComponent,
     ItemPreviewComponent,
     PhoneAppComponent,
+    LoginComponent,
+    OrdersComponent,
     WallComponent,
     CellComponent
   ],
