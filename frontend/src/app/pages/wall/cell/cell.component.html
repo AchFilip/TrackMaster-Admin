@@ -1,10 +1,15 @@
 <div class="main-container">
     
     <!-- Empty Cell -->
-    <div class="empty-cell">
+    <div *ngIf="this.empty" class="empty-cell" (click)="onAddClick()">
         <button mat-fab  aria-label="Example icon button with a home icon">
             <mat-icon>add</mat-icon>
         </button>
+    </div>
+
+    <!-- Widget -->
+    <div *ngIf="!this.empty" class="widget">
+        <p>HERE COMES THE WIDGET</p>
     </div>
     
 </div>

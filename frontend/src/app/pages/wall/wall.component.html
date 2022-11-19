@@ -1,12 +1,11 @@
 <div class="main-container">
     <div class="grid">
         <mat-grid-list [cols]="3" rowHeight="50%">
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
-            <mat-grid-tile ><cell></cell></mat-grid-tile>
+            <mat-grid-tile *ngFor="let cell of cells">
+                <cell 
+                    [self]=cell
+                ></cell>
+            </mat-grid-tile>
         </mat-grid-list>
     </div>
 </div>
