@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CellModel } from 'src/app/global/models/cell/cell.model';
+import { Display } from 'src/app/global/models/cell/cell.enum.display';
 
 @Component({
   selector: 'cell',
@@ -9,23 +10,25 @@ import { CellModel } from 'src/app/global/models/cell/cell.model';
 export class CellComponent implements OnInit {
   @Input() self!: CellModel;
 
-  protected empty: boolean = true;
+  
+
+  protected DisplayEnum = Display;
+  protected display?: Display;
   
   constructor() { }
 
   ngOnInit(): void {
+    this.display = Display.empty;
   }
 
   public onAddClick(){
-    this.setWidgetState()
+    this.toggleDisplay()
   }
 
-  // Cell's state
-  setEmptyState(){
-    this.empty = true
-  }
-
-  setWidgetState(){
-    this.empty = false
+  private toggleDisplay(){
+    if(this.display===this.DisplayEnum.widget) 
+      this.display=this.DisplayEnum.empty;
+    else 
+      this.display=this.DisplayEnum.widget;
   }
 }

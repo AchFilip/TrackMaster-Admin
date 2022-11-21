@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './pages/phone-app/login/login.component';
 import { OrdersComponent } from './pages/phone-app/orders/orders.component';
+import { WidgetComponent } from './pages/wall/cell/widget/widget.component';
 
 
 
@@ -34,7 +35,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     LoginComponent,
     OrdersComponent,
     WallComponent,
-    CellComponent
+    CellComponent,
+    WidgetComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),
