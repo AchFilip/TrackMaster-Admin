@@ -10,12 +10,12 @@
             </div>
             <div class="top-box">
                 <img [src]="topIconPath"/>
-                <p>AVAILABLE ORDERS</p>
+                <p>{{this.topDescription}}</p>
             </div>
-            <div class="bottom-box">
+            <button mat-button class="bottom-box" (click)="Skata()">
                 <img [src]="bottomIconPath"/>
-                <p>AVAILABLE ORDERS</p>
-            </div>  
+                <p>{{this.bottomDescription}}</p>
+            </button>  
         </div>
     </div>
     <div class = "bottom-buttons">
