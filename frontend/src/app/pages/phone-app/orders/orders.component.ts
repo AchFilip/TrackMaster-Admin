@@ -27,7 +27,7 @@ export class OrdersComponent implements OnInit {
       this.bottomDescription = "SELECTED ORDERS";
   }
 
-  Skata(): void {
+  changeOrders(): void {
     if(this.topIconPath.includes(this.avOrdersPath)){
       this.topIconPath = this.iconsPath + this.delPath;
       this.bottomIconPath = this.iconsPath + this.avOrdersPath;
@@ -43,6 +43,12 @@ export class OrdersComponent implements OnInit {
     }
   }
 
-  
+  clearSelectedOrders(){
+    console.log("Clearing orders..");
+  }
+
+  startWork(){
+    console.log("Start working..");
+  }
 
 }

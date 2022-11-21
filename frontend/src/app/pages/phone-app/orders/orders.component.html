@@ -12,17 +12,17 @@
                 <img [src]="topIconPath"/>
                 <p>{{this.topDescription}}</p>
             </div>
-            <button mat-button class="bottom-box" (click)="Skata()">
+            <button mat-button class="bottom-box" (click)="changeOrders()">
                 <img [src]="bottomIconPath"/>
                 <p>{{this.bottomDescription}}</p>
             </button>  
         </div>
     </div>
     <div class = "bottom-buttons">
-        <button mat-button class="clear">
+        <button mat-button class="clear" (click)="clearSelectedOrders()">
             <p>CLEAR</p>
         </button>
-        <button mat-button class="start">
+        <button mat-button class="start" (click)="startWork()">
             <p>start</p>
         </button>
     </div>
