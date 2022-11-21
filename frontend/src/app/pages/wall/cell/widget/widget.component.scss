@@ -41,5 +41,32 @@
         width:100%;
         background-color: #F0F6FF;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        justify-content: start;
+        gap: 3px;
+        padding-top: 3px;
+        padding-left: 3px;
+        padding-bottom: 3px;
+
+        .widget-option{
+            background-color: #85A8C9;
+            width: 33.05%;
+            // flex-grow: 1;
+            // margin-left: 3px;
+            // margin-top: 3px;
+            // margin-bottom: 3px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .icon{
+                padding-bottom: 30px;
+            }
+        }
     }
 }
