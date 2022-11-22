@@ -2,18 +2,48 @@
 
     <!-- Navbar -->
     <div class="navbar">
-        <img src="{{this.widget.title_icon_path}}" class="icon">
-        <div class="title text text-size-title">{{this.widget.title}}</div>
-        <button mat-button class="menu">
-            <img src="{{this.widget.menu_icon_path}}" >
+        <img src="{{this.widget.navbar.title_icon_path}}" class="icon">
+        <div class="title text text-size-title text-white">{{this.widget.navbar.title}}</div>
+        <button mat-button class="menu" (click)="onMenuClicked()">
+            <img src="{{this.widget.navbar.menu_icon_path}}" >
         </button>
     </div>
 
-    <div class="content" >
-        <button mat-button class="widget-option"  *ngFor="let option of widget_options" (click)="onWidgetOptionClicked(option)">
+    <!-- Menu options -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.menu">
+        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onMenuOptionClicked(option)">
             <img src="{{getIconPath(option)}}" class="icon">
-            <p class=" text text-size-title">{{option}}</p>
+            <p class="text text-size-title text-white">{{option}}</p>
+        </button>     
+    </div>
+
+    <!-- Widget options -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.widget_options">
+        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onWidgetOptionClicked(option)">
+            <img src="{{getIconPath(option)}}" class="icon">
+            <p class=" text text-size-title text-white">{{option}}</p>
         </button>
     </div>
 
+    <!-- Order options -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_options">
+        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onOrderOptionClicked(option)">
+            <img src="{{getIconPath(option)}}" class="icon">
+            <p class="text text-size-title text-white">{{option}}</p>
+        </button>
+    </div>
+
+    <!-- Completed Order -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.completed_orders">
+        <div class="title-frame text text-size-title text-white">
+            <div class="field" *ngFor="let field of db_completed_order_fields">{{field}}</div>
+        </div>
+        <div class="order-list">
+            <div class="row" *ngFor="let row of orders">
+                <div class="text text-size-content text-black" *ngFor="let field of row">
+                    {{field}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

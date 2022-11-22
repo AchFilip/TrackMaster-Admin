@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { List } from 'lodash';
+import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
+import { OrderOptions } from 'src/app/global/models/cell/orders.enum.options';
+import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.content.options';
 
 @Component({
   selector: 'Widget',
@@ -7,39 +9,236 @@ import { List } from 'lodash';
   styleUrls: ['./widget.component.scss']
 })
 export class WidgetComponent implements OnInit {
+  /**
+   * Dump data
+   * These will be erased, when db is implemented
+   */
 
+  protected db_widget_options = [
+    'orders','live','statistics'
+  ];
+
+  protected db_order_options = [
+    'completed','available','ongoing','add'
+  ];
+
+  protected db_completed_order_fields = [
+    'id','address','St. Num.','zip code','floor level','volume*','time listed'
+  ];
+
+  protected db_menu_options = [
+    'resize', 'move', 'close'
+  ];
+
+  protected orders = [[
+      '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
+      '1', '398', '25 august 1999, 23:23:23'
+    ],[
+      '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
+      '1', '398', '25 august 1999, 23:23:23'
+    ]
+  ]
+
+  /** DELETE UNTIL HERE */
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
   protected imagePaths: {[index: string]: string} ={
-    'widget': 'widgets.png',
+    'snackbar': 'snackbar.png',
+    'cross': 'cross.png',
     'menu': 'menu.png',
+
+    'widget': 'widgets.png',
+    // Widget options
     'orders': 'orders.png',
     'live': 'live.png',
-    'statistics': 'statistics.png'
+    'statistics': 'statistics.png',
+    // Order options
+    'completed': 'orders.png',
+    'available': 'available.png',
+    'ongoing': 'ongoing.png',
+    'add': 'add.png',
+    // Menu options
+    'resize': 'resize.png',
+    'move': 'move.png',
+    'close': 'close.png'
   }
 
   protected widget = {
-    'title_icon_path': '',
-    'title': '',
-    'menu_icon_path':''
-  }
+    'navbar':{
+      'title_icon_path': '',
+      'title': '',
+      'menu_icon_path':'',
+    },
 
-  protected widget_options?: string[];
+    'content':{
+      'display':'',
+      'options':['']
+    }
+  }
+  protected WidgetContentOptionsEnum = WidgetContentOptions;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.widget.title = 'WIDGETS';
-    this.widget.title_icon_path = this.getIconPath('widget');
-    this.widget.menu_icon_path = this.getIconPath('menu');
+    // Init navbar
+    this.widget.navbar.title = 'widgets';
+    this.setNavbarIcon('widget');
+    this.setMenuIcon('snackbar');
 
-    // This is supposed to come from db
-    // Remember that the title must be the same 
-    // with the name of the icon
-    this.widget_options = [
-      'orders','live','statistics'
-    ]
+    // Init content state
+    this.widget.content.display = WidgetContentOptions.widget_options
+    
+    // Init content options
+    this.widget.content.options = this.getWidgetOptions();
   }
 
+  
+
+  /**  
+   * On click actions
+  */
+  protected onMenuClicked(){
+    if(this.getContentDisplay()==WidgetContentOptions.menu){
+      // Update menu's icon 
+      this.setMenuIcon('snackbar');
+
+      console.warn('implemet to route back, after exiting the menu')
+      // TODO: find previous state and go to it 
+    }else{
+      // Update menu's icon 
+      this.setMenuIcon('cross');
+
+      // Update widget's icon
+      this.setNavbarIcon('menu');
+
+      // Update widget's title 
+      this.addSubpathTitle('menu');  
+
+      // Request for order options 
+      this.widget.content.options = this.getMenuOptions(this.getContentDisplay());
+
+      // Change widget's content display
+      this.setContentDisplay(WidgetContentOptions.menu);
+    }
+  }
+
+  protected onMenuOptionClicked(name: string){
+    console.warn('menu option on click is not implemented yet')
+  }
+
+  protected onWidgetOptionClicked(name: string){
+    if(!this.isValidOption(WidgetOptions, name)){
+      console.error('Unkown widget option selected: ',name);
+      return 
+    }
+
+    const pressed = (<any>WidgetOptions)[name];
+
+    switch(pressed){
+      case WidgetOptions.orders :{
+
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
+        // Update widget's title 
+        this.addSubpathTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.order_options);
+
+        // Request for order options 
+        this.widget.content.options = this.getOrderOptions();
+        break;
+      }
+      default:{
+        console.error('Missing widget option a case bro!')
+      }
+    }
+  }
+
+  protected onOrderOptionClicked(name: string){
+    if(!this.isValidOption(OrderOptions, name)){
+      console.error('Unkown order option selected: ',name);
+      return 
+    }
+
+    const pressed = (<any>OrderOptions)[name];
+
+    switch(pressed){
+      case OrderOptions.completed :{
+        
+        // Request for order options 
+        // this.widget.content.options = this.getOrderOptions();
+
+        // Update widget's title 
+        this.addSubpathTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.completed_orders);
+        break;
+      }
+      default:{
+        console.error('Missing an order option case bro!')
+      }
+    }
+  }
+
+
+  
+  /**
+   * Manipulate Widget
+   */
+  
+  // Manipulate Title
+  protected addSubpathTitle(name: string){
+    this.widget.navbar.title = this.widget.navbar.title + '>' + name 
+  }
+
+  // Set Menu icon
+  protected setMenuIcon(name: string){
+    this.widget.navbar.menu_icon_path = this.getIconPath(name);
+  }
+
+  // Manipulate display's state 
+  protected setContentDisplay(type: WidgetContentOptions){
+    if(!this.isValidOption(WidgetContentOptions, type)){
+      console.error('Unkown display type: ',type);
+      return 
+    }
+    console.info('Widget display set to: ',type)
+    this.widget.content.display=type;
+  }
+
+  // Get display's state
+  protected getContentDisplay(): WidgetContentOptions{
+    return (<any>this.widget.content).display
+  }
+
+  // Set navbar's icon
+  protected setNavbarIcon(name: string){
+    this.widget.navbar.title_icon_path = this.getIconPath(name);
+  }
+
+  /**
+   * Service functions
+   * */ 
+   protected getWidgetOptions(): string[]{
+    return this.db_widget_options;
+  }
+
+  protected getOrderOptions(): string[]{
+    return this.db_order_options;
+  }
+
+  // Get menu options based on state this widget was before 
+  protected getMenuOptions(state: WidgetContentOptions){
+    return this.db_menu_options;
+  }
+
+  /**
+   *  Utils
+   */
+
+  // Return's the icon path base on the name given
   protected getIconPath(name: string){
     let icon: string = this.imagePaths[name];
     if (icon == undefined){
@@ -49,7 +248,10 @@ export class WidgetComponent implements OnInit {
     return this.imageBasePath + icon;
   }
 
-  protected onWidgetOptionClicked(name: string){
-    console.log(name)
+  // Checks if name is in given enum
+  protected isValidOption(EnumToCheck: any, name: string ): boolean{
+    let res: string = (<any>EnumToCheck)[name];
+    if(res==undefined) return false;
+    else return true;
   }
 }

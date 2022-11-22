@@ -17,6 +17,8 @@
 
         .icon{
             margin-left: 6px;
+            width: auto;
+            height: 55px;
         }
 
         .title{
@@ -50,14 +52,10 @@
         padding-top: 3px;
         padding-left: 3px;
         padding-bottom: 3px;
-
+        
         .widget-option{
             background-color: #85A8C9;
             width: 33.05%;
-            // flex-grow: 1;
-            // margin-left: 3px;
-            // margin-top: 3px;
-            // margin-bottom: 3px;
 
             display: flex;
             flex-direction: column;
@@ -68,5 +66,51 @@
                 padding-bottom: 30px;
             }
         }
+
+        // Orders 
+        .title-frame{
+            background-color: #85A8C9;
+            height: 10%;
+            width: 100%;
+            margin-right: 3px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap:nowrap;
+            justify-content: space-around;
+            align-items: center;
+
+            .field{
+
+            }
+        }
+        .order-list{
+            height: 109%;
+            width: 100%;
+            margin-right: 3px;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap:nowrap;
+            justify-content: start;
+            align-items: center;
+            row-gap: 4px;
+
+            .row{
+                display: flex;
+                flex-direction: row;
+                flex-wrap:nowrap;
+                justify-content: space-around;
+                align-items: center;
+                width: 100%;
+
+                box-sizing: border-box;
+                background: #FFFFFF;
+                border: 1px solid #ECE9E9;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 3px;
+            }
+        }
+
     }
 }
