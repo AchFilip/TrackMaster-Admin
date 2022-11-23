@@ -34,7 +34,7 @@
     </div>
 
     <!-- Completed Order -->
-    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.completed_orders">
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_options">
         <div class="title-frame text text-size-title text-white">
             <div class="field" *ngFor="let field of db_completed_order_fields">{{field}}</div>
         </div>
@@ -46,4 +46,11 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="this.widget.content.display===WidgetContentOptionsEnum.chosen">
+        <ng-container 
+            *ngComponentOutlet="this.widget.content.content_component"
+        ></ng-container>
+    </div>
+    
 </div>
