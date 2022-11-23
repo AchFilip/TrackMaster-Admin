@@ -39,7 +39,7 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     WallComponent,
     CellComponent,
     WidgetComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
     CompletedOrdersContentComponent
   ],
   imports: [
