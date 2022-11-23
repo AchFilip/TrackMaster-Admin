@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './pages/phone-app/login/login.component';
 import { OrdersComponent } from './pages/phone-app/orders/orders.component';
 import { WidgetComponent } from './pages/wall/cell/widget/widget.component';
+import { CompletedOrdersContentComponent } from './pages/wall/cell/widget/contents/completed-orders-content/completed-orders-content.component';
 
 
 
@@ -36,7 +37,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     OrdersComponent,
     WallComponent,
     CellComponent,
-    WidgetComponent
+    WidgetComponent,
+    CompletedOrdersContentComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

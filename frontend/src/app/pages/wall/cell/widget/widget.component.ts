@@ -3,6 +3,9 @@ import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
 import { OrderOptions } from 'src/app/global/models/cell/orders.enum.options';
 import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.content.options';
 
+// Content Views
+import { CompletedOrdersContentComponent } from './contents/completed-orders-content/completed-orders-content.component';
+
 @Component({
   selector: 'Widget',
   templateUrl: './widget.component.html',
@@ -71,7 +74,9 @@ export class WidgetComponent implements OnInit {
 
     'content':{
       'display':'',
-      'options':['']
+      'options':[''],
+
+      'content_component':CompletedOrdersContentComponent
     }
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
@@ -173,7 +178,7 @@ export class WidgetComponent implements OnInit {
         this.addSubpathTitle(name)
 
         // Change widget's content display
-        this.setContentDisplay(WidgetContentOptions.completed_orders);
+        this.setContentDisplay(WidgetContentOptions.chosen);
         break;
       }
       default:{
