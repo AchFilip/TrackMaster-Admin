@@ -13,6 +13,7 @@ import { ItemPreviewComponent } from './pages/item-shop/item-preview/item-previe
 import { WallComponent } from './pages/wall/wall.component';
 import { CellComponent } from './pages/wall/cell/cell.component';
 import { PhoneAppComponent } from './pages/phone-app/phone-app.component';
+import { OrderDetailsComponent } from './pages/phone-app/orders/order-details/order-details.component';
 
 // Our Libraries
 import { MatGridListModule } from '@angular/material';
@@ -36,7 +37,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     OrdersComponent,
     WallComponent,
     CellComponent,
-    WidgetComponent
+    WidgetComponent,
+    OrderDetailsComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

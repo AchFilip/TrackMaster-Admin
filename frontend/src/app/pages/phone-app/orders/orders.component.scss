@@ -77,6 +77,25 @@
 
                 background: #F0F6FF;
                 border-radius: 10px 10px 0px 0px;
+
+                .orderDetails{
+                    display: flex;
+                    flex-wrap: nowrap;
+                    font-size: 16px;
+                    color: black;
+        
+                    font-family: 'Koulen', sans-serif;
+                    font-style: normal;
+                    padding-top: 13%;
+
+                    .orderDetails > div {
+                        width: 100px;
+                        margin: 10px;
+                        text-align: center;
+                        line-height: 75px;
+                    }
+                }
+
             }
             
             .bottom-box{
