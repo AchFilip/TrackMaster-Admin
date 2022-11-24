@@ -30,6 +30,32 @@
                 text-align: cell;
                 line-height: 75px;
             }
+
+            .id{
+                position: relative;
+                left: 10px;
+            }
+            
+            .address{
+                position: relative;
+                text-align: center;
+                width: 58%;
+                left: 30px;
+            }
+
+            .volume{
+                position: relative;
+                text-align: center;
+                width: 10%;
+                left: 36px;
+            }
+
+            .dist{
+                position: relative;
+                text-align: center;
+                width: 15%;
+                left: 50px;
+            }
         }
     }
 }
