@@ -1,6 +1,6 @@
 <div class="main-container">
         <div class="orderDetails" *ngFor="let row of avOrders let j=index;">
-            <button class="box" (click)="Test(j)">
+            <button class="box" (click)="SelectOrder(j)">
                 <div *ngFor="let field of row;let i=index;"
                 [ngClass]="{ id: i===0,address: i===1,volume: i===2, dist: i===3 }">
                     {{field}}

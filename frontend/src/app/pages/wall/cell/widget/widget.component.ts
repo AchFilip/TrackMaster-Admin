@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
-import { OrderOptions } from 'src/app/global/models/cell/orders.enum.options';
+import { OrderOptions, Statistics } from 'src/app/global/models/cell/orders.enum.options';
 import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.content.options';
 
 // Content Views
@@ -33,6 +33,11 @@ export class WidgetComponent implements OnInit {
     'resize', 'move', 'close'
   ];
 
+  //Statistics
+  protected db_statistics_options = [
+    'single driver','company'
+  ];
+
   protected orders = [[
       '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
       '1', '398', '25 august 1999, 23:23:23'
@@ -62,7 +67,10 @@ export class WidgetComponent implements OnInit {
     // Menu options
     'resize': 'resize.png',
     'move': 'move.png',
-    'close': 'close.png'
+    'close': 'close.png',
+    // Statistics options
+    'single driver': 'single driver.png',
+    'company': 'company.png'
   }
 
   protected widget = {
@@ -154,6 +162,20 @@ export class WidgetComponent implements OnInit {
         this.widget.content.options = this.getOrderOptions();
         break;
       }
+      case WidgetOptions.statistics:{
+
+        console.log("sadsd");
+        // Update widget's title 
+        this.addSubpathTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.statistics_options);
+
+        // Request for order options 
+        this.widget.content.options = this.getStatisticsOptions();
+
+        break;
+      }
       default:{
         console.error('Missing widget option a case bro!')
       }
@@ -173,6 +195,33 @@ export class WidgetComponent implements OnInit {
         
         // Request for order options 
         // this.widget.content.options = this.getOrderOptions();
+
+        // Update widget's title 
+        this.addSubpathTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.chosen);
+        break;
+      }
+      default:{
+        console.error('Missing an order option case bro!')
+      }
+    }
+  }
+
+  protected onStatisticsOptionClicked(name: string){
+    if(!this.isValidOption(Statistics, name)){
+      console.error('Unkown order option selected: ',name);
+      return 
+    }
+
+    const pressed = (<any>Statistics)[name];
+
+    switch(pressed){
+      case Statistics.test :{
+        
+        // Request for order options 
+        //this.widget.content.options = this.getStatisticsOptions();
 
         // Update widget's title 
         this.addSubpathTitle(name)
@@ -232,6 +281,10 @@ export class WidgetComponent implements OnInit {
 
   protected getOrderOptions(): string[]{
     return this.db_order_options;
+  }
+
+  protected getStatisticsOptions(): string[]{
+    return this.db_statistics_options;
   }
 
   // Get menu options based on state this widget was before 

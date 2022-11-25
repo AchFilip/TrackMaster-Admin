@@ -1,25 +1,27 @@
-<div class="container"> 
+<div class="container">
 
     <!-- Navbar -->
     <div class="navbar">
         <img src="{{this.widget.navbar.title_icon_path}}" class="icon">
         <div class="title text text-size-title text-white">{{this.widget.navbar.title}}</div>
         <button mat-button class="menu" (click)="onMenuClicked()">
-            <img src="{{this.widget.navbar.menu_icon_path}}" >
+            <img src="{{this.widget.navbar.menu_icon_path}}">
         </button>
     </div>
 
     <!-- Menu options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.menu">
-        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onMenuOptionClicked(option)">
+        <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
+            (click)="onMenuOptionClicked(option)">
             <img src="{{getIconPath(option)}}" class="icon">
             <p class="text text-size-title text-white">{{option}}</p>
-        </button>     
+        </button>
     </div>
 
     <!-- Widget options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.widget_options">
-        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onWidgetOptionClicked(option)">
+        <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
+            (click)="onWidgetOptionClicked(option)">
             <img src="{{getIconPath(option)}}" class="icon">
             <p class=" text text-size-title text-white">{{option}}</p>
         </button>
@@ -27,7 +29,8 @@
 
     <!-- Order options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_options">
-        <button  mat-button class="widget-option"  *ngFor="let option of this.widget.content.options" (click)="onOrderOptionClicked(option)">
+        <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
+            (click)="onOrderOptionClicked(option)">
             <img src="{{getIconPath(option)}}" class="icon">
             <p class="text text-size-title text-white">{{option}}</p>
         </button>
@@ -47,10 +50,17 @@
         </div>
     </div>
 
-    <div *ngIf="this.widget.content.display===WidgetContentOptionsEnum.chosen">
-        <ng-container 
-            *ngComponentOutlet="this.widget.content.content_component"
-        ></ng-container>
+    <!-- Statistics -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.statistics_options">
+        <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
+            (click)="onStatisticsOptionClicked(option)">
+            <img src="{{getIconPath(option)}}" class="icon">
+            <p class="text text-size-title text-white">{{option}}</p>
+        </button>
     </div>
-    
+
+    <div *ngIf="this.widget.content.display===WidgetContentOptionsEnum.chosen">
+        <ng-container *ngComponentOutlet="this.widget.content.content_component"></ng-container>
+    </div>
+
 </div>

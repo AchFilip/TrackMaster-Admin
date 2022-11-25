@@ -32,7 +32,7 @@ export class OrderDetailsComponent implements OnInit {
   }
 
 
-  public Test(i: number) {
+  public SelectOrder(i: number) {
     if (this.avOrdersToggle[i] === false) {
       console.log("I am not selected " + i);
       this.avOrdersToggle[i] = true;

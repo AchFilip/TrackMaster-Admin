@@ -3,5 +3,6 @@ export enum WidgetContentOptions{
     widget_options='widget_options',
     order_options='order_options',
     add_order='add_order',
-    chosen='chosen'
+    chosen='chosen',
+    statistics_options='statistics_options'
 }
