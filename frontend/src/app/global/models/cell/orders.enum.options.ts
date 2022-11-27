@@ -6,8 +6,6 @@ export enum OrderOptions{
 }
 
 export enum Statistics{
-    test='test',
-    testtt='testtt',
-    ongoing='ongoing',
-    add='add'
+    single='single',
+    company='company'
 }

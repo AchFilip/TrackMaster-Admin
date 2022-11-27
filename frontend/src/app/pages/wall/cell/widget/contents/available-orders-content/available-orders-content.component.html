@@ -1,0 +1,12 @@
+<div class="content">
+    <div class="title-frame text text-size-title text-white">
+        <div class="field" *ngFor="let field of fields">{{field}}</div>
+    </div>
+    <div class="order-list">
+        <div class="row" *ngFor="let row of orders">
+            <div class="text text-size-content text-black" *ngFor="let field of row">
+                {{field}}
+            </div>
+        </div>
+    </div>
+</div>

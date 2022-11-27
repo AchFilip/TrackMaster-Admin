@@ -5,6 +5,7 @@ import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.con
 
 // Content Views
 import { CompletedOrdersContentComponent } from './contents/completed-orders-content/completed-orders-content.component';
+import { AvailableOrdersContentComponent } from './contents/available-orders-content/available-orders-content.component';
 
 @Component({
   selector: 'Widget',
@@ -18,15 +19,15 @@ export class WidgetComponent implements OnInit {
    */
 
   protected db_widget_options = [
-    'orders','live','statistics'
+    'orders', 'live', 'statistics'
   ];
 
   protected db_order_options = [
-    'completed','available','ongoing','add'
+    'completed', 'available', 'ongoing', 'add'
   ];
 
   protected db_completed_order_fields = [
-    'id','address','St. Num.','zip code','floor level','volume*','time listed'
+    'id', 'address', 'St. Num.', 'zip code', 'floor level', 'volume*', 'time listed'
   ];
 
   protected db_menu_options = [
@@ -35,21 +36,21 @@ export class WidgetComponent implements OnInit {
 
   //Statistics
   protected db_statistics_options = [
-    'single driver','company'
+    'single', 'company'
   ];
 
   protected orders = [[
-      '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-      '1', '398', '25 august 1999, 23:23:23'
-    ],[
-      '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-      '1', '398', '25 august 1999, 23:23:23'
-    ]
+    '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
+    '1', '398', '25 august 1999, 23:23:23'
+  ], [
+    '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
+    '1', '398', '25 august 1999, 23:23:23'
+  ]
   ]
 
   /** DELETE UNTIL HERE */
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
-  protected imagePaths: {[index: string]: string} ={
+  protected imagePaths: { [index: string]: string } = {
     'snackbar': 'snackbar.png',
     'cross': 'cross.png',
     'menu': 'menu.png',
@@ -69,22 +70,22 @@ export class WidgetComponent implements OnInit {
     'move': 'move.png',
     'close': 'close.png',
     // Statistics options
-    'single driver': 'single driver.png',
+    'single': 'single driver.png',
     'company': 'company.png'
   }
 
   protected widget = {
-    'navbar':{
+    'navbar': {
       'title_icon_path': '',
       'title': '',
-      'menu_icon_path':'',
+      'menu_icon_path': '',
     },
 
-    'content':{
-      'display':'',
-      'options':[''],
+    'content': {
+      'display': '',
+      'options': [''],
 
-      'content_component':CompletedOrdersContentComponent
+      'content_component': CompletedOrdersContentComponent
     }
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
@@ -99,24 +100,24 @@ export class WidgetComponent implements OnInit {
 
     // Init content state
     this.widget.content.display = WidgetContentOptions.widget_options
-    
+
     // Init content options
     this.widget.content.options = this.getWidgetOptions();
   }
 
-  
+
 
   /**  
    * On click actions
   */
-  protected onMenuClicked(){
-    if(this.getContentDisplay()==WidgetContentOptions.menu){
+  protected onMenuClicked() {
+    if (this.getContentDisplay() == WidgetContentOptions.menu) {
       // Update menu's icon 
       this.setMenuIcon('snackbar');
 
       console.warn('implemet to route back, after exiting the menu')
       // TODO: find previous state and go to it 
-    }else{
+    } else {
       // Update menu's icon 
       this.setMenuIcon('cross');
 
@@ -124,7 +125,7 @@ export class WidgetComponent implements OnInit {
       this.setNavbarIcon('menu');
 
       // Update widget's title 
-      this.addSubpathTitle('menu');  
+      this.addSubpathTitle('menu');
 
       // Request for order options 
       this.widget.content.options = this.getMenuOptions(this.getContentDisplay());
@@ -134,20 +135,20 @@ export class WidgetComponent implements OnInit {
     }
   }
 
-  protected onMenuOptionClicked(name: string){
+  protected onMenuOptionClicked(name: string) {
     console.warn('menu option on click is not implemented yet')
   }
 
-  protected onWidgetOptionClicked(name: string){
-    if(!this.isValidOption(WidgetOptions, name)){
-      console.error('Unkown widget option selected: ',name);
-      return 
+  protected onWidgetOptionClicked(name: string) {
+    if (!this.isValidOption(WidgetOptions, name)) {
+      console.error('Unkown widget option selected: ', name);
+      return
     }
 
     const pressed = (<any>WidgetOptions)[name];
 
-    switch(pressed){
-      case WidgetOptions.orders :{
+    switch (pressed) {
+      case WidgetOptions.orders: {
 
         // Update widget's icon 
         this.setNavbarIcon(name)
@@ -162,9 +163,8 @@ export class WidgetComponent implements OnInit {
         this.widget.content.options = this.getOrderOptions();
         break;
       }
-      case WidgetOptions.statistics:{
+      case WidgetOptions.statistics: {
 
-        console.log("sadsd");
         // Update widget's title 
         this.addSubpathTitle(name)
 
@@ -176,119 +176,172 @@ export class WidgetComponent implements OnInit {
 
         break;
       }
-      default:{
+      default: {
         console.error('Missing widget option a case bro!')
       }
     }
   }
 
-  protected onOrderOptionClicked(name: string){
-    if(!this.isValidOption(OrderOptions, name)){
-      console.error('Unkown order option selected: ',name);
-      return 
+  protected onOrderOptionClicked(name: string) {
+    if (!this.isValidOption(OrderOptions, name)) {
+      console.error('Unkown order option selected: ', name);
+      return
     }
 
     const pressed = (<any>OrderOptions)[name];
 
-    switch(pressed){
-      case OrderOptions.completed :{
-        
+    switch (pressed) {
+      case OrderOptions.completed: {
+
         // Request for order options 
         // this.widget.content.options = this.getOrderOptions();
 
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
         // Update widget's title 
-        this.addSubpathTitle(name)
+        this.changeTitle(name)
 
         // Change widget's content display
         this.setContentDisplay(WidgetContentOptions.chosen);
         break;
       }
-      default:{
+      case OrderOptions.available: {
+        // Request for order options 
+        // this.widget.content.options = this.getOrderOptions();
+
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
+        // Update widget's title 
+        this.changeTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.available_order_options);
+        break;
+      }
+      case OrderOptions.ongoing: {
+        // Request for order options 
+        // this.widget.content.options = this.getOrderOptions();
+
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
+        // Update widget's title 
+        this.changeTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.ongoing_order_options);
+        break;
+      }
+      default: {
         console.error('Missing an order option case bro!')
       }
     }
   }
 
-  protected onStatisticsOptionClicked(name: string){
-    if(!this.isValidOption(Statistics, name)){
-      console.error('Unkown order option selected: ',name);
-      return 
+  protected onStatisticsOptionClicked(name: string) {
+    if (!this.isValidOption(Statistics, name)) {
+      console.error('Unkown statistics option selected: ', name);
+      return
     }
 
     const pressed = (<any>Statistics)[name];
 
-    switch(pressed){
-      case Statistics.test :{
-        
+    switch (pressed) {
+      case Statistics.single: {
+
         // Request for order options 
         //this.widget.content.options = this.getStatisticsOptions();
 
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
         // Update widget's title 
-        this.addSubpathTitle(name)
+        this.changeTitle(name)
 
         // Change widget's content display
-        this.setContentDisplay(WidgetContentOptions.chosen);
+        this.setContentDisplay(WidgetContentOptions.single_option);
         break;
       }
-      default:{
+      case Statistics.company: {
+
+        // Request for order options 
+        //this.widget.content.options = this.getStatisticsOptions();
+
+        // Update widget's icon 
+        this.setNavbarIcon(name)
+
+        // Update widget's title 
+        this.changeTitle(name)
+
+        // Change widget's content display
+        this.setContentDisplay(WidgetContentOptions.company_option);
+        break;
+      }
+      default: {
         console.error('Missing an order option case bro!')
       }
     }
   }
 
 
-  
+
   /**
    * Manipulate Widget
    */
-  
+
   // Manipulate Title
-  protected addSubpathTitle(name: string){
-    this.widget.navbar.title = this.widget.navbar.title + '>' + name 
+  protected addSubpathTitle(name: string) {
+    this.widget.navbar.title = this.widget.navbar.title + '>' + name
+  }
+
+  protected changeTitle(name: string) {
+    this.widget.navbar.title = name;
   }
 
   // Set Menu icon
-  protected setMenuIcon(name: string){
+  protected setMenuIcon(name: string) {
     this.widget.navbar.menu_icon_path = this.getIconPath(name);
   }
 
   // Manipulate display's state 
-  protected setContentDisplay(type: WidgetContentOptions){
-    if(!this.isValidOption(WidgetContentOptions, type)){
-      console.error('Unkown display type: ',type);
-      return 
+  protected setContentDisplay(type: WidgetContentOptions) {
+    if (!this.isValidOption(WidgetContentOptions, type)) {
+      console.error('Unkown display type: ', type);
+      return
     }
-    console.info('Widget display set to: ',type)
-    this.widget.content.display=type;
+    console.info('Widget display set to: ', type)
+    this.widget.content.display = type;
   }
 
   // Get display's state
-  protected getContentDisplay(): WidgetContentOptions{
+  protected getContentDisplay(): WidgetContentOptions {
     return (<any>this.widget.content).display
   }
 
   // Set navbar's icon
-  protected setNavbarIcon(name: string){
+  protected setNavbarIcon(name: string) {
     this.widget.navbar.title_icon_path = this.getIconPath(name);
   }
 
   /**
    * Service functions
-   * */ 
-   protected getWidgetOptions(): string[]{
+   * */
+  protected getWidgetOptions(): string[] {
     return this.db_widget_options;
   }
 
-  protected getOrderOptions(): string[]{
+  protected getOrderOptions(): string[] {
     return this.db_order_options;
   }
 
-  protected getStatisticsOptions(): string[]{
+  protected getStatisticsOptions(): string[] {
     return this.db_statistics_options;
   }
 
   // Get menu options based on state this widget was before 
-  protected getMenuOptions(state: WidgetContentOptions){
+  protected getMenuOptions(state: WidgetContentOptions) {
     return this.db_menu_options;
   }
 
@@ -297,9 +350,9 @@ export class WidgetComponent implements OnInit {
    */
 
   // Return's the icon path base on the name given
-  protected getIconPath(name: string){
+  protected getIconPath(name: string) {
     let icon: string = this.imagePaths[name];
-    if (icon == undefined){
+    if (icon == undefined) {
       console.log('Not such icon for widget title!');
       icon = 'default_widget_title_icon.png'
     }
@@ -307,9 +360,9 @@ export class WidgetComponent implements OnInit {
   }
 
   // Checks if name is in given enum
-  protected isValidOption(EnumToCheck: any, name: string ): boolean{
+  protected isValidOption(EnumToCheck: any, name: string): boolean {
     let res: string = (<any>EnumToCheck)[name];
-    if(res==undefined) return false;
+    if (res == undefined) return false;
     else return true;
   }
 }

@@ -23,6 +23,9 @@ import { LoginComponent } from './pages/phone-app/login/login.component';
 import { OrdersComponent } from './pages/phone-app/orders/orders.component';
 import { WidgetComponent } from './pages/wall/cell/widget/widget.component';
 import { CompletedOrdersContentComponent } from './pages/wall/cell/widget/contents/completed-orders-content/completed-orders-content.component';
+import { SingleStatisticsContentComponent } from './pages/wall/cell/widget/contents/single-statistics-content/single-statistics-content.component';
+import { AvailableOrdersContentComponent } from './pages/wall/cell/widget/contents/available-orders-content/available-orders-content.component';
+import { OngoingOrdersContentComponent } from './pages/wall/cell/widget/contents/ongoing-orders-content/ongoing-orders-content.component';
 
 
 
@@ -40,7 +43,10 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     CellComponent,
     WidgetComponent,
     OrderDetailsComponent,
-    CompletedOrdersContentComponent
+    CompletedOrdersContentComponent,
+    SingleStatisticsContentComponent,
+    AvailableOrdersContentComponent,
+    OngoingOrdersContentComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

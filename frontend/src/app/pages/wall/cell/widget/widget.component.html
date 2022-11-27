@@ -50,6 +50,17 @@
         </div>
     </div>
 
+    <!-- Available Orders -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.available_order_options">
+        <app-available-orders-content></app-available-orders-content>
+    </div>
+
+    <!-- OnGoing Orders -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.ongoing_order_options">
+        <app-ongoing-orders-content></app-ongoing-orders-content>
+    </div>
+
+
     <!-- Statistics -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.statistics_options">
         <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
@@ -58,6 +69,12 @@
             <p class="text text-size-title text-white">{{option}}</p>
         </button>
     </div>
+
+    <!-- Single Statistics -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.single_option">
+        <app-single-statistics-content></app-single-statistics-content>
+    </div>
+
 
     <div *ngIf="this.widget.content.display===WidgetContentOptionsEnum.chosen">
         <ng-container *ngComponentOutlet="this.widget.content.content_component"></ng-container>
