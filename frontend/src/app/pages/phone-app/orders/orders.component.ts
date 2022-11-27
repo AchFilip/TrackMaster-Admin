@@ -21,6 +21,7 @@ export class OrdersComponent implements OnInit {
   bottomDescription: string = "";
 
   inAvailable: boolean = true;
+  canClear: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -49,8 +50,14 @@ export class OrdersComponent implements OnInit {
     }
   }
 
+
+  setCanClear(event: boolean){
+    this.canClear = event;
+    console.log("Can clear: ",this.canClear)
+  }
+
   clearSelectedOrders() {
-    console.log("Clearing orders..");
+    console.log("Start working..");
   }
 
   startWork() {

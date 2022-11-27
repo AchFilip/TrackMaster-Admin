@@ -12,7 +12,7 @@
                     <div style="padding-left: 22%;">VOLUME</div>
                     <div style="padding-left: 6%;">DIST.</div>
                 </div>
-                <app-order-details [inAvailable]="this.inAvailable"></app-order-details>
+                <app-order-details [inAvailable]="this.inAvailable" (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
             </div>
             <div class="top-box">
                 <img [src]="topIconPath"/>
@@ -24,11 +24,14 @@
             </button>  
         </div>
     </div>
+    <!-- make unclickable -->
     <div class = "bottom-buttons">
-        <button mat-button class="clear" (click)="clearSelectedOrders()">
+        <button mat-button class="clear" (click)="clearSelectedOrders()"
+        [ngClass]="{'disable-click': this.canClear===false, 'clear_on':this.canClear, 'enable-click': this.canClear}">
             <p>CLEAR</p>
         </button>
-        <button mat-button class="start" (click)="startWork()">
+        <button mat-button class="start" (click)="startWork()"
+        [ngClass]="{'disable-click': this.canClear===false, 'enable-click': this.canClear}">
             <p>start</p>
         </button>
     </div>

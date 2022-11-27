@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -13,6 +13,7 @@ export class OrderDetailsComponent implements OnInit {
   public chosenOrdersToggle!: boolean[];
 
   @Input() inAvailable!: boolean;
+  @Output("GetChosenOrdersLength") selectedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -59,9 +60,15 @@ export class OrderDetailsComponent implements OnInit {
       }
       this.avOrdersToggle[i] = false;
     }
+
+    this.GetChosenOrdersLength();
   }
 
-  
+  //todo: change name
+  public GetChosenOrdersLength(){
+    this.selectedEmitter.emit(this.chosenOrders.length > 0);
+  }
+
   public RemoveOrder(i: number) {
     if (this.chosenOrdersToggle[i] === false) {
       console.log("I am not selected " + i);
