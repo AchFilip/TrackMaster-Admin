@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-order-details',
@@ -6,13 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  protected avOrders?: string[][];
-  protected chosenOrders?: string[][];
+  protected avOrders!: string[][];
+  protected chosenOrders!: string[][];
 
   public avOrdersToggle!: boolean[];
+  public chosenOrdersToggle!: boolean[];
+
+  @Input() inAvailable!: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.inAvailable = true;
     this.getOrders();
   }
 
@@ -24,7 +29,16 @@ export class OrderDetailsComponent implements OnInit {
       ['501.', 'Ti mas les', '1', '398']
     ];
 
+    this.chosenOrders = [
+    ];
+
     this.avOrdersToggle = [
+      false,
+      false,
+      false
+    ];
+
+    this.chosenOrdersToggle = [
       false,
       false,
       false
@@ -34,11 +48,28 @@ export class OrderDetailsComponent implements OnInit {
 
   public SelectOrder(i: number) {
     if (this.avOrdersToggle[i] === false) {
-      console.log("I am not selected " + i);
+      //Push the order to our current orders
+      this.chosenOrders?.push(this.avOrders[i]); 
       this.avOrdersToggle[i] = true;
     }else if(this.avOrdersToggle[i]){
-      console.log("I am selected! " + i);
+      //Find index of order
+      var index = this.chosenOrders.indexOf(this.avOrders[i]);
+      if (index !== -1) {
+        this.chosenOrders.splice(index, 1); //remove it from current orders list
+      }
       this.avOrdersToggle[i] = false;
     }
   }
+
+  
+  public RemoveOrder(i: number) {
+    if (this.chosenOrdersToggle[i] === false) {
+      console.log("I am not selected " + i);
+      this.chosenOrdersToggle[i] = true;
+    }else if(this.chosenOrdersToggle[i]){
+      console.log("I am selected! " + i);
+      this.chosenOrdersToggle[i] = false;
+    }
+  }
+
 }

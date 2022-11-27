@@ -6,6 +6,7 @@
 
             font-family: 'Koulen', sans-serif;
             font-style: normal;
+
             .box{
                 box-sizing: border-box;
         
@@ -23,15 +24,7 @@
                 border: 1px solid #ECE9E9;
                 border-radius: 3px;
                 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-                
-                .green {
-                    background-color: green;
-                }
-                
-                .red {
-                    background-color: red;
-                }
-                
+            
                 .id{
                     position: relative;
                     left: 2px;
@@ -65,6 +58,56 @@
                 }
             }
 
+            .green{
+                background-color: #8EFC9F;
+            }
+            
+            .red{
+                background-color: #FE3434;
+            }
+        }
+
+            .bottom-buttons{
+        .clear{
+            position: absolute;
+            left: 6.15%;
+            right: 56.67%;
+            top: 88.74%;
+            bottom: 3.32%;
+    
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+            background: #B1C8DD;
+            border-radius: 21px;
+        }
+
+        .start{
+            position: absolute;
+            left: 57.18%;
+            right: 5.64%;
+            top: 88.74%;
+            bottom: 3.32%;
+            
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+            background: #6ECF7D;
+            border-radius: 21px;
+
+            p{
+                color: black;
+            }
+        }
+
+        p{
+            display: flex;
+            line-height: 33px;
+            align-items: center;
+            height: 67px;
+            padding-left: 37px;
+        
+            font-family: 'Koulen', sans-serif;
+            font-style: normal;
+            font-size: 18px;
+            color: #FBFBFB;
 
         }
+    }
 }

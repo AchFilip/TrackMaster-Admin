@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 @Component({
@@ -18,37 +19,41 @@ export class OrdersComponent implements OnInit {
 
   topDescription: string = "";
   bottomDescription: string = "";
+
+  inAvailable: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
-      this.topIconPath = this.iconsPath + this.avOrdersPath;
-      this.bottomIconPath = this.iconsPath + this.delPath;
+    this.topIconPath = this.iconsPath + this.avOrdersPath;
+    this.bottomIconPath = this.iconsPath + this.delPath;
 
-      this.topDescription = "AVAILABLE ORDERS";
-      this.bottomDescription = "SELECTED ORDERS";
+    this.topDescription = "AVAILABLE ORDERS";
+    this.bottomDescription = "SELECTED ORDERS";
   }
 
   changeOrders(): void {
-    if(this.topIconPath.includes(this.avOrdersPath)){
+    if (this.topIconPath.includes(this.avOrdersPath)) {
       this.topIconPath = this.iconsPath + this.delPath;
       this.bottomIconPath = this.iconsPath + this.avOrdersPath;
 
       this.topDescription = "SELECTED ORDERS";
       this.bottomDescription = "AVAILABLE ORDERS";
-    }else{
+      this.inAvailable = false;
+    } else {
       this.topIconPath = this.iconsPath + this.avOrdersPath;
       this.bottomIconPath = this.iconsPath + this.delPath;
 
       this.topDescription = "AVAILABLE ORDERS";
       this.bottomDescription = "SELECTED ORDERS";
+      this.inAvailable = true;
     }
   }
 
-  clearSelectedOrders(){
+  clearSelectedOrders() {
     console.log("Clearing orders..");
   }
 
-  startWork(){
+  startWork() {
     console.log("Start working..");
   }
 
