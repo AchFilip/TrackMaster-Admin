@@ -459,6 +459,9 @@ export class WidgetComponent implements OnInit {
     // Update menu's icon 
     this.setMenuIcon('snackbar');
 
+    // BUG: if we open final/chosen content
+    // and open menu, the title never resets..
+    // content>MENU>MENU ...
     if(this.widget.prev_content.display==='chosen'){
       this.widget.content.display='chosen';
     }else{
