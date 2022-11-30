@@ -8,6 +8,8 @@ import { CompletedOrdersContentComponent } from './contents/completed-orders-con
 import { AvailableOrdersContentComponent } from './contents/available-orders-content/available-orders-content.component';
 import { initial } from 'lodash';
 
+import { OrdersService } from 'src/app/global/services/orders/orders.service';
+
 @Component({
   selector: 'Widget',
   templateUrl: './widget.component.html',
@@ -97,7 +99,7 @@ export class WidgetComponent implements OnInit {
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.initState(WidgetContentOptions.widget_options, 'widgets')
@@ -304,11 +306,11 @@ export class WidgetComponent implements OnInit {
         this.initStatisticsOptions(name);
         break;
       }
-      case OrderOptions.available:{
+      case Statistics.single:{
         this.initStatisticsSingle(name);
         break;
       }
-      case OrderOptions.completed:{
+      case Statistics.company:{
         this.initStatisticsCompany(name);
         break;
       }
@@ -353,9 +355,6 @@ export class WidgetComponent implements OnInit {
   /** INIT ORDERS */
 
   initCompleted(name:string){
-    // Request for order options 
-    // this.widget.content.options = this.getOrderOptions();
-
     // Update widget's icon 
     this.setNavbarIcon(name)
 
@@ -368,7 +367,7 @@ export class WidgetComponent implements OnInit {
 
   initAvailable(name:string){
     // Request for order options 
-    // this.widget.content.options = this.getOrderOptions();
+    this.widget.content.options = this.getOrderOptions();
 
     // Update widget's icon 
     this.setNavbarIcon(name)
@@ -460,7 +459,11 @@ export class WidgetComponent implements OnInit {
     // Update menu's icon 
     this.setMenuIcon('snackbar');
 
-    this.initPrevState();
+    if(this.widget.prev_content.display==='chosen'){
+      this.widget.content.display='chosen';
+    }else{
+      this.initPrevState();
+    }
   }
 
 }

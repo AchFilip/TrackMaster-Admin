@@ -19,6 +19,7 @@ import { OrderDetailsComponent } from './pages/phone-app/orders/order-details/or
 import { MatGridListModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './pages/phone-app/login/login.component';
 import { OrdersComponent } from './pages/phone-app/orders/orders.component';
 import { WidgetComponent } from './pages/wall/cell/widget/widget.component';
@@ -55,7 +56,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     HttpClientModule,
     MatGridListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
