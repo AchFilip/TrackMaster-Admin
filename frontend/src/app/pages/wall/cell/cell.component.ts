@@ -18,7 +18,7 @@ export class CellComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.display = Display.widget;
+    this.display = Display.empty;
   }
 
   public onAddClick(){

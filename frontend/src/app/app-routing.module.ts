@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'item-shop', component: ItemShopComponent},
   { path: 'phone-app', component: PhoneAppComponent},
   { path: 'phone-app/login', component: LoginComponent},
-  { path: 'phone-app/orders', component: OrdersComponent},
+  { path: 'phone-app/orders', component: OrdersComponent}, 
   { path: 'wall', component: WallComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
