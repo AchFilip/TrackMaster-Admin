@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
-import { OrderOptions, Statistics } from 'src/app/global/models/cell/orders.enum.options';
-import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.content.options';
+import {Component, OnInit} from '@angular/core';
+import {WidgetOptions} from 'src/app/global/models/cell/widget.enum.options';
+import {OrderOptions, Statistics} from 'src/app/global/models/cell/orders.enum.options';
+import {WidgetContentOptions} from 'src/app/global/models/cell/widget.enum.content.options';
 
 // Content Views
-import { CompletedOrdersContentComponent } from './contents/completed-orders-content/completed-orders-content.component';
-import { AvailableOrdersContentComponent } from './contents/available-orders-content/available-orders-content.component';
-import { initial } from 'lodash';
+import {CompletedOrdersContentComponent} from './contents/completed-orders-content/completed-orders-content.component';
+import {AvailableOrdersContentComponent} from './contents/available-orders-content/available-orders-content.component';
+import {initial} from 'lodash';
 
-import { OrdersService } from 'src/app/global/services/orders/orders.service';
+import {OrdersService} from 'src/app/global/services/orders/orders.service';
 
 @Component({
   selector: 'Widget',
@@ -91,7 +91,7 @@ export class WidgetComponent implements OnInit {
       'content_component': CompletedOrdersContentComponent
     },
 
-    'prev_content':{
+    'prev_content': {
       'display': '',
       'title': '',
       'name': ''
@@ -99,15 +99,16 @@ export class WidgetComponent implements OnInit {
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.initState(WidgetContentOptions.widget_options, 'widgets')
   }
 
-  /**  
+  /**
    * On click actions
-  */
+   */
   protected onMenuClicked() {
     if (this.getContentDisplay() == WidgetContentOptions.menu) {
       this.closeMenu();
@@ -153,7 +154,6 @@ export class WidgetComponent implements OnInit {
   }
 
 
-
   /**
    * Manipulate Widget
    */
@@ -172,7 +172,7 @@ export class WidgetComponent implements OnInit {
     this.widget.navbar.menu_icon_path = this.getIconPath(name);
   }
 
-  // Manipulate display's state 
+  // Manipulate display's state
   protected setContentDisplay(type: WidgetContentOptions) {
     if (!this.isValidOption(WidgetContentOptions, type)) {
       console.error('Unkown display type: ', type);
@@ -207,7 +207,7 @@ export class WidgetComponent implements OnInit {
     return this.db_statistics_options;
   }
 
-  // Get menu options based on state this widget was before 
+  // Get menu options based on state this widget was before
   protected getMenuOptions(state: WidgetContentOptions) {
     return this.db_menu_options;
   }
@@ -233,23 +233,23 @@ export class WidgetComponent implements OnInit {
     else return true;
   }
 
-  protected setPrevState(){
+  protected setPrevState() {
     this.widget.content.display = this.widget.prev_content.display;
   }
 
-  protected storeCurState(display: string){
+  protected storeCurState(display: string) {
     this.widget.prev_content.display = display;
-    
-    // Array of sections in the title 
+
+    // Array of sections in the title
     let sections = this.widget.navbar.title.split('>')
 
     let last_section = sections.pop();
-    this.widget.prev_content.name = last_section !== undefined ? last_section : '' ;
+    this.widget.prev_content.name = last_section !== undefined ? last_section : '';
 
     this.widget.prev_content.title = sections.join(">");
   }
 
-  protected initPrevState(){
+  protected initPrevState() {
     this.widget.navbar.title = this.widget.prev_content.title;
 
     const prev_state = this.widget.prev_content.display;
@@ -258,64 +258,64 @@ export class WidgetComponent implements OnInit {
   }
 
   // For each new state/view add it's init function here
-  protected initState(display: string, name:string){
-    switch(display){
+  protected initState(display: string, name: string) {
+    switch (display) {
 
       /** WIDGET */
-      case WidgetContentOptions.widget_options:{
+      case WidgetContentOptions.widget_options: {
         this.initWidgetOptions(name);
         break;
       }
-      case WidgetOptions.orders:{
+      case WidgetOptions.orders: {
         this.initOrderOptions(name);
         break;
       }
-      case WidgetOptions.live:{
+      case WidgetOptions.live: {
         console.warn('Implement live option')
         break;
       }
-      case WidgetOptions.statistics:{
+      case WidgetOptions.statistics: {
         this.initStatisticsOptions(name);
         break;
       }
 
       /** ORDERS */
-      case WidgetContentOptions.order_options:{
+      case WidgetContentOptions.order_options: {
         this.initOrderOptions(name);
         break;
       }
-      case OrderOptions.available:{
+      case OrderOptions.available: {
         this.initAvailable(name);
         break;
       }
-      case OrderOptions.completed:{
+      case OrderOptions.completed: {
         this.initCompleted(name);
         break;
       }
-      case OrderOptions.ongoing:{
+      case OrderOptions.ongoing: {
         this.initOngoing(name);
         break;
       }
-      case OrderOptions.add:{
+      case OrderOptions.add: {
         console.warn('implement add init')
         break;
       }
 
       /** STATISTICS */
-      case WidgetContentOptions.statistics_options:{
+      case WidgetContentOptions.statistics_options: {
         this.initStatisticsOptions(name);
         break;
       }
-      case Statistics.single:{
+      case Statistics.single: {
         this.initStatisticsSingle(name);
         break;
       }
-      case Statistics.company:{
+      case Statistics.company: {
         this.initStatisticsCompany(name);
         break;
       }
 
-      default:{
+      default: {
         console.error('Not such state', display);
       }
     }
@@ -323,7 +323,7 @@ export class WidgetComponent implements OnInit {
 
   /** INIT WIDGET OPTIONS */
 
-  initWidgetOptions(name:string){
+  initWidgetOptions(name: string) {
     // Init navbar
     this.widget.navbar.title = name;
     this.setNavbarIcon('widget');
@@ -338,55 +338,55 @@ export class WidgetComponent implements OnInit {
 
   /** INIT ORDER OPTIONS */
 
-  initOrderOptions(name:string){
-    // Update widget's icon 
+  initOrderOptions(name: string) {
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.addSubpathTitle(name)
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.order_options);
 
-    // Request for order options 
+    // Request for order options
     this.widget.content.options = this.getOrderOptions();
   }
 
   /** INIT ORDERS */
 
-  initCompleted(name:string){
-    // Update widget's icon 
+  initCompleted(name: string) {
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.changeTitle(name)
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
   }
 
-  initAvailable(name:string){
-    // Request for order options 
+  initAvailable(name: string) {
+    // Request for order options
     this.widget.content.options = this.getOrderOptions();
 
-    // Update widget's icon 
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.changeTitle(name)
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.available_order_options);
   }
 
-  initOngoing(name:string){
-    // Request for order options 
+  initOngoing(name: string) {
+    // Request for order options
     // this.widget.content.options = this.getOrderOptions();
 
-    // Update widget's icon 
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.changeTitle(name)
 
     // Change widget's content display
@@ -394,40 +394,40 @@ export class WidgetComponent implements OnInit {
   }
 
   /** INIT STATISTICS OPTIONS */
-  initStatisticsOptions(name:string){
-    // Update widget's title 
+  initStatisticsOptions(name: string) {
+    // Update widget's title
     this.addSubpathTitle(name)
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.statistics_options);
 
-    // Request for order options 
+    // Request for order options
     this.widget.content.options = this.getStatisticsOptions();
   }
 
-  protected initStatisticsSingle(name:string){
+  protected initStatisticsSingle(name: string) {
 
-    // Request for order options 
+    // Request for order options
     //this.widget.content.options = this.getStatisticsOptions();
 
-    // Update widget's icon 
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.changeTitle(name)
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.single_option);
   }
 
-  protected initStatisticsCompany(name:string){
-    // Request for order options 
+  protected initStatisticsCompany(name: string) {
+    // Request for order options
     //this.widget.content.options = this.getStatisticsOptions();
 
-    // Update widget's icon 
+    // Update widget's icon
     this.setNavbarIcon(name)
 
-    // Update widget's title 
+    // Update widget's title
     this.changeTitle(name)
 
     // Change widget's content display
@@ -435,36 +435,42 @@ export class WidgetComponent implements OnInit {
   }
 
   /** Menu  */
-  protected openMenu(){
+  protected openMenu() {
     // Store previus state
     this.storeCurState(this.widget.content.display);
 
-    // Update menu's icon 
+    // Update menu's icon
     this.setMenuIcon('cross');
 
     // Update widget's icon
     this.setNavbarIcon('menu');
 
-    // Update widget's title 
+    // Update widget's title
     this.addSubpathTitle('menu');
 
-    // Request for order options 
+    // Request for order options
     this.widget.content.options = this.getMenuOptions(this.getContentDisplay());
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.menu);
   }
 
-  protected closeMenu(){
-    // Update menu's icon 
+  protected closeMenu() {
+    // Update menu's icon
     this.setMenuIcon('snackbar');
 
-    // BUG: if we open final/chosen content
-    // and open menu, the title never resets..
-    // content>MENU>MENU ...
-    if(this.widget.prev_content.display==='chosen'){
-      this.widget.content.display='chosen';
-    }else{
+
+    if (this.widget.prev_content.display === 'chosen') {
+      this.widget.content.display = 'chosen';
+
+      var nameComponent = this.widget.navbar.title.substr(0, this.widget.navbar.title.indexOf('>'));
+      this.changeTitle(nameComponent);
+
+      //todo: add the rest or use the same title name with the .png file.
+      if (nameComponent === "completed") {
+        this.setNavbarIcon("orders");
+      }
+    } else {
       this.initPrevState();
     }
   }
