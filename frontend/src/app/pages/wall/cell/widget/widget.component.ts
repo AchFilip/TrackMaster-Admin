@@ -9,6 +9,10 @@ import {AvailableOrdersContentComponent} from './contents/available-orders-conte
 import {initial} from 'lodash';
 
 import {OrdersService} from 'src/app/global/services/orders/orders.service';
+import {OngoingOrdersContentComponent} from "./contents/ongoing-orders-content/ongoing-orders-content.component";
+import {
+  SingleStatisticsContentComponent
+} from "./contents/single-statistics-content/single-statistics-content.component";
 
 @Component({
   selector: 'Widget',
@@ -42,15 +46,6 @@ export class WidgetComponent implements OnInit {
     'single', 'company'
   ];
 
-  protected orders = [[
-    '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-    '1', '398', '25 august 1999, 23:23:23'
-  ], [
-    '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-    '1', '398', '25 august 1999, 23:23:23'
-  ]
-  ]
-
   /** DELETE UNTIL HERE */
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
   protected imagePaths: { [index: string]: string } = {
@@ -60,11 +55,11 @@ export class WidgetComponent implements OnInit {
 
     'widget': 'widgets.png',
     // Widget options
-    'orders': 'orders.png',
+    'orders': 'completed.png',
     'live': 'live.png',
     'statistics': 'statistics.png',
     // Order options
-    'completed': 'orders.png',
+    'completed': 'completed.png',
     'available': 'available.png',
     'ongoing': 'ongoing.png',
     'add': 'add.png',
@@ -73,7 +68,7 @@ export class WidgetComponent implements OnInit {
     'move': 'move.png',
     'close': 'close.png',
     // Statistics options
-    'single': 'single driver.png',
+    'single': 'single.png',
     'company': 'company.png'
   }
 
@@ -86,9 +81,7 @@ export class WidgetComponent implements OnInit {
 
     'content': {
       'display': '',
-      'options': [''],
-
-      'content_component': CompletedOrdersContentComponent
+      'options': ['']
     },
 
     'prev_content': {
@@ -98,7 +91,7 @@ export class WidgetComponent implements OnInit {
     }
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
-
+  protected content_component : any;
   constructor() {
   }
 
@@ -363,6 +356,8 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = CompletedOrdersContentComponent;
   }
 
   initAvailable(name: string) {
@@ -376,12 +371,14 @@ export class WidgetComponent implements OnInit {
     this.changeTitle(name)
 
     // Change widget's content display
-    this.setContentDisplay(WidgetContentOptions.available_order_options);
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = AvailableOrdersContentComponent;
   }
 
   initOngoing(name: string) {
     // Request for order options
-    // this.widget.content.options = this.getOrderOptions();
+    this.widget.content.options = this.getOrderOptions();
 
     // Update widget's icon
     this.setNavbarIcon(name)
@@ -390,7 +387,9 @@ export class WidgetComponent implements OnInit {
     this.changeTitle(name)
 
     // Change widget's content display
-    this.setContentDisplay(WidgetContentOptions.ongoing_order_options);
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = OngoingOrdersContentComponent;
   }
 
   /** INIT STATISTICS OPTIONS */
@@ -417,7 +416,9 @@ export class WidgetComponent implements OnInit {
     this.changeTitle(name)
 
     // Change widget's content display
-    this.setContentDisplay(WidgetContentOptions.single_option);
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = SingleStatisticsContentComponent;
   }
 
   protected initStatisticsCompany(name: string) {
@@ -465,11 +466,7 @@ export class WidgetComponent implements OnInit {
 
       var nameComponent = this.widget.navbar.title.substr(0, this.widget.navbar.title.indexOf('>'));
       this.changeTitle(nameComponent);
-
-      //todo: add the rest or use the same title name with the .png file.
-      if (nameComponent === "completed") {
-        this.setNavbarIcon("orders");
-      }
+      this.setNavbarIcon(nameComponent);
     } else {
       this.initPrevState();
     }
