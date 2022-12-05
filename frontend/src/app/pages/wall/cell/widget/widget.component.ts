@@ -91,7 +91,8 @@ export class WidgetComponent implements OnInit {
     }
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
-  protected content_component : any;
+  protected content_component: any;
+
   constructor() {
   }
 
@@ -111,7 +112,15 @@ export class WidgetComponent implements OnInit {
   }
 
   protected onMenuOptionClicked(name: string) {
-    console.warn('menu option on click is not implemented yet')
+    if (name == "close") {
+      this.widget.content.display = this.WidgetContentOptionsEnum.reset;
+    } else if (name == "move") {
+      console.log("Clicked move");
+    } else if (name == "resize") {
+      console.log("Clicked resize");
+    } else {
+      console.warn('menu option on click is not implemented yet')
+    }
   }
 
   protected onWidgetOptionClicked(name: string) {

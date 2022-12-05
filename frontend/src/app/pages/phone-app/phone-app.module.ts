@@ -5,7 +5,7 @@ import { OrderDetailsComponent } from './orders/order-details/order-details.comp
 
 @NgModule({
   declarations: [
-    OrderDetailsComponent
+
   ],
   imports: [
     CommonModule

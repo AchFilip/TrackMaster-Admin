@@ -1,6 +1,7 @@
 export enum WidgetContentOptions{
     menu='menu',
     widget_options='widget_options',
+    reset='reset',
     order_options='order_options',
     available_order_options='available_order_options',
     ongoing_order_options='ongoing_order_options',

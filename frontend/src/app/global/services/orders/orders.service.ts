@@ -21,6 +21,12 @@ export class OrdersService {
       .get<OrderModel[]>(`${this.hostURl}/api/orders/completed`)
       .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
   }
+
+  public getAvailable(): Observable<OrderModel[]> {
+    return this.http
+      .get<OrderModel[]>(`${this.hostURl}/api/orders/available`)
+      .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
+  }
 //   public create(resource: ItemModel): Observable<ItemModel> {
 //     return this.http
 //       .post<ItemModel>(`${this.hostURl}/api/item-shop`, resource)
