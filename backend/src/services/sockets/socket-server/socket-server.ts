@@ -108,9 +108,29 @@ export class SocketServer {
   
   /** WALL */
   private onWallSubscribe = (topic:string, data:any) => {
-    this.logger.debug('New wall: ', data.id);
+    this.logger.debug('Sunscribe wall: ', data.id);
     this.gridManager.initWall(data.id);
     this.gridManager.print();
+  }
+  private onWallunSubscribe = (topic:string, data:any) => {
+    this.logger.debug('Unsubscribe wall: ', data.id);
+    this.gridManager.deleteWall(data.id);
+    this.gridManager.print();
+  }
+  //
+  private onWallState= (topic:string, data:any) => {
+    switch(data.action){
+      case 'getEnabledGrid':{
+        data.enabled_grid = this.gridManager.getEnabledGrid(data.wallID);
+        break;
+      }
+
+      default:{
+        this.logger.error('Wrong action for wall state: ', data.action);
+      }
+    }
+
+    this.io.emit(topic, data);
   }
   /** CELLS */
   private handleCellState = (topic:string, data:any) => {
@@ -141,6 +161,8 @@ export class SocketServer {
   }
   protected handlers: { [key: string]: (topic:string, data:any) => void; } = {
     'wall-subscribe': this.onWallSubscribe,
+    'wall-unsubscribe': this.onWallunSubscribe,
+    'wall-state': this.onWallState,
     'cell-state': this.handleCellState
   }
 }
@@ -164,8 +186,8 @@ class GridManager{
     this.grids[wallID].enabled_grid[cellID] = false;
   }
 
-  public getEnabledGrid(){
-    return this.enabled_grid;
+  public getEnabledGrid(wallID: number){
+    return this.grids[wallID].enabled_grid;
   }
 
   public initWall(id: number){
@@ -176,6 +198,11 @@ class GridManager{
     }
     this.initGrid(id,2,3);
     this.initEnabledGrid(id,2,3);
+  }
+
+  public deleteWall(id: number){
+    // Create new wall
+    delete this.grids[id];
   }
 
   private initGrid(wallID: number, rows: number, cols: number){

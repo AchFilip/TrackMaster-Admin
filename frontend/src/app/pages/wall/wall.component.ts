@@ -22,6 +22,14 @@ export class WallComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.initCells()
     this.socketService.publish("wall-subscribe", {id: this.id});
+    this.socketService.publish("wall-state", {wallID: this.id, action: 'getEnabledGrid'});
+    this.socketService.subscribe("wall-state", (data: any) => {
+      console.log(data);
+    });
+  }
+
+  ngOnDestroy(): void{
+    this.socketService.publish("wall-unsubscribe", {id: this.id});
   }
 
   initCells(): void{
