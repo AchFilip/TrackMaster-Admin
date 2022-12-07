@@ -9,7 +9,10 @@
 
     <!-- Widget -->
     <div *ngIf="this.display===DisplayEnum.widget" class="widget">
-        <Widget></Widget>
+        <Widget
+            [wallID]=self.wallID
+            [cellID]=self.id
+        ></Widget>
     </div>
     
 </div>

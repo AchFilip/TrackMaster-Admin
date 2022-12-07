@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {WidgetOptions} from 'src/app/global/models/cell/widget.enum.options';
 import {OrderOptions, Statistics} from 'src/app/global/models/cell/orders.enum.options';
 import {WidgetContentOptions} from 'src/app/global/models/cell/widget.enum.content.options';
@@ -13,6 +13,8 @@ import {OngoingOrdersContentComponent} from "./contents/ongoing-orders-content/o
 import {
   SingleStatisticsContentComponent
 } from "./contents/single-statistics-content/single-statistics-content.component";
+import { BasicMenuOptions } from 'src/app/global/models/cell/menu.basic.options';
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
 @Component({
   selector: 'Widget',
@@ -71,6 +73,8 @@ export class WidgetComponent implements OnInit {
     'single': 'single.png',
     'company': 'company.png'
   }
+  @Input() wallID!: number;
+  @Input() cellID!: number;
 
   protected widget = {
     'navbar': {
@@ -93,7 +97,9 @@ export class WidgetComponent implements OnInit {
   protected WidgetContentOptionsEnum = WidgetContentOptions;
   protected content_component: any;
 
-  constructor() {
+  constructor(
+    private socketService: SocketsService
+  ) {
   }
 
   ngOnInit(): void {
@@ -112,14 +118,12 @@ export class WidgetComponent implements OnInit {
   }
 
   protected onMenuOptionClicked(name: string) {
-    if (name == "close") {
-      this.widget.content.display = this.WidgetContentOptionsEnum.reset;
-    } else if (name == "move") {
-      console.log("Clicked move");
-    } else if (name == "resize") {
-      console.log("Clicked resize");
-    } else {
-      console.warn('menu option on click is not implemented yet')
+    if(this.isValidOption(BasicMenuOptions, name)){
+      console.log('basic menu option pressed: ', name);
+      // this.clickMenuEmitter.emit(name);
+      if(name === BasicMenuOptions.close){
+        this.socketService.publish("cell-state", {wallID: this.wallID, cellID: this.cellID, action: 'close'});
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 export class CellModel {
 
-    public self!: number;
+    public id!: number;
+    public wallID!: number;
     public selected?: boolean
   
     constructor(model?: any) {
