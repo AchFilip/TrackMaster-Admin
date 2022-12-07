@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CellModel } from 'src/app/global/models/cell/cell.model';
 import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
@@ -10,16 +11,17 @@ import { SocketsService } from 'src/app/global/services/sockets/sockets.service'
 export class WallComponent implements OnInit {
   protected cells: CellModel[] = [];
   // TODO: change this dynamically
-  protected id: number = 1;
+  protected id?: any;
   constructor(
-    private socketService: SocketsService
+    private socketService: SocketsService,
+    private route: ActivatedRoute
   ) { 
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
     this.initCells()
-    // TODO: get rid of hardcoded values
-    this.socketService.publish("wall-subscribe", {id: 1});
+    this.socketService.publish("wall-subscribe", {id: this.id});
   }
 
   initCells(): void{

@@ -108,7 +108,9 @@ export class SocketServer {
   
   /** WALL */
   private onWallSubscribe = (topic:string, data:any) => {
+    this.logger.debug('New wall: ', data.id);
     this.gridManager.initWall(data.id);
+    this.gridManager.print();
   }
   /** CELLS */
   private handleCellState = (topic:string, data:any) => {
@@ -186,5 +188,9 @@ class GridManager{
     for (let i = 0; i < rows*cols; i++) { 
       this.grids[wallID].enabled_grid.push(false);
     }
+  }
+
+  public print(){
+    console.log(this.grids)
   }
 }

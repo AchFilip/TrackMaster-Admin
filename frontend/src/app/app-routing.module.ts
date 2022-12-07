@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'phone-app', component: PhoneAppComponent},
   { path: 'phone-app/login', component: LoginComponent},
   { path: 'phone-app/orders', component: OrdersComponent}, 
-  { path: 'wall', component: WallComponent},
+  { path: 'wall/:id', component: WallComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
