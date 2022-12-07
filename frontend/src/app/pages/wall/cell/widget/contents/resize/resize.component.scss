@@ -1,0 +1,41 @@
+.content {
+  height: 87%;
+  width: 100%;
+  background-color: #F0F6FF;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 3px;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-bottom: 3px;
+
+  .widget-option {
+    background-color: #85A8C9;
+    width: 33.05%;
+    height: 13.3vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .can {
+      filter: invert(100%) sepia(30%) saturate(6334%) hue-rotate(186deg) brightness(125%) contrast(101%);
+    }
+
+    .cannot{
+      filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(99deg) brightness(104%) contrast(100%);
+    }
+  }
+}

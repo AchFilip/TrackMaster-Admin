@@ -1,14 +1,12 @@
 export enum WidgetContentOptions{
     menu='menu',
+    resize='resize',
+    move='move',
     widget_options='widget_options',
     reset='reset',
     order_options='order_options',
-    available_order_options='available_order_options',
-    ongoing_order_options='ongoing_order_options',
-    add_order='add_order',
     chosen='chosen',
     //statistics
     statistics_options='statistics_options',
-    single_option='single_option',
     company_option='company_option'
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {WidgetOptions} from 'src/app/global/models/cell/widget.enum.options';
 import {OrderOptions, Statistics} from 'src/app/global/models/cell/orders.enum.options';
 import {WidgetContentOptions} from 'src/app/global/models/cell/widget.enum.content.options';
@@ -6,15 +6,13 @@ import {WidgetContentOptions} from 'src/app/global/models/cell/widget.enum.conte
 // Content Views
 import {CompletedOrdersContentComponent} from './contents/completed-orders-content/completed-orders-content.component';
 import {AvailableOrdersContentComponent} from './contents/available-orders-content/available-orders-content.component';
-import {initial} from 'lodash';
-
-import {OrdersService} from 'src/app/global/services/orders/orders.service';
 import {OngoingOrdersContentComponent} from "./contents/ongoing-orders-content/ongoing-orders-content.component";
 import {
   SingleStatisticsContentComponent
 } from "./contents/single-statistics-content/single-statistics-content.component";
-import { BasicMenuOptions } from 'src/app/global/models/cell/menu.basic.options';
-import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
+import {BasicMenuOptions} from 'src/app/global/models/cell/menu.basic.options';
+import {SocketsService} from 'src/app/global/services/sockets/sockets.service';
+import {ResizeComponent} from "./contents/resize/resize.component";
 
 @Component({
   selector: 'Widget',
@@ -123,6 +121,10 @@ export class WidgetComponent implements OnInit {
       // this.clickMenuEmitter.emit(name);
       if(name === BasicMenuOptions.close){
         this.socketService.publish("cell-state", {wallID: this.wallID, cellID: this.cellID, action: 'close'});
+      }else if(name === BasicMenuOptions.resize){
+        this.setContentDisplay(WidgetContentOptions.resize);
+        this.addSubpathTitle("resize");
+        this.setNavbarIcon("resize");
       }
     }
   }
@@ -472,7 +474,6 @@ export class WidgetComponent implements OnInit {
   protected closeMenu() {
     // Update menu's icon
     this.setMenuIcon('snackbar');
-
 
     if (this.widget.prev_content.display === 'chosen') {
       this.widget.content.display = 'chosen';

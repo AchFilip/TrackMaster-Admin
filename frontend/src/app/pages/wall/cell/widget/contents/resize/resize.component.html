@@ -1,0 +1,6 @@
+<div class="content">
+  <button mat-button class="widget-option" *ngFor="let option of buttons;let i=index;">
+    <img src="{{arrowFolderPath + i + '.png'}}" class="icon"
+         [ngClass]="{cannot: option===false,can: option===true}">
+  </button>
+</div>

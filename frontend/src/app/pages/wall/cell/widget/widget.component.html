@@ -49,4 +49,8 @@
         <ng-container *ngComponentOutlet=content_component></ng-container>
     </div>
 
+  <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.resize">
+      <app-resize [wallID]="wallID"></app-resize>
+  </div>
+
 </div>
