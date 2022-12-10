@@ -1,6 +1,7 @@
 <div class="content">
-  <button mat-button class="widget-option" *ngFor="let option of buttons;let i=index;">
+  <button mat-button class="widget-option" *ngFor="let option of buttons;let i=index;"
+          [ngClass]="{disableclick: option===false,enableclick: option===true}">
     <img src="{{arrowFolderPath + i + '.png'}}" class="icon"
-         [ngClass]="{cannot: option===false,can: option===true}">
+          [ngClass]="{cannot: option===false,can: option===true}">
   </button>
 </div>

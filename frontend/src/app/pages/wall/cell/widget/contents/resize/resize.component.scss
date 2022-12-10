@@ -13,6 +13,16 @@
   padding-left: 3px;
   padding-bottom: 3px;
 
+  .enableclick {
+    pointer-events: all;
+    cursor: default;
+  }
+
+  .disableclick {
+    pointer-events: none;
+    cursor: default;
+  }
+
   .widget-option {
     background-color: #85A8C9;
     width: 33.05%;
@@ -37,5 +47,7 @@
     .cannot{
       filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(99deg) brightness(104%) contrast(100%);
     }
+
+
   }
 }

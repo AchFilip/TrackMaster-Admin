@@ -11,11 +11,11 @@ import { SocketsService } from 'src/app/global/services/sockets/sockets.service'
 })
 export class CellComponent implements OnInit {
   @Input() self!: CellModel;
-  
+
 
   protected DisplayEnum = Display;
   protected display?: Display;
-  
+
   constructor(
     private socketService: SocketsService
   ) { }
@@ -27,15 +27,15 @@ export class CellComponent implements OnInit {
   }
 
   public onAddClick(){
-    this.toggleDisplay()
+      this.openWidget()
   }
 
-  private toggleDisplay(){
-    if(this.display===this.DisplayEnum.widget){ 
-      this.display=this.DisplayEnum.empty;
-    }else{
-      this.display=this.DisplayEnum.widget;
-    }
+  private openWidget(){
+    this.socketService.publish("cell-state", {wallID: this.self.wallID,cellID: this.self.id,action:'open'})
+  }
+
+  private closeWidget(){
+    this.socketService.publish("cell-state", {wallID: this.self.wallID,cellID: this.self.id,action:'close'})
   }
 
   private initStateSocket(){
@@ -44,7 +44,11 @@ export class CellComponent implements OnInit {
         data.wallID === this.self.wallID
         && data.cellID === this.self.id
       ){
-        this.toggleDisplay();
+        if(data.action === "close") {
+          this.display=this.DisplayEnum.empty;
+        }else{
+          this.display=this.DisplayEnum.widget;
+        }
       }
     });
   }
