@@ -1,190 +1,200 @@
-@font-face{
-    font-family: 'Koulen';
-    src: url(/assets/fonts/Koulen-Regular.ttf);
+@font-face {
+  font-family: 'Koulen';
+  src: url(/assets/fonts/Koulen-Regular.ttf);
 }
 
-.main-container{
+.main-container {
 
-    /* bgr */
-    background: linear-gradient(24.51deg,
-            #85A8C9 75.84%,
-            #AFC6DB 92.59%,
-            #FFFFFF 108.79%);
+  /* bgr */
+  background: linear-gradient(24.51deg,
+    #85A8C9 75.84%,
+    #AFC6DB 92.59%,
+    #FFFFFF 108.79%);
 
-    width:100vw;
-    height: 100vh;
-    overflow: hidden;
-    margin: 0px;
-    p{
-        font-family: 'Koulen', sans-serif;
-        font-style: normal;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0px;
+
+  p {
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+  }
+
+  .user-info {
+    display: flex;
+    position: absolute;
+    width: 176px;
+    height: 32px;
+    left: 20px;
+    top: 20px;
+
+    img {
+      border-radius: 90px;
     }
 
-    .user-info{
-        display: flex;
+    p {
+      color: white;
+      padding-left: 7px;
+      padding-top: 5px;
+    }
+  }
+
+  .menu-orders {
+    .boxes {
+      .top-box {
         position: absolute;
-        width: 176px;
-        height: 32px;
-        left: 20px;
-        top: 20px;
+        width: 355px;
+        height: 44px;
+        left: 19px;
+        top: 76px;
 
-        img{
-            border-radius: 90px;
+        background: #698CAD;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px 10px 0px 0px;
+
+        img {
+          position: relative;
+          width: 27px;
+          height: 27px;
+          left: 80px;
+          top: 5px;
         }
 
-        p{
-            color: white;
-            padding-left: 7px;
-            padding-top: 5px;
+        p {
+          position: relative;
+          font-size: 22px;
+
+          color: white;
+          left: 115px;
+          bottom: 22px;
         }
+      }
+
+      .middle-box {
+        position: absolute;
+        width: 355px;
+        height: 632px;
+        left: 19px;
+        top: 78px;
+        background: #F0F6FF;
+        border-radius: 10px 10px 0px 0px;
+
+        .testTT{
+          overflow-y: scroll;
+          overflow-x: hidden;
+          max-height: 83%;
+        }
+
+        .orderDetails {
+          display: flex;
+          clear: both;
+          flex-wrap: nowrap;
+          font-size: 16px;
+          color: black;
+          height: 10%;
+          font-family: 'Koulen', sans-serif;
+          font-style: normal;
+          padding-top: 13%;
+
+          .orderDetails > div {
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            line-height: 75px;
+          }
+        }
+
+      }
+
+      .bottom-box {
+        position: absolute;
+        width: 357px;
+        height: 50px;
+        left: 18px;
+        top: 673px;
+
+        background: #698CAD;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 0px 0px 10px 10px;
+
+
+        img {
+          position: relative;
+          width: 30px;
+          height: 30px;
+          right: 80px;
+          top: 7.5px;
+        }
+
+        p {
+          position: relative;
+          font-size: 22px;
+
+          color: white;
+          left: 15px;
+          bottom: 25px;
+        }
+      }
     }
-    .menu-orders{
-        .boxes{
-            .top-box{
-                position: absolute;
-                width: 355px;
-                height: 44px;
-                left: 19px;
-                top: 76px;
+  }
 
-                background: #698CAD;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 10px 10px 0px 0px;
-            
-                img{
-                    position: relative;
-                    width: 27px;
-                    height: 27px;
-                    left: 80px;
-                    top: 5px;
-                }
-    
-                p{
-                    position: relative;
-                    font-size: 22px;
-    
-                    color: white;
-                    left: 115px;
-                    bottom: 22px;
-                }
-            }
+  .bottom-buttons {
+    .clear {
+      position: absolute;
+      left: 6.15%;
+      right: 56.67%;
+      top: 88.74%;
+      bottom: 3.32%;
 
-            .middle-box{
-                position: absolute;
-                width: 355px;
-                height: 632px;
-                left: 19px;
-                top: 78px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      background: #B1C8DD;
+      border-radius: 21px;
 
-                background: #F0F6FF;
-                border-radius: 10px 10px 0px 0px;
-
-                .orderDetails{
-                    display: flex;
-                    flex-wrap: nowrap;
-                    font-size: 16px;
-                    color: black;
-        
-                    font-family: 'Koulen', sans-serif;
-                    font-style: normal;
-                    padding-top: 13%;
-
-                    .orderDetails > div {
-                        width: 100px;
-                        margin: 10px;
-                        text-align: center;
-                        line-height: 75px;
-                    }
-                }
-
-            }
-            
-            .bottom-box{
-                position: absolute;
-                width: 357px;
-                height: 50px;
-                left: 18px;
-                top: 673px;
-
-                background: #698CAD;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 0px 0px 10px 10px;        
-            
-            
-                img{
-                    position: relative;
-                    width: 30px;
-                    height: 30px;
-                    right: 80px;
-                    top: 7.5px;
-                }
-    
-                p{
-                    position: relative;
-                    font-size: 22px;
-    
-                    color: white;
-                    left: 15px;
-                    bottom: 25px;
-                }
-            }
-        }
     }
-    .bottom-buttons{
-        .clear{
-            position: absolute;
-            left: 6.15%;
-            right: 56.67%;
-            top: 88.74%;
-            bottom: 3.32%;
-    
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-            background: #B1C8DD;
-            border-radius: 21px;
-            
-        }
 
-        .start{
-            position: absolute;
-            left: 57.18%;
-            right: 5.64%;
-            top: 88.74%;
-            bottom: 3.32%;
-            
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-            background: #6ECF7D;
-            border-radius: 21px;
+    .start {
+      position: absolute;
+      left: 57.18%;
+      right: 5.64%;
+      top: 88.74%;
+      bottom: 3.32%;
 
-            p{
-                color: black;
-            }
-        }
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      background: #6ECF7D;
+      border-radius: 21px;
 
-        .clear_on{
-            background-color: #6E92B5;
-        }
-        .enable-click {
-            pointer-events: all;
-            cursor: default;
-        }
-
-        .disable-click {
-            pointer-events: none;
-            cursor: default;
-        }
-
-        p{
-            display: flex;
-            line-height: 33px;
-            align-items: center;
-            height: 67px;
-            padding-left: 37px;
-        
-            font-family: 'Koulen', sans-serif;
-            font-style: normal;
-            font-size: 18px;
-            color: #FBFBFB;
-
-        }
+      p {
+        color: black;
+      }
     }
+
+    .clear_on {
+      background-color: #6E92B5;
+    }
+
+    .enable-click {
+      pointer-events: all;
+      cursor: default;
+    }
+
+    .disable-click {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    p {
+      display: flex;
+      line-height: 33px;
+      align-items: center;
+      height: 67px;
+      padding-left: 37px;
+
+      font-family: 'Koulen', sans-serif;
+      font-style: normal;
+      font-size: 18px;
+      color: #FBFBFB;
+
+    }
+  }
 }

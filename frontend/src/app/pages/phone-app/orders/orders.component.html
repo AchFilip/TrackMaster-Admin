@@ -9,10 +9,12 @@
                 <div class="orderDetails">
                     <div style="padding-left: 4%;">ID</div>
                     <div style="padding-left: 29%;">ADDRESS</div>
-                    <div style="padding-left: 22%;">VOLUME</div>
-                    <div style="padding-left: 6%;">DIST.</div>
+                    <div style="padding-left: 20%;">VOLUME</div>
+                    <div style="padding-left: 7%;">DIST.</div>
                 </div>
-                <app-order-details [inAvailable]="this.inAvailable" (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
+                <div class="testTT">
+                  <app-order-details [inAvailable]="this.inAvailable" (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
+                </div>
             </div>
             <div class="top-box">
                 <img [src]="topIconPath"/>
@@ -21,7 +23,7 @@
             <button mat-button class="bottom-box" (click)="changeOrders()">
                 <img [src]="bottomIconPath"/>
                 <p>{{this.bottomDescription}}</p>
-            </button>  
+            </button>
         </div>
     </div>
     <!-- make unclickable -->

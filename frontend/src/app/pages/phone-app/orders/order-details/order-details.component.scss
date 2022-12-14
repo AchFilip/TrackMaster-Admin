@@ -9,59 +9,59 @@
 
             .box{
                 box-sizing: border-box;
-        
+
                 display: flex;
                 position: relative;
 
 
                 width: 343px;
                 height: 43px;
-                
+
                 margin-top: 10px;
                 left: 6px;
-                        
+
                 background: #FFFFFF;
                 border: 1px solid #ECE9E9;
                 border-radius: 3px;
                 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-            
+
                 .id{
                     position: relative;
                     left: 2px;
                     padding-top: 2.5%;
                 }
-                
+
                 .address{
                     position: relative;
                     text-align: center;
                     width: 58%;
-                    left: 30px;
+                    left: 10px;
                     padding-top: 2.5%;
                 }
-    
+
                 .volume{
                     position: relative;
                     text-align: center;
                     width: 10%;
-                    left: 36px;
+                    left: 22px;
                     padding-top: 2.5%;
-    
+
                 }
-    
+
                 .dist{
                     position: relative;
                     text-align: center;
                     width: 15%;
-                    left: 43px;
+                    left: 38px;
                     padding-top: 2.5%;
-    
+
                 }
             }
 
             .green{
                 background-color: #8EFC9F;
             }
-            
+
             .red{
                 background-color: #FE3434;
             }
@@ -74,7 +74,7 @@
             right: 56.67%;
             top: 88.74%;
             bottom: 3.32%;
-    
+
             filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
             background: #B1C8DD;
             border-radius: 21px;
@@ -86,7 +86,7 @@
             right: 5.64%;
             top: 88.74%;
             bottom: 3.32%;
-            
+
             filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
             background: #6ECF7D;
             border-radius: 21px;
@@ -102,7 +102,7 @@
             align-items: center;
             height: 67px;
             padding-left: 37px;
-        
+
             font-family: 'Koulen', sans-serif;
             font-style: normal;
             font-size: 18px;
