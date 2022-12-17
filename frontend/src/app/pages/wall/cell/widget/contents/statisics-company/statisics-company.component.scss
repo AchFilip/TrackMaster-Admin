@@ -1,0 +1,78 @@
+@font-face{
+  font-family: 'Koulen';
+  src: url(/assets/fonts/Koulen-Regular.ttf);
+}
+
+.main-container{
+  .line-left{
+    position: absolute;
+    width: 371px;
+    height: 0px;
+    left: 15%;
+    top: 320px;
+
+    border: 1px solid #464646;
+    transform: rotate(90deg);
+  }
+
+  .line-right{
+    position: absolute;
+    width: 371px;
+    height: 0px;
+    left: 45%;
+    top: 320px;
+
+    border: 1px solid #464646;
+    transform: rotate(90deg);
+  }
+
+
+  p {
+    font-family: 'Koulen', sans-serif;
+    font-style: normal;
+    font-size: 40px;
+  }
+
+  .left-title{
+    position: absolute;
+    right: 75%;
+    bottom: 2%;
+  }
+
+  .mid-title{
+    position: absolute;
+    right: 48%;
+    bottom: 2%;
+  }
+
+  .right-title{
+    position: absolute;
+    right: 10%;
+    bottom: 2%;
+  }
+
+
+  .left-chart{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 157px;
+    left: 4%;
+  }
+
+  .middle-chart{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 157px;
+    left: 33%;
+  }
+
+  .right-chart{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 157px;
+    left: 66%;
+  }
+}
