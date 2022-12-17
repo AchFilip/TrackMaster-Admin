@@ -14,19 +14,15 @@ export class StatisicsCompanyComponent implements OnInit {
     new Chart("orders", {
       type: 'bar',
       data: {
-        labels: ['Delivered', 'Not Delivered', 'Ongoing'],
+        labels: ['Monday', 'Tuesday', 'Ongoing'],
         datasets: [{
-          label: '# of Votes',
+          label: 'Orders',
           data: [12, 19, 3],
           borderWidth: 1
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
+
       }
     });
   }
