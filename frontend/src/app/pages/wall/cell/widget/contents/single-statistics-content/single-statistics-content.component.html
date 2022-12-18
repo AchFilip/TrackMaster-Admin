@@ -1,12 +1,21 @@
 <div class="content">
-    <div class="title-frame text text-size-title text-white">
-        <div class="field" *ngFor="let field of fields">{{field}}</div>
+  <div class="title-bar">
+    <div class="text text-white">
+      <div class="titles">
+        <p>NAME</p>
+        <p style="position:relative; left: 25%;">SURNAME</p>
+        <p style="position:relative; left: 45%;">AGE</p>
+        <p style="position:relative; left: 55%;">PHONE</p>
+      </div>
     </div>
-    <div class="order-list">
-        <div class="row" *ngFor="let row of orders">
-            <div class="text text-size-content text-black" *ngFor="let field of row">
-                {{field}}
-            </div>
-        </div>
+  </div>
+  <div class="line-right"></div>
+  <div class="driver-content">
+    <div class="titles text">
+      <p>AIKATERINI AGAMEMNODAKI</p>
+      <p style="position:relative; bottom: 15px;">281 028 5684</p>
+      <canvas style="position: absolute;; height: 100%; width: 50%; top: 300px; left: 50px;" id="orders"></canvas>
+<!--      <canvas id="piechart"></canvas>-->
     </div>
+  </div>
 </div>
