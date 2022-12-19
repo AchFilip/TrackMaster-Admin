@@ -1,21 +1,39 @@
 <div class="content">
+<!-- Titles -->
   <div class="title-bar">
     <div class="text text-white">
       <div class="titles">
         <p>NAME</p>
-        <p style="position:relative; left: 25%;">SURNAME</p>
-        <p style="position:relative; left: 45%;">AGE</p>
+        <p style="position:relative; left: 28%;">SURNAME</p>
+        <p style="position:relative; left: 52%;">AGE</p>
         <p style="position:relative; left: 55%;">PHONE</p>
       </div>
     </div>
   </div>
   <div class="line-right"></div>
+<!--  Driver Data-->
   <div class="driver-content">
     <div class="titles text">
       <p>AIKATERINI AGAMEMNODAKI</p>
       <p style="position:relative; bottom: 15px;">281 028 5684</p>
-      <canvas style="position: absolute;; height: 100%; width: 50%; top: 300px; left: 50px;" id="orders"></canvas>
-<!--      <canvas id="piechart"></canvas>-->
+      <canvas style="position: absolute;; height: 100%; width: 50%; top: 300px; left: 50px;"
+              id="single-stats-1"></canvas>
+      <!--      <canvas id="piechart"></canvas>-->
     </div>
   </div>
+<!-- Order Data -->
+  <div class="orders-Height">
+    <div *ngFor="let row of myLength let j=index;">
+      <div class="order-box" style="position:relative; margin-bottom: 10px;">
+        <div class="order-details text text-black">
+          <div class="name">ACHILLAKOS LALALIS</div>
+          <div class="surname">FILIPPIDADKIS O 2OS</div>
+          <div class="age">15</div>
+          <div class="phone">6976271951</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>

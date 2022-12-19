@@ -8,19 +8,21 @@ import {Chart} from "chart.js/auto";
 })
 export class SingleStatisticsContentComponent implements OnInit {
 
+  protected myLength?: number[];
   protected fields?: string[];
   protected orders?: string[][];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.myLength = [1,2,3,4,5,6,7,8,9,10,11,12];
     this.getOrders();
     this.PieChart();
     this.RenderChart();
   }
 
   RenderChart(){
-    new Chart("orders", {
+    new Chart("single-stats-1", {
       type: 'bar',
       data: {
         labels: ['Monday', 'Tuesday', 'Thursday', 'Wednesday', 'Friday'],
@@ -37,7 +39,7 @@ export class SingleStatisticsContentComponent implements OnInit {
   }
 
   PieChart(){
-    new Chart("piechart", {
+    new Chart("single-stats-2", {
       type: 'doughnut',
       data: {
         labels: ['Delivered', 'Not Delivered', 'Ongoing'],

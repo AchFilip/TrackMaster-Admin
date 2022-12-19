@@ -38,6 +38,62 @@
     }
   }
 
+  .orders-Height {
+    position: absolute;
+
+    max-height: 100%;
+    max-width: 56%;
+    top: 110px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .order-box {
+      box-sizing: border-box;
+
+      position: absolute;
+      height: 35px;
+      width: 642px;
+      left: 1px;
+
+      background: #FFFFFF;
+      border: 1px solid #ECE9E9;
+      border-radius: 3px;
+
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
+      .order-details {
+        display: flex;
+        flex-direction: row;
+        flex-wrap:nowrap;
+        font-size: 22px;
+
+        .name {
+          position: absolute;
+          max-width: 25%;
+          left: 2px;
+        }
+
+        .surname {
+          position: absolute;
+          max-width: 25%;
+          left: 228px;
+        }
+
+        .age {
+          position: absolute;
+          max-width: 5%;
+          left: 462px;
+        }
+
+        .phone {
+          position: absolute;
+          max-width: 15%;
+          left: 514px;
+        }
+      }
+    }
+  }
+
   .line-right{
     position: absolute;
     width: 471px;
