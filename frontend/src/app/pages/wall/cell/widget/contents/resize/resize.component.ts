@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SocketsService} from "../../../../../../global/services/sockets/sockets.service";
-import {forEach} from "lodash";
 
 @Component({
   selector: 'app-resize',
