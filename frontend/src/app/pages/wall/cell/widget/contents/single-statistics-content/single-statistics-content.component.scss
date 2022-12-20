@@ -75,10 +75,12 @@
 
 
       .order-details {
+        position: relative;
         display: flex;
         flex-direction: row;
         flex-wrap:nowrap;
         font-size: 22px;
+        top: -12.5px;
 
         .name {
           position: absolute;

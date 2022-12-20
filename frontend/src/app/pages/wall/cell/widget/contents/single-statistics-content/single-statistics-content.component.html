@@ -1,5 +1,5 @@
 <div class="content">
-<!-- Titles -->
+  <!-- Titles -->
   <div class="title-bar">
     <div class="text text-white">
       <div class="titles">
@@ -12,30 +12,33 @@
   </div>
   <div class="line-right"></div>
 <!--  Driver Data-->
-  <div class="driver-content">
-    <div class="titles text">
-      <p>AIKATERINI AGAMEMNODAKI</p>
-      <p style="position:relative; bottom: 20px; left: 30px;">281 028 5684</p>
-      <img class="phone_img" src="/assets/wall/cell/widget/phone.png">
-      <img class="driver_img" src="/assets/wall/cell/widget/driver.png">
-      <canvas style="position: absolute;; height: 100%; width: 50%; top: 300px; left: 100px;"
-              id="single-stats-1"></canvas>
-      <!--      <canvas id="piechart"></canvas>-->
+  <ng-container *ngIf="this.phone != 0">
+    <div class="driver-content">
+      <div class="titles text">
+        <p>{{this.name}} {{this.surname}}</p>
+        <p style="position:relative; bottom: 20px; left: 30px;">{{this.phone}}</p>
+        <img class="phone_img" src="/assets/wall/cell/widget/phone.png">
+        <img class="driver_img" src="/assets/wall/cell/widget/driver.png">
+              <canvas style="position: absolute;; height: 100%; width: 50%; top: 300px; left: 100px;"
+                      id="single-stats-1"></canvas>
+      </div>
     </div>
-  </div>
+  </ng-container>
 <!-- Order Data -->
   <div class="orders-Height">
-    <div *ngFor="let row of myLength let j=index;">
-      <div class="order-box" style="position:relative; margin-bottom: 10px;">
+    <div *ngFor="let row of driverInfo let j=index;">
+      <button class="order-box"  (click)="SetDriverToShow(j)" (click)="RenderChart()" style="position:relative; margin-bottom: 10px;">
         <div class="order-details text text-black">
-          <div class="name">ACHILLAKOS LALALIS</div>
-          <div class="surname">FILIPPIDADKIS O 2OS</div>
-          <div class="age">15</div>
-          <div class="phone">6976271951</div>
+          <div class="name">{{row.name}}</div>
+          <div class="surname">{{row.surname}}</div>
+          <div class="age">{{row.age}}</div>
+          <div class="phone">{{row.phone}}</div>
         </div>
-      </div>
-
+      </button>
     </div>
   </div>
-
 </div>
+
+
+
+
