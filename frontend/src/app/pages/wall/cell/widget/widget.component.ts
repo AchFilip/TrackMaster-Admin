@@ -12,7 +12,6 @@ import {
 } from "./contents/single-statistics-content/single-statistics-content.component";
 import {BasicMenuOptions} from 'src/app/global/models/cell/menu.basic.options';
 import {SocketsService} from 'src/app/global/services/sockets/sockets.service';
-import {ResizeComponent} from "./contents/resize/resize.component";
 import {CreateOrderComponent} from "./contents/create-order/create-order.component";
 import {StatisicsCompanyComponent} from "./contents/statisics-company/statisics-company.component";
 
@@ -127,6 +126,10 @@ export class WidgetComponent implements OnInit {
         this.setContentDisplay(WidgetContentOptions.resize);
         this.addSubpathTitle("resize");
         this.setNavbarIcon("resize");
+      }else if(name === BasicMenuOptions.move){
+        this.setContentDisplay(WidgetContentOptions.move);
+        this.addSubpathTitle("move");
+        this.setNavbarIcon("move");
       }
     }
   }

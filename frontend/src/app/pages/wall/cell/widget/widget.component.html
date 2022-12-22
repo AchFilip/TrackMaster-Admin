@@ -53,4 +53,8 @@
       <app-resize [wallID]="wallID" [cellID]="cellID"></app-resize>
   </div>
 
+  <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.move">
+    <app-move [wallID]="wallID" [cellID]="cellID"></app-move>
+  </div>
+
 </div>

@@ -1,0 +1,20 @@
+<div class="content" *ngIf="this.screen === -1">
+  <button mat-button class="widget_option" (click)="SelectScreen(i)" *ngFor="let option of buttons;let i=index;">
+    <div class="text text-size-title text-white">
+      {{option}}
+    </div>
+  </button>
+</div>
+
+<div class="available_screens" *ngIf="this.screen != -1">
+  <button mat-button class="widget_option" *ngFor="let option of available_screens;let i=index;">
+    <div class="text text-size-title text-white">
+      <ng-container *ngIf="option === true">
+        <img src="{{this.img_path}}available.png" class="icon">
+      </ng-container>
+      <ng-container *ngIf="option === false">
+        <img src="{{this.img_path}}available.png" class="icon">
+      </ng-container>
+    </div>
+  </button>
+</div>
