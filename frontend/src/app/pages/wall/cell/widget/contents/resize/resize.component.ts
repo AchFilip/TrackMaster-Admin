@@ -10,6 +10,7 @@ export class ResizeComponent implements OnInit {
 
   public buttons:any[] = [true,true,true, true,true,true, true,true,true];
   public arrowFolderPath: string = "assets\\wall\\cell\\widget\\arrows\\";
+  public rotated:boolean = false;
   @Input() public wallID: any;
   @Input() public cellID: any;
 

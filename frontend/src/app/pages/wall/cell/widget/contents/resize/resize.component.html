@@ -2,7 +2,14 @@
   <button mat-button class="widget_option" *ngFor="let option of buttons;let i=index;"
           [ngClass]="{disableclick: option===false,enableclick: option===true}"
           [ngStyle]="{backgroundColor: option===false ? '#F0F6FF' : '#85A8C9'}">
-    <img src="{{arrowFolderPath + i + '.png'}}" class="icon"
-          [ngClass]="{cannot: option===false,can: option===true}">
+    <ng-container *ngIf="this.rotated === false">
+      <img src="{{arrowFolderPath + i + '.png'}}" class="icon"
+            [ngClass]="{cannot: option===false,can: option===true}">
+    </ng-container>
+
+    <ng-container *ngIf="this.rotated === true">
+      <img src="{{arrowFolderPath + 'r_' + i + '.png'}}" class="icon"
+           [ngClass]="{cannot: option===false,can: option===true}">
+    </ng-container>
   </button>
 </div>
