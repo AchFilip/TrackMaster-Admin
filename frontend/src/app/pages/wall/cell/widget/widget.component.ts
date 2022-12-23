@@ -14,6 +14,7 @@ import {BasicMenuOptions} from 'src/app/global/models/cell/menu.basic.options';
 import {SocketsService} from 'src/app/global/services/sockets/sockets.service';
 import {CreateOrderComponent} from "./contents/create-order/create-order.component";
 import {StatisicsCompanyComponent} from "./contents/statisics-company/statisics-company.component";
+import {LiveMapComponent} from "./contents/live-map/live-map.component";
 
 @Component({
   selector: 'Widget',
@@ -284,7 +285,7 @@ export class WidgetComponent implements OnInit {
         break;
       }
       case WidgetOptions.live: {
-        console.warn('Implement live option')
+        this.initLiveMap(name);
         break;
       }
       case WidgetOptions.statistics: {
@@ -472,6 +473,22 @@ export class WidgetComponent implements OnInit {
 
     this.content_component = StatisicsCompanyComponent;
 
+  }
+
+  initLiveMap(name: string){
+    // Request for order options
+    this.widget.content.options = this.getOrderOptions();
+
+    // Update widget's icon
+    this.setNavbarIcon(name)
+
+    // Update widget's title
+    this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = LiveMapComponent;
   }
 
   /** Menu  */

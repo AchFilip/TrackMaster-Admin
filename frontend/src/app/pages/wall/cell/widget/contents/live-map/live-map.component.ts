@@ -7,6 +7,7 @@ import * as L from 'leaflet';
   styleUrls: ['./live-map.component.scss']
 })
 export class LiveMapComponent implements AfterViewInit {
+  //todo: change element 'map' to be dynamically so that we can open multiple maps
   private map:any;
 
   private initMap(): void {
@@ -28,7 +29,6 @@ export class LiveMapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-
   }
 
 }
