@@ -10,26 +10,20 @@ export class LiveMapComponent implements AfterViewInit {
   //todo: change element 'map' to be dynamically so that we can open multiple maps
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
 
-  private map:any;
+  private map!: L.Map;
   private name!:string;
   private surname!:string;
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
-    });
+    this.map = L.map('map').setView([35.34257, 25.13422], 13);
 
-    this.map.locate({setView: true, maxZoom: 16});
+    // Add a tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
 
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    tiles.addTo(this.map);
+    // Use the locate function to get the user's current location and display it on the map
+    this.map.locate({ setView: true, maxZoom: 16 });
   }
   constructor() { }
 

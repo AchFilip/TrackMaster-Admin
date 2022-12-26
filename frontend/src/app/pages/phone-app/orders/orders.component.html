@@ -1,40 +1,41 @@
 <div class="main-container">
-    <div class="user-info">
-        <img [src]="userPath"/>
-        <p>VOLANAKIS KOSTIS</p>
-    </div>
-    <div class="menu-orders">
-        <div class="boxes">
-            <div class="middle-box">
-                <div class="orderDetails">
-                    <div style="padding-left: 4%;">ID</div>
-                    <div style="padding-left: 29%;">ADDRESS</div>
-                    <div style="padding-left: 20%;">VOLUME</div>
-                    <div style="padding-left: 7%;">DIST.</div>
-                </div>
-                <div class="testTT">
-                  <app-order-details [inAvailable]="this.inAvailable" (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
-                </div>
-            </div>
-            <div class="top-box">
-                <img [src]="topIconPath"/>
-                <p>{{this.topDescription}}</p>
-            </div>
-            <button mat-button class="bottom-box" (click)="changeOrders()">
-                <img [src]="bottomIconPath"/>
-                <p>{{this.bottomDescription}}</p>
-            </button>
+  <div class="user-info">
+    <img [src]="userPath"/>
+    <p>VOLANAKIS KOSTIS</p>
+  </div>
+  <div class="menu-orders">
+    <div class="boxes">
+      <div class="middle-box">
+        <div class="orderDetails">
+          <div style="padding-left: 4%;">ID</div>
+          <div style="padding-left: 10%;">ADDRESS</div>
+          <div style="padding-left: 39%;">VOLUME</div>
+          <div style="padding-left: 6%;">DIST.</div>
         </div>
+        <div class="testTT">
+          <app-order-details [inAvailable]="this.inAvailable"
+                             (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
+        </div>
+      </div>
+      <div class="top-box">
+        <img [src]="topIconPath"/>
+        <p>{{this.topDescription}}</p>
+      </div>
+      <button mat-button class="bottom-box" (click)="changeOrders()">
+        <img [src]="bottomIconPath"/>
+        <p>{{this.bottomDescription}}</p>
+      </button>
     </div>
-    <!-- make unclickable -->
-    <div class = "bottom-buttons">
-        <button mat-button class="clear" (click)="clearSelectedOrders()"
-        [ngClass]="{'disable-click': this.canClear===false, 'clear_on':this.canClear, 'enable-click': this.canClear}">
-            <p>CLEAR</p>
-        </button>
-        <button mat-button class="start" (click)="startWork()"
-        [ngClass]="{'disable-click': this.canClear===false, 'enable-click': this.canClear}">
-            <p>start</p>
-        </button>
-    </div>
+  </div>
+  <!-- make unclickable -->
+  <div class="bottom-buttons">
+    <button mat-button class="clear" (click)="clearSelectedOrders()"
+            [ngClass]="{'disable-click': this.canClear===false, 'clear_on':this.canClear, 'enable-click': this.canClear}">
+      <p>CLEAR</p>
+    </button>
+    <button mat-button class="start" (click)="startWork()"
+            [ngClass]="{'disable-click': this.canClear===false, 'enable-click': this.canClear}">
+      <p>start</p>
+    </button>
+  </div>
 </div>

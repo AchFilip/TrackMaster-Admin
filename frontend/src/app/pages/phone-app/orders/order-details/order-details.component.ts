@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import {OrdersService} from "../../../../global/services/orders/orders.service";
 import {OrderModel} from "../../../../global/models/order/order.model";
