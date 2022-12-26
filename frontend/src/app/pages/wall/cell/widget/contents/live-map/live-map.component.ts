@@ -8,13 +8,20 @@ import * as L from 'leaflet';
 })
 export class LiveMapComponent implements AfterViewInit {
   //todo: change element 'map' to be dynamically so that we can open multiple maps
+  protected imageBasePath = 'assets\\wall\\cell\\widget\\';
+
   private map:any;
+  private name!:string;
+  private surname!:string;
 
   private initMap(): void {
     this.map = L.map('map', {
       center: [ 39.8282, -98.5795 ],
       zoom: 3
     });
+
+    this.map.locate({setView: true, maxZoom: 16});
+
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
