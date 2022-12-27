@@ -29,6 +29,7 @@ import { MoveComponent } from './pages/wall/cell/widget/contents/move/move.compo
 import { LiveMapComponent } from './pages/wall/cell/widget/contents/live-map/live-map.component';
 import { CreateOrderComponent } from './pages/wall/cell/widget/contents/create-order/create-order.component';
 import { StatisicsCompanyComponent } from './pages/wall/cell/widget/contents/statisics-company/statisics-company.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 
@@ -53,16 +54,17 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     CreateOrderComponent,
     StatisicsCompanyComponent
   ],
-  imports: [
-    SocketIoModule.forRoot(socketIoConfig),
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTableModule
-  ],
+    imports: [
+        SocketIoModule.forRoot(socketIoConfig),
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTableModule,
+        MatFormFieldModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
