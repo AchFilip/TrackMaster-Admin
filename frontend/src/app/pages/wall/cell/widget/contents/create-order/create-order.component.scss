@@ -6,7 +6,7 @@
 .order-info{
   font-family: 'Koulen', sans-serif;
   font-style: normal;
-
+  font-size: 30px;
   .titles{
     position: absolute;
     right: 80%;
@@ -101,4 +101,15 @@
     background: #EEAC2D;
     border-radius: 21px;
   }
+
+  .enable-click {
+    pointer-events: all;
+    cursor: default;
+  }
+
+  .disable-click {
+    pointer-events: none;
+    cursor: default;
+  }
+
 }
