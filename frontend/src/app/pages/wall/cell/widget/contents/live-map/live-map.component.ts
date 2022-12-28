@@ -14,6 +14,9 @@ export class LiveMapComponent implements AfterViewInit {
   private name!:string;
   private surname!:string;
 
+  public closeInfo: boolean = true;
+  public closeDriver: boolean = false;
+
   private initMap(): void {
     this.map = L.map('map').setView([35.34257, 25.13422], 13);
 
@@ -30,6 +33,16 @@ export class LiveMapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
+  }
+
+  public closeCard(card: string): void{
+    if(card === "info"){
+      this.closeInfo = true;
+    }else if(card === "driver"){
+      this.closeDriver = true;
+    }else{
+      console.error("Wrong input!");
+    }
   }
 
 }
