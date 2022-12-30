@@ -1,11 +1,15 @@
 <div class="content">
-    <div class="title-frame text text-size-title text-white">
-        <div class="field" *ngFor="let field of fields">{{field}}</div>
+    <div class="title-frame text text-white">
+        <div *ngFor="let field of fields;let i=index;"
+        [ngClass]="{id:i===0,address:i===1,st:i===2,zip:i===3,floor:i===4,volume:i===5,time:i===6}">
+          {{field}}
+        </div>
     </div>
     <div class="order-list">
         <div class="row" *ngFor="let row of orders">
-            <div class="text text-size-content text-black" *ngFor="let field of row">
-                {{field}}
+            <div class="text text-size-content text-black" *ngFor="let field of row;let i=index;"
+                 [ngClass]="{id:i===0,address:i===1,st:i===2,zip:i===3,floor:i===4,volume:i===5,time:i===6}">
+            {{field}}
             </div>
         </div>
     </div>
