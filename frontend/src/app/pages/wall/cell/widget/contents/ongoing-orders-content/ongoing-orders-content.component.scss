@@ -1,60 +1,119 @@
 .content{
-    height:87%;
-    width:100%;
-    background-color: #F0F6FF;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  height:87%;
+  width:100%;
+  background-color: #F0F6FF;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: start;
+  gap: 3px;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-bottom: 3px;
+
+  .title-frame{
+    background-color: #85A8C9;
+    height: 10%;
+    width: 100%;
+    margin-right: 3px;
+    font-size: 30px;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
+    align-items: center;
+
+    .id{
+      position: relative;
+      left: 10px;
+    }
+
+    .address{
+      position: relative;
+      left: 60px;
+    }
+
+    .st{
+      position: relative;
+      left: 320px;
+    }
+
+    .zip{
+      position: relative;
+      left: 400px;
+    }
+
+    .driver{
+      position: relative;
+      left: 480px;
+    }
+
+    .time{
+      position: relative;
+      left: 600px;
+    }
+  }
+
+  .order-list{
+    height: 109%;
+    width: 100%;
+    margin-right: 3px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap;
     justify-content: start;
-    gap: 3px;
-    padding-top: 3px;
-    padding-left: 3px;
-    padding-bottom: 3px;
+    align-items: center;
+    row-gap: 4px;
 
-    .title-frame{
-        background-color: #85A8C9;
-        height: 10%;
-        width: 100%;
-        margin-right: 3px;
+    .row{
+      display: flex;
+      flex-direction: row;
+      font-size: 22px;
+      flex-wrap:nowrap;
+      align-items: center;
+      width: 100%;
 
-        display: flex;
-        flex-direction: row;
-        flex-wrap:nowrap;
-        justify-content: space-around;
-        align-items: center;
+      box-sizing: border-box;
+      background: #FFFFFF;
+      border: 1px solid #ECE9E9;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 3px;
 
-        .field{
+      .id{
+        position: relative;
+        left: 10px;
+      }
 
-        }
+      .address{
+        position: relative;
+        width: 300px;
+        left: 45px;
+      }
+
+      .st{
+        position: relative;
+        left: 100px;
+        width: 95px;
+      }
+
+      .zip{
+        position: relative;
+        left: 170px;
+        width: 95px;
+      }
+
+      .driver{
+        position: relative;
+        left: 250px;
+        width: 195px;
+      }
+
+      .time{
+        position: relative;
+        left: 250px;
+      }
     }
-    
-    .order-list{
-        height: 109%;
-        width: 100%;
-        margin-right: 3px;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap:nowrap;
-        justify-content: start;
-        align-items: center;
-        row-gap: 4px;
-
-        .row{
-            display: flex;
-            flex-direction: row;
-            flex-wrap:nowrap;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-
-            box-sizing: border-box;
-            background: #FFFFFF;
-            border: 1px solid #ECE9E9;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 3px;
-        }
-    }
-}    
+  }
+}

@@ -18,7 +18,7 @@ export class OngoingOrdersContentComponent implements OnInit {
 
   protected getOrders(){
     // DB will return [ {}, {}, ... ]
-    
+
     // Extract keys -> fields
     this.fields = [
       'id','address','St. Num.','zip code','driver','pick-up time'
@@ -26,7 +26,7 @@ export class OngoingOrdersContentComponent implements OnInit {
 
     // Extract values as rows
     this.orders = [[
-        '352.', 'andreadaki', '79825', 'agapios volanakis the 2nd', '25 august 1999, 23:23:23'
+        '352.', 'andreadaki', '79825', '76123','agapios volanakis', '25 august 1999, 23:23:23'
       ]
     ];
   }
