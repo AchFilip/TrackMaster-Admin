@@ -33,21 +33,31 @@ export class SingleStatisticsContentComponent implements OnInit {
 
     this.myLength = [1,2,3,4,5,6,7,8,9,10,11,12];
     this.getOrders();
+
+
   }
 
   RenderChart(){
     new Chart("single-stats-1", {
       type: 'bar',
       data: {
-        labels: ['Monday', 'Tuesday', 'Thursday', 'Wednesday', 'Friday'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         datasets: [{
           label: 'Orders',
           data: [12, 19, 3,5,9],
-          borderWidth: 0.5
+          borderWidth: 1,
+          barThickness: 10
         }]
       },
       options: {
-
+        scales:{
+          x: {
+            beginAtZero: true,
+          },
+          y:{
+            beginAtZero: true
+          }
+        }
       }
     });
   }
