@@ -1,125 +1,130 @@
 .content{
-    height:87%;
-    width:100%;
-    background-color: #F0F6FF;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  height:87%;
+  width:100%;
+  background-color: #F0F6FF;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content: start;
+  gap: 3px;
+  padding-top: 3px;
+  padding-left: 3px;
+  padding-bottom: 3px;
+
+  .title-frame{
+    background-color: #85A8C9;
+    height: 10%;
+    width: 100%;
+    margin-right: 3px;
+    font-size: 30px;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
+    align-items: center;
+
+    .id{
+      position: relative;
+      left: 10px;
+    }
+
+    .address{
+      position: relative;
+      left: 60px;
+    }
+
+    .st{
+      position: relative;
+      left: 320px;
+    }
+
+    .zip{
+      position: relative;
+      left: 400px;
+    }
+
+    .floor{
+      position: relative;
+      left: 480px;
+    }
+
+    .volume{
+      position: relative;
+      left: 550px;
+    }
+
+    .time{
+      position: relative;
+      left: 600px;
+    }
+  }
+
+  .order-list{
+    height: 109%;
+    width: 100%;
+    margin-right: 3px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap;
     justify-content: start;
-    gap: 3px;
-    padding-top: 3px;
-    padding-left: 3px;
-    padding-bottom: 3px;
+    align-items: center;
+    row-gap: 4px;
 
-    .title-frame{
-        background-color: #85A8C9;
-        height: 10%;
-        width: 100%;
-        margin-right: 3px;
-        font-size: 30px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap:nowrap;
-        align-items: center;
+    .row{
+      display: flex;
+      flex-direction: row;
+      font-size: 22px;
+      flex-wrap:nowrap;
+      align-items: center;
+      width: 100%;
 
-        .id{
-          position: relative;
-          left: 10px;
-        }
+      box-sizing: border-box;
+      background: #FFFFFF;
+      border: 1px solid #ECE9E9;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 3px;
 
-        .address{
-          position: relative;
-          left: 60px;
-        }
+      .id{
+        position: relative;
+        left: 10px;
+      }
 
-        .st{
-          position: relative;
-          left: 250px;
-        }
+      .address{
+        position: relative;
+        width: 300px;
+        left: 40px;
+      }
 
-        .zip{
-          position: relative;
-          left: 300px;
-        }
+      .st{
+        position: relative;
+        left: 95px;
+        width: 95px;
+      }
 
-        .floor{
-          position: relative;
-          left: 360px;
-        }
+      .zip{
+        position: relative;
+        left: 170px;
+        width: 95px;
+      }
 
-        .volume{
-          position: relative;
-          left: 450px;
-        }
+      .floor{
+        position: relative;
+        left: 250px;
+        width: 120px;
+      }
 
-        .time{
-          position: relative;
-          left: 550px;
-        }
+      .volume{
+        position: relative;
+        left: 268px;
+        width: 65px;
+      }
+
+      .time{
+        position: relative;
+        left: 330px;
+      }
     }
-
-    .order-list{
-        height: 109%;
-        width: 100%;
-        margin-right: 3px;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap:nowrap;
-        justify-content: start;
-        align-items: center;
-        row-gap: 4px;
-
-        .row{
-            display: flex;
-            flex-direction: row;
-            font-size: 22px;
-            flex-wrap:nowrap;
-            align-items: center;
-            width: 100%;
-
-            box-sizing: border-box;
-            background: #FFFFFF;
-            border: 1px solid #ECE9E9;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 3px;
-
-            .id{
-              position: relative;
-              left: 10px;
-            }
-
-            .address{
-              position: relative;
-              left: 40px;
-            }
-
-            .st{
-              position: relative;
-              left: 170px;
-            }
-
-            .zip{
-              position: relative;
-              left: 287px;
-            }
-
-            .floor{
-              position: relative;
-              left: 400px;
-            }
-
-            .volume{
-              position: relative;
-              left: 545px;
-            }
-
-            .time{
-              position: relative;
-              left: 550px;
-            }
-        }
-    }
+  }
 }

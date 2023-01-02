@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {OrdersService} from "../../../../../../global/services/orders/orders.service";
+import {OrderModel} from "../../../../../../global/models/order/order.model";
 
 @Component({
   selector: 'app-available-orders-content',
@@ -7,32 +9,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvailableOrdersContentComponent implements OnInit {
 
-  protected fields?: string[];
-  protected orders?: string[][];
+  protected fields = [
+    'id','address','st. num.','zip code','floor','volume','time'
+  ];
+  protected orders: any[][] = [];
 
-  constructor() { }
+  constructor(
+    private orderService: OrdersService
+  ) { }
 
   ngOnInit(): void {
     this.getOrders();
   }
 
   protected getOrders(){
-    // DB will return [ {}, {}, ... ]
-    
-    // Extract keys -> fields
-    this.fields = [
-      'id','address','St. Num.','zip code','floor level','volume*','pick-up time'
-    ];
+    this.clearOrders()
 
-    // Extract values as rows
-    this.orders = [[
-        '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-        '1', '398', '25 august 1999, 23:23:23'
-      ],[
-        '352.', 'paraskevopoulou kai ioanias', '1276', '71304',
-        '1', '398', '25 august 1999, 23:23:23'
-      ]
-    ];
+    this.orderService.getAvailable().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available orders in db')
+        return;
+      }
+
+      let orders = result.map((order)=>{
+        order.time = order.timestamp.added;
+        return order;
+      });
+
+      // Add all orders
+      for(let i=0; i<orders.length; i++){
+        orders[i]._id = orders[i]._id.substr(orders[i]._id.length-4);
+        this.addOrder(orders[i])
+      }
+    });
   }
+
+  protected addOrder(order: OrderModel){
+    // TODO: do something with id size
+    let d = new Date(order.timestamp.added);
+    this.orders.push([
+      order._id,order.address,order.street_number,
+      order.zip_code,order.floor_level,order.volume,d.toLocaleDateString("en-US")
+    ])
+  }
+
+  protected clearOrders(){
+    this.orders = [];
+  }
+
 
 }

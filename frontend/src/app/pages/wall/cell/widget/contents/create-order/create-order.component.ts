@@ -23,12 +23,13 @@ export class CreateOrderComponent implements OnInit {
   @Input() public wallID: any;
   @Input() public cellID: any;
 
-  constructor(
+constructor(
     private orderService: OrdersService,
     private socketService: SocketsService
   ) { }
 
   ngOnInit(): void {
+
     this.socketService.publish("wall-state", {wallID: this.wallID,cellID: this.cellID,action:'getActiveWalls'});
   }
 
@@ -48,13 +49,18 @@ export class CreateOrderComponent implements OnInit {
 
   public submit(): void{
     let test = new OrderModel();
-    test.address = this.address;
-    test.street_number = Number(this.st_num);
-    test.volume = Number(this.volume);
-    test.floor_level = 1;
-    test.zip_code = Number(this.zip_code);
+    const adr = document.getElementById('adr') as HTMLInputElement;
+    const st = document.getElementById('st') as HTMLInputElement;
+    const zip = document.getElementById('zip') as HTMLInputElement;
+    const vol = document.getElementById('vol') as HTMLInputElement;
+    test.address = adr.value;
+    test.street_number = Number(st.value);
+    test.volume = Number(vol.value);
+    test.floor_level = 5;//Number(this.floor);
+    test.zip_code = Number(zip.value);
     test.status = "available";
-    test.timestamp = "skata";
+    test.timestamp =  {};
+    test.timestamp['added'] = new Date();
     test.time = new Date();
     this.orderService.addOrder(test).subscribe(response => {console.log(response)});
     this.socketService.publish("cell-state", {wallID: this.wallID,cellID: this.cellID,action:'close'})
