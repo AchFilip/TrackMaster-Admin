@@ -1,20 +1,23 @@
 <div class="order-info">
-  <input class="box-address" maxlength="30">
-  <input class="box-st" maxlength="4">
-  <input class="box-zip" maxlength="6">
+  <input class="box-address" type="text" [value]="address" id="adr" maxlength="30">
+  <input class="box-st"  type="text" [value]="st_num" id="st" maxlength="4">
+  <input class="box-zip"  type="text" value={{this.zip_code}}  id="zip" maxlength="6">
   <div  class="box-floor">
     <mat-form-field appearance="fill">
-      <mat-select>
-        <mat-option value="GROUND FLOOR">GROUND FLOOR</mat-option>
-        <mat-option value="1st FLOOR">1st Floor</mat-option>
-        <mat-option value="2nd FLOOR">2nd Floor</mat-option>
+      <mat-select [(ngModel)]="floor">
+        <mat-option  value="0">GROUND FLOOR</mat-option>
+        <mat-option  value="1">1st Floor</mat-option>
+        <mat-option  value="2">2nd Floor</mat-option>
+        <mat-option  value="3">3nd Floor</mat-option>
+        <mat-option  value="4">4nd Floor</mat-option>
+        <mat-option  value="5">5nd Floor</mat-option>
+        <mat-option  value="6">6nd Floor</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-<!--  <input class="box-floor">-->
-  <input class="box-volume" maxlength="6">
+  <input class="box-volume" value={{this.volume}} id="vol" maxlength="6">
   <section class="box-delivery">
-    <mat-checkbox></mat-checkbox>
+    <mat-checkbox id="delivery" [checked]=fast></mat-checkbox>
   </section>
   <div class="titles">
     <p>ADDRESS:</p>
@@ -29,7 +32,7 @@
   <div class="line"></div>
 </div>
 <div class="bottom-buttons">
-  <button mat-button class="clear disable-click" >
+  <button mat-button class="clear enable-click" (click)="clearAll()">
     <p>CLEAR</p>
   </button>
   <button mat-button class="submit disable-click">

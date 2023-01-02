@@ -16,6 +16,7 @@ export class CellComponent implements OnInit {
   protected DisplayEnum = Display;
   protected display?: Display;
   protected widgetDisplay!: string;
+  protected audio!: any;
 
   constructor(
     private socketService: SocketsService
@@ -23,12 +24,15 @@ export class CellComponent implements OnInit {
 
   ngOnInit(): void {
     this.display = Display.empty;
-
+    this.audio = new Audio();
+    this.audio.src = "assets/sounds/plop.wav";
+    this.audio.load();
     this.initStateSocket();
   }
 
   public onAddClick(){
       this.openWidget()
+    this.audio.play();
   }
 
   private openWidget(){

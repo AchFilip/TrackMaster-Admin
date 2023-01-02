@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 // Our Components
@@ -30,6 +31,11 @@ import { LiveMapComponent } from './pages/wall/cell/widget/contents/live-map/liv
 import { CreateOrderComponent } from './pages/wall/cell/widget/contents/create-order/create-order.component';
 import { StatisicsCompanyComponent } from './pages/wall/cell/widget/contents/statisics-company/statisics-company.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSelectModule} from "@angular/material/select";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -54,17 +60,23 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     CreateOrderComponent,
     StatisicsCompanyComponent
   ],
-    imports: [
-        SocketIoModule.forRoot(socketIoConfig),
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        MatGridListModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTableModule,
-        MatFormFieldModule
-    ],
+  imports: [
+    SocketIoModule.forRoot(socketIoConfig),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    FormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
