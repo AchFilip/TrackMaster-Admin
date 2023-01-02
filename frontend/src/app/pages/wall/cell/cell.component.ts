@@ -15,6 +15,7 @@ export class CellComponent implements OnInit {
 
   protected DisplayEnum = Display;
   protected display?: Display;
+  protected widgetDisplay!: string;
 
   constructor(
     private socketService: SocketsService
@@ -48,6 +49,9 @@ export class CellComponent implements OnInit {
           this.display=this.DisplayEnum.empty;
         }else{
           this.display=this.DisplayEnum.widget;
+          this.widgetDisplay=data.display
+          // put this as injector to widget
+          // display = data.display;
         }
       }
     });

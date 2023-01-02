@@ -73,6 +73,7 @@ export class WidgetComponent implements OnInit {
   }
   @Input() wallID!: number;
   @Input() cellID!: number;
+  @Input() Display!: string;
 
   protected widget = {
     'navbar': {
@@ -102,6 +103,7 @@ export class WidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.initState(WidgetContentOptions.widget_options, 'widgets')
+    console.log(this.Display)
   }
 
   /**
@@ -122,9 +124,27 @@ export class WidgetComponent implements OnInit {
       if(name === BasicMenuOptions.close){
         this.socketService.publish("cell-state", {wallID: this.wallID, cellID: this.cellID, action: 'close'});
       }else if(name === BasicMenuOptions.resize){
+        // BUG: when pressing X from resize, wrong title 
         this.setContentDisplay(WidgetContentOptions.resize);
         this.addSubpathTitle("resize");
         this.setNavbarIcon("resize");
+      }
+      else if(name === BasicMenuOptions.move){
+        this.setContentDisplay(WidgetContentOptions.move);
+        this.addSubpathTitle("move");
+        this.setNavbarIcon("move");
+        this.socketService.publish("cell-state", {
+            from: {
+              wallID: this.wallID, 
+              cellID: this.cellID
+            },
+            to: {
+              wallID: '1', 
+              cellID: this.cellID,
+              display: this.widget.content.display
+            },
+            action: 'move'
+          });
       }
     }
   }
