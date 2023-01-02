@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import {OrdersService} from "../../../../global/services/orders/orders.service";
 import {OrderModel} from "../../../../global/models/order/order.model";
@@ -26,9 +26,12 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   protected getOrders() {
-    this.initOrders();
+    this.avOrders = [ ];
+    this.chosenOrders = [ ];
+    this.avOrdersToggle = [ ];
+    this.chosenOrdersToggle = [ ];
 
-    this.orderService.getCompleted().subscribe((result) => {
+      this.orderService.getCompleted().subscribe((result) => {
       if(result.length == 0){
         console.warn('There are no available orders in db')
         return;
@@ -42,34 +45,28 @@ export class OrderDetailsComponent implements OnInit {
 
       // Add all orders
       for(let i=0; i<orders.length; i++){
-        this.addOrder(orders[i])
+        var tmp = new OrderModel();
+        tmp._id = orders[i]._id.substr(orders[i]._id.length-4);
+        tmp.address = orders[i].address + " " + orders[i].street_number
+        tmp.volume = orders[i].volume;
+        tmp.timestamp = "5 KM";
+        this.addOrder(tmp);
+        this.avOrdersToggle.push(false);
+        this.chosenOrdersToggle.push(false);
       }
     });
+    this.initOrders();
+
   }
 
   protected initOrders(){
-    this.avOrders = [ ];
 
-    this.chosenOrders = [ ];
-
-    this.avOrdersToggle = [
-      false,
-      false,
-      false
-    ];
-
-    this.chosenOrdersToggle = [
-      false,
-      false,
-      false
-    ];
   }
 
   protected addOrder(order: OrderModel){
     // TODO: do something with id size
     this.avOrders.push([
-      order._id,order.address,order.street_number,
-      order.zip_code,order.floor_level,order.volume,order.time
+      order._id,order.address,order.volume,order.timestamp
     ])
   }
 

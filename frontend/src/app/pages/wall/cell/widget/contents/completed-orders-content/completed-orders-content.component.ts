@@ -42,15 +42,16 @@ export class CompletedOrdersContentComponent implements OnInit {
 
       // Use timestamp->delivered as time
       let orders = result.map((order)=>{
-        order.time = order.timestamp.delivered; 
+        order.time = order.timestamp.delivered;
         return order;
       });
 
       // Add all orders
       for(let i=0; i<orders.length; i++){
+        orders[i]._id = orders[i]._id.substr(orders[i]._id.length-4);
         this.addOrder(orders[i])
       }
-    });    
+    });
   }
 
   protected clearOrders(){
@@ -58,7 +59,7 @@ export class CompletedOrdersContentComponent implements OnInit {
   }
 
   protected addOrder(order: OrderModel){
-    // TODO: do something with id size 
+    // TODO: do something with id size
     this.orders.push([
       order._id,order.address,order.street_number,
       order.zip_code,order.floor_level,order.volume,order.time

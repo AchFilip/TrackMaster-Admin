@@ -1,0 +1,35 @@
+<div class="map-container">
+    <div id="map"></div>
+</div>
+
+<div class="box-container">
+  <div *ngIf="closeInfo === false">
+    <div class="info-card">
+      <button class="close-button" (click)="closeCard('info')">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="info-img">
+        <img [src]="imageBasePath + 'info.png'" >
+        <p class="text text-black"> INFORMATION CARD</p>
+      </div>
+      <div class="active-drivers">
+        <img [src]="imageBasePath + 'delivery.png'" >
+        <p class="text text-black">ACTIVE DRIVERS:</p>
+        <div class="num-active text text-black">100</div>
+        <div class="line"></div>
+      </div>
+      <div class="ongoing-orders">
+        <img [src]="imageBasePath + 'available.png'" >
+        <p class="text text-black">ONGOING ORDERS:</p>
+        <div class="num-active text text-black">100</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="closeDriver === false">
+    <div class="selected-card">
+      <button class="close-button" (click)="closeCard('driver')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

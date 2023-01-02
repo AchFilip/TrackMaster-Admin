@@ -25,6 +25,11 @@ import { SingleStatisticsContentComponent } from './pages/wall/cell/widget/conte
 import { AvailableOrdersContentComponent } from './pages/wall/cell/widget/contents/available-orders-content/available-orders-content.component';
 import { OngoingOrdersContentComponent } from './pages/wall/cell/widget/contents/ongoing-orders-content/ongoing-orders-content.component';
 import { ResizeComponent } from './pages/wall/cell/widget/contents/resize/resize.component';
+import { MoveComponent } from './pages/wall/cell/widget/contents/move/move.component';
+import { LiveMapComponent } from './pages/wall/cell/widget/contents/live-map/live-map.component';
+import { CreateOrderComponent } from './pages/wall/cell/widget/contents/create-order/create-order.component';
+import { StatisicsCompanyComponent } from './pages/wall/cell/widget/contents/statisics-company/statisics-company.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 
@@ -43,18 +48,23 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     SingleStatisticsContentComponent,
     AvailableOrdersContentComponent,
     OngoingOrdersContentComponent,
-    ResizeComponent
+    ResizeComponent,
+    MoveComponent,
+    LiveMapComponent,
+    CreateOrderComponent,
+    StatisicsCompanyComponent
   ],
-  imports: [
-    SocketIoModule.forRoot(socketIoConfig),
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    MatGridListModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTableModule
-  ],
+    imports: [
+        SocketIoModule.forRoot(socketIoConfig),
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MatGridListModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTableModule,
+        MatFormFieldModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

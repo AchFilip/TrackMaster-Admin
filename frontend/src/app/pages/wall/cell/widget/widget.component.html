@@ -30,7 +30,8 @@
     <!-- Order options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_options">
         <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
-            (click)="onOrderOptionClicked(option)">
+            (click)="onOrderOptionClicked(option)"
+                style="position:relative; height: 50%">
             <img src="{{getIconPath(option)}}" class="icon">
             <p class="text text-size-title text-white">{{option}}</p>
         </button>
@@ -51,6 +52,10 @@
 
   <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.resize">
       <app-resize [wallID]="wallID" [cellID]="cellID"></app-resize>
+  </div>
+
+  <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.move">
+    <app-move [wallID]="wallID" [cellID]="cellID"></app-move>
   </div>
 
 </div>

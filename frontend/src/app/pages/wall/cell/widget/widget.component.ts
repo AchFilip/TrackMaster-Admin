@@ -12,7 +12,9 @@ import {
 } from "./contents/single-statistics-content/single-statistics-content.component";
 import {BasicMenuOptions} from 'src/app/global/models/cell/menu.basic.options';
 import {SocketsService} from 'src/app/global/services/sockets/sockets.service';
-import {ResizeComponent} from "./contents/resize/resize.component";
+import {CreateOrderComponent} from "./contents/create-order/create-order.component";
+import {StatisicsCompanyComponent} from "./contents/statisics-company/statisics-company.component";
+import {LiveMapComponent} from "./contents/live-map/live-map.component";
 
 @Component({
   selector: 'Widget',
@@ -128,6 +130,10 @@ export class WidgetComponent implements OnInit {
         this.setContentDisplay(WidgetContentOptions.resize);
         this.addSubpathTitle("resize");
         this.setNavbarIcon("resize");
+      }else if(name === BasicMenuOptions.move){
+        this.setContentDisplay(WidgetContentOptions.move);
+        this.addSubpathTitle("move");
+        this.setNavbarIcon("move");
       }
       else if(name === BasicMenuOptions.move){
         this.setContentDisplay(WidgetContentOptions.move);
@@ -299,7 +305,7 @@ export class WidgetComponent implements OnInit {
         break;
       }
       case WidgetOptions.live: {
-        console.warn('Implement live option')
+        this.initLiveMap(name);
         break;
       }
       case WidgetOptions.statistics: {
@@ -325,7 +331,7 @@ export class WidgetComponent implements OnInit {
         break;
       }
       case OrderOptions.add: {
-        console.warn('implement add init')
+        this.initCreateOrder(name);
         break;
       }
 
@@ -427,6 +433,22 @@ export class WidgetComponent implements OnInit {
     this.content_component = OngoingOrdersContentComponent;
   }
 
+  initCreateOrder(name: string) {
+    // Request for order options
+    this.widget.content.options = this.getOrderOptions();
+
+    // Update widget's icon
+    this.setNavbarIcon(name)
+
+    // Update widget's title
+    this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = CreateOrderComponent;
+  }
+
   /** INIT STATISTICS OPTIONS */
   initStatisticsOptions(name: string) {
     // Update widget's title
@@ -467,7 +489,26 @@ export class WidgetComponent implements OnInit {
     this.changeTitle(name)
 
     // Change widget's content display
-    this.setContentDisplay(WidgetContentOptions.company_option);
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = StatisicsCompanyComponent;
+
+  }
+
+  initLiveMap(name: string){
+    // Request for order options
+    this.widget.content.options = this.getOrderOptions();
+
+    // Update widget's icon
+    this.setNavbarIcon(name)
+
+    // Update widget's title
+    this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.chosen);
+
+    this.content_component = LiveMapComponent;
   }
 
   /** Menu  */

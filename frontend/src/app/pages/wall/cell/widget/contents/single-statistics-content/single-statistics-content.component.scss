@@ -1,61 +1,122 @@
 .content{
-    height:87%;
-    width:100%;
-    background-color: #F0F6FF;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  .driver-content{
+    position: relative;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    justify-content: start;
-    gap: 3px;
-    padding-top: 3px;
-    padding-left: 3px;
-    padding-bottom: 3px;
+    .titles{
+      position: relative;
 
-    .title-frame{
-        background-color: #85A8C9;
-        height: 10%;
-        width: 100%;
-        margin-right: 3px;
+      max-width: 100%;
+      bottom: -30px;
+      left: 65%;
+      font-size: 25px;
+    }
 
+    .phone_img{
+      position: absolute;
+      top: 40px;
+    }
+
+    .driver_img{
+      position: absolute;
+      top: 0px;
+      left: -83px;
+      max-width: 64px;
+      max-height: 64px;
+    }
+  }
+
+  .title-bar{
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 641px;
+    height: 32px;
+    left: 2px;
+    top: 75px;
+
+    background: #698CAD;
+    border-top: 1px solid #000000;
+    border-radius: 0px;
+
+    .titles{
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      flex-wrap:nowrap;
+
+      max-width: 100%;
+      bottom: 2px;
+      left: 5px;
+      font-size: 25px;
+    }
+  }
+
+  .orders-Height {
+    position: absolute;
+
+    max-height: 100%;
+    max-width: 56%;
+    top: 110px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    .order-box {
+      box-sizing: border-box;
+
+      position: absolute;
+      height: 35px;
+      width: 642px;
+      left: 1px;
+
+      background: #FFFFFF;
+      border: 1px solid #ECE9E9;
+      border-radius: 3px;
+
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
+      .order-details {
+        position: relative;
         display: flex;
         flex-direction: row;
         flex-wrap:nowrap;
-        justify-content: space-around;
-        align-items: center;
-        font-size: 25px;
-        .field{
-
-        }
-    }
-    
-    .order-list{
-        height: 109%;
-        width: 100%;
-        margin-right: 3px;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap:nowrap;
-        justify-content: start;
-        align-items: center;
-        row-gap: 4px;
         font-size: 22px;
+        top: -12.5px;
 
-        .row{
-            display: flex;
-            flex-direction: row;
-            flex-wrap:nowrap;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-
-            box-sizing: border-box;
-            background: #FFFFFF;
-            border: 1px solid #ECE9E9;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 3px;
+        .name {
+          position: absolute;
+          max-width: 25%;
+          left: 2px;
         }
+
+        .surname {
+          position: absolute;
+          max-width: 25%;
+          left: 228px;
+        }
+
+        .age {
+          position: absolute;
+          max-width: 5%;
+          left: 462px;
+        }
+
+        .phone {
+          position: absolute;
+          max-width: 15%;
+          left: 514px;
+        }
+      }
     }
-}    
+  }
+
+  .line-right{
+    position: absolute;
+    width: 471px;
+    height: 0px;
+    left: 36%;
+    top: 320px;
+
+    border: 1px solid #464646;
+    transform: rotate(90deg);
+  }
+}

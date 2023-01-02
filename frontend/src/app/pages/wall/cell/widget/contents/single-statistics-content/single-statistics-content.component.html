@@ -1,12 +1,44 @@
 <div class="content">
-    <div class="title-frame text text-size-title text-white">
-        <div class="field" *ngFor="let field of fields">{{field}}</div>
+  <!-- Titles -->
+  <div class="title-bar">
+    <div class="text text-white">
+      <div class="titles">
+        <p>NAME</p>
+        <p style="position:relative; left: 28%;">SURNAME</p>
+        <p style="position:relative; left: 52%;">AGE</p>
+        <p style="position:relative; left: 55%;">PHONE</p>
+      </div>
     </div>
-    <div class="order-list">
-        <div class="row" *ngFor="let row of orders">
-            <div class="text text-size-content text-black" *ngFor="let field of row">
-                {{field}}
-            </div>
+  </div>
+  <div class="line-right"></div>
+<!--  Driver Data-->
+  <ng-container *ngIf="this.phone != 0">
+    <div class="driver-content">
+      <div class="titles text">
+        <p>{{this.name}} {{this.surname}}</p>
+        <p style="position:relative; bottom: 20px; left: 30px;">{{this.phone}}</p>
+        <img class="phone_img" src="/assets/wall/cell/widget/phone.png">
+        <img class="driver_img" src="/assets/wall/cell/widget/driver.png">
+              <canvas style="position: absolute;; height: 100%; width: 40%; top: 200px; left: -80px;"
+                      id="single-stats-1"></canvas>
+      </div>
+    </div>
+  </ng-container>
+<!-- Order Data -->
+  <div class="orders-Height">
+    <div *ngFor="let row of driverInfo let j=index;">
+      <button class="order-box"  (click)="SetDriverToShow(j)" (click)="RenderChart()" style="position:relative; margin-bottom: 10px;">
+        <div class="order-details text text-black">
+          <div class="name">{{row.name}}</div>
+          <div class="surname">{{row.surname}}</div>
+          <div class="age">{{row.age}}</div>
+          <div class="phone">{{row.phone}}</div>
         </div>
+      </button>
     </div>
+  </div>
 </div>
+
+
+
+
