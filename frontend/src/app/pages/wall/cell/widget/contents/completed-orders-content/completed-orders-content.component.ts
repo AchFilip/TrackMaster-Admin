@@ -12,10 +12,6 @@ export class CompletedOrdersContentComponent implements OnInit {
 
   protected dataLoaded: boolean = false;
 
-  // protected db_fields = [
-  //   '_id','address','street_number','zip_code','floor_level','volume','time'
-  // ];
-
   protected fields = [
     'id','address','st. num.','zip code','floor','volume','time'
   ];
@@ -60,9 +56,10 @@ export class CompletedOrdersContentComponent implements OnInit {
 
   protected addOrder(order: OrderModel){
     // TODO: do something with id size
+    let d = new Date(order.timestamp.delivered);
     this.orders.push([
       order._id,order.address,order.street_number,
-      order.zip_code,order.floor_level,order.volume,order.time
+      order.zip_code,order.floor_level,order.volume,d.toLocaleDateString("en-US")
     ])
   }
 }

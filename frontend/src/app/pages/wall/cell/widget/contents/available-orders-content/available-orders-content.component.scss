@@ -36,27 +36,27 @@
 
     .st{
       position: relative;
-      left: 250px;
+      left: 320px;
     }
 
     .zip{
       position: relative;
-      left: 300px;
+      left: 400px;
     }
 
     .floor{
       position: relative;
-      left: 360px;
+      left: 480px;
     }
 
     .volume{
       position: relative;
-      left: 400px;
+      left: 550px;
     }
 
     .time{
       position: relative;
-      left: 460px;
+      left: 600px;
     }
   }
 
@@ -93,32 +93,37 @@
 
       .address{
         position: relative;
-        left: 45px;
+        width: 300px;
+        left: 40px;
       }
 
       .st{
         position: relative;
-        left: 90px;
+        left: 95px;
+        width: 95px;
       }
 
       .zip{
         position: relative;
-        left: 195px;
+        left: 170px;
+        width: 95px;
       }
 
       .floor{
         position: relative;
-        left: 310px;
+        left: 250px;
+        width: 120px;
       }
 
       .volume{
         position: relative;
-        left: 480px;
+        left: 268px;
+        width: 65px;
       }
 
       .time{
         position: relative;
-        left: 600px;
+        left: 330px;
       }
     }
   }
