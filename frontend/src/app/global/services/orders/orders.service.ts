@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { environment } from 'src/environments/environment';
 import { OrderModel } from '../../models/order/order.model';
+import {ItemModel} from "../../models/items/item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class OrdersService {
     return this.http
       .get<OrderModel[]>(`${this.hostURl}/api/orders/available`)
       .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
+  }
+
+  public addOrder(data: OrderModel): Observable<OrderModel>{
+    return this.http
+      .post<OrderModel>(`${this.hostURl}/api/orders/available`, data)
+      .pipe(map(result => new OrderModel(result)));
   }
 //   public create(resource: ItemModel): Observable<ItemModel> {
 //     return this.http
