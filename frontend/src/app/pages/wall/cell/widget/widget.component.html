@@ -55,10 +55,14 @@
   </div>
 
   <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.move">
-    <app-move 
-        [wallID]="wallID" 
+    <app-move
+        [wallID]="wallID"
         [cellID]="cellID"
         [state]="getCurrentState()"></app-move>
+  </div>
+
+  <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.create">
+    <app-create-order [wallID]="wallID" [cellID]="cellID"></app-create-order>
   </div>
 
 </div>

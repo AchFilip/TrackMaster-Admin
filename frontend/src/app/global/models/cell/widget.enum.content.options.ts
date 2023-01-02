@@ -4,6 +4,7 @@ export enum WidgetContentOptions{
     move='move',
     widget_options='widget_options',
     reset='reset',
+    create='create',
     order_options='order_options',
     // We must know what we have choose :D
     chosen='chosen',

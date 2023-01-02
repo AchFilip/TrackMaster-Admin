@@ -128,7 +128,7 @@ export class WidgetComponent implements OnInit {
       if(name === BasicMenuOptions.close){
         this.socketService.publish("cell-state", {wallID: this.wallID, cellID: this.cellID, action: 'close'});
       }else if(name === BasicMenuOptions.resize){
-        // BUG: when pressing X from resize, wrong title 
+        // BUG: when pressing X from resize, wrong title
         this.setContentDisplay(WidgetContentOptions.resize);
         this.addSubpathTitle("resize");
         this.setNavbarIcon("resize");
@@ -143,11 +143,11 @@ export class WidgetComponent implements OnInit {
         this.setNavbarIcon("move");
         this.socketService.publish("cell-state", {
             from: {
-              wallID: this.wallID, 
+              wallID: this.wallID,
               cellID: this.cellID
             },
             to: {
-              wallID: '1', 
+              wallID: '1',
               cellID: this.cellID,
               display: this.widget.content.display
             },
@@ -437,7 +437,7 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
-    
+
     // Store chosen option
     this.widget.chosen_option = OrderOptions.ongoing;
 
@@ -455,7 +455,7 @@ export class WidgetComponent implements OnInit {
     this.changeTitle(name)
 
     // Change widget's content display
-    this.setContentDisplay(WidgetContentOptions.chosen);
+    this.setContentDisplay(WidgetContentOptions.create);
 
     // Store chosen option
     this.widget.chosen_option = OrderOptions.add;
