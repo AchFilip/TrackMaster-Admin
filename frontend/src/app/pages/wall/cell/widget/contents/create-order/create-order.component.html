@@ -1,15 +1,32 @@
 <div class="order-info">
-  <input class="box-address">
-  <input class="box-st">
-  <input class="box-zip">
-  <input class="box-floor">
+  <input class="box-address" maxlength="30">
+  <input class="box-st" maxlength="4">
+  <input class="box-zip" maxlength="6">
+  <div  class="box-floor">
+    <mat-form-field appearance="fill">
+      <mat-select>
+        <mat-option value="GROUND FLOOR">GROUND FLOOR</mat-option>
+        <mat-option value="1st FLOOR">1st Floor</mat-option>
+        <mat-option value="2nd FLOOR">2nd Floor</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+<!--  <input class="box-floor">-->
+  <input class="box-volume" maxlength="6">
+  <section class="box-delivery">
+    <mat-checkbox></mat-checkbox>
+  </section>
   <div class="titles">
     <p>ADDRESS:</p>
     <p>ST. NUMBER:</p>
     <p>ZIP CODE:</p>
     <p>FLOOR LEVEL:</p>
   </div>
-
+  <div class="titles2">
+    <p>PACKAGE VOLUME:</p>
+    <p>FAST DELIVERY:</p>
+  </div>
+  <div class="line"></div>
 </div>
 <div class="bottom-buttons">
   <button mat-button class="clear disable-click" >
