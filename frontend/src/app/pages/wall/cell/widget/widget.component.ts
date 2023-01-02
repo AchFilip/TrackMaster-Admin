@@ -107,6 +107,7 @@ export class WidgetComponent implements OnInit {
 
   ngOnInit(): void {
     this.initState(this.initStateOn.display, this.initStateOn.name)
+    console.log(this.initStateOn);
   }
 
   /**

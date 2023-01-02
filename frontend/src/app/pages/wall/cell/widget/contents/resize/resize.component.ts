@@ -27,6 +27,86 @@ export class ResizeComponent implements OnInit {
 
   }
 
+  onResize(i:number){
+    console.log(this.expand(i))
+  }
+
+  expand(pressed: number){
+    let expand = [];
+    switch (pressed) {
+      case 0:{
+        expand = this.expandTopLeft(pressed);
+        break;
+      }
+      case 1:{
+        expand = [this.expandTop(pressed)];
+        break;
+      }
+      case 2:{
+        expand = this.expandTopRight(pressed);
+        break;
+      }
+      case 3:{
+        expand = [this.expandLeft(pressed)];
+        break;
+      }
+      case 4:{
+        // Change arrow direction
+        break;
+      }
+      case 5:{
+        expand = [this.expandRight(pressed)];
+        break;
+      }
+      case 6:{
+        expand = this.expandBottomLeft(pressed);
+        break;
+      }
+      case 7:{
+        expand = [this.expandBottom(pressed)];
+        break;
+      }
+      case 8:{
+        expand = this.expandBottomRight(pressed);
+        break;
+      }
+    }
+
+    console.log(expand)
+  }
+
+  expandTop(pressed: number){
+    return this.cellID-3;
+  }
+
+  expandBottom(pressed: number){
+    return this.cellID+3;
+  }
+
+  expandLeft(pressed: number){
+    return this.cellID-1;
+  }
+
+  expandRight(pressed: number){
+    return this.cellID+1;
+  }
+
+  expandTopLeft(pressed: number){
+    return [this.cellID-4, this.expandTop(pressed), this.expandLeft(pressed)];
+  }
+
+  expandTopRight(pressed: number){
+    return [this.expandTop(pressed), this.cellID-2, this.expandRight(pressed)];
+  }
+
+  expandBottomLeft(pressed: number){
+    return [this.expandLeft(pressed), this.cellID+2, this.expandBottom(pressed)];
+  }
+
+  expandBottomRight(pressed: number){
+    return [this.expandRight(pressed), this.expandBottom(pressed), this.cellID+4];
+  }
+
   positionCases(): void{
     if(this.cellID >= 0 && this.cellID <= 2){ //Common disables
       this.buttons[0] = false;
