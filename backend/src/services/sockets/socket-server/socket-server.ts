@@ -125,6 +125,32 @@ export class SocketServer {
         break;
       }
 
+      case 'getActiveWalls':{
+        data.activeWallsState = this.gridManager.getActiveWallsState();
+        break;
+      }
+
+      case 'move':{
+        console.log(data)
+        // Open widget to destination 
+        let dest_data = {
+          wallID: data.toWallID,
+          cellID: data.toCellID,
+          action: 'open',
+          state: data.state
+        }
+        // console.log(topic, dest_data)
+        this.io.emit('cell-state', dest_data);
+        this.gridManager.widgetOpened(data.toWallID, data.toCellID);
+
+        data.action = 'close';
+        data.wallID = String(data.wallID);
+        // Close source widget 
+        this.io.emit('cell-state', data);
+        this.gridManager.widgetClosed(data.wallID, data.cellID);
+        return;
+      }
+
       default:{
         this.logger.error('Wrong action for wall state: ', data.action);
       }
@@ -188,6 +214,10 @@ class GridManager{
 
   public getEnabledGrid(wallID: number){
     return this.grids[wallID].enabled_grid;
+  }
+
+  public getActiveWallsState(){
+    return this.grids;
   }
 
   public initWall(id: number){

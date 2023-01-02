@@ -55,7 +55,10 @@
   </div>
 
   <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.move">
-    <app-move [wallID]="wallID" [cellID]="cellID"></app-move>
+    <app-move 
+        [wallID]="wallID" 
+        [cellID]="cellID"
+        [state]="getCurrentState()"></app-move>
   </div>
 
 </div>

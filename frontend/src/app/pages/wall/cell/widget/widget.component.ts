@@ -75,7 +75,7 @@ export class WidgetComponent implements OnInit {
   }
   @Input() wallID!: number;
   @Input() cellID!: number;
-  @Input() Display!: string;
+  @Input() initStateOn!: any;
 
   protected widget = {
     'navbar': {
@@ -93,7 +93,9 @@ export class WidgetComponent implements OnInit {
       'display': '',
       'title': '',
       'name': ''
-    }
+    },
+
+    chosen_option: ''
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
   protected content_component: any;
@@ -104,8 +106,7 @@ export class WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initState(WidgetContentOptions.widget_options, 'widgets')
-    console.log(this.Display)
+    this.initState(this.initStateOn.display, this.initStateOn.name)
   }
 
   /**
@@ -398,6 +399,9 @@ export class WidgetComponent implements OnInit {
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
 
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.completed;
+
     this.content_component = CompletedOrdersContentComponent;
   }
 
@@ -414,6 +418,9 @@ export class WidgetComponent implements OnInit {
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
 
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.available;
+
     this.content_component = AvailableOrdersContentComponent;
   }
 
@@ -429,6 +436,9 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
+    
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.ongoing;
 
     this.content_component = OngoingOrdersContentComponent;
   }
@@ -445,6 +455,9 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
+
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.add;
 
     this.content_component = CreateOrderComponent;
   }
@@ -475,6 +488,9 @@ export class WidgetComponent implements OnInit {
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
 
+     // Store chosen option
+     this.widget.chosen_option = Statistics.single;
+
     this.content_component = SingleStatisticsContentComponent;
   }
 
@@ -490,6 +506,9 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
+
+    // Store chosen option
+    this.widget.chosen_option = Statistics.company;
 
     this.content_component = StatisicsCompanyComponent;
 
@@ -507,6 +526,9 @@ export class WidgetComponent implements OnInit {
 
     // Change widget's content display
     this.setContentDisplay(WidgetContentOptions.chosen);
+
+    // Store chosen option
+    this.widget.chosen_option = WidgetOptions.live;
 
     this.content_component = LiveMapComponent;
   }
@@ -547,4 +569,15 @@ export class WidgetComponent implements OnInit {
     }
   }
 
+  public getCurrentState(){
+    let display = this.widget.prev_content.display
+    if(this.widget.prev_content.display === 'chosen'){
+      display = this.widget.chosen_option
+    }
+
+    return {
+      display: display,
+      name: this.widget.prev_content.name
+    }
+  }
 }
