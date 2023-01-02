@@ -20,7 +20,7 @@ export class OrdersController extends ResourceController<Order>{
             .post('/available', this.postOrder)
             .get('/completed', this.getCompletedOrders)
             .get('/ongoing', this.getOngoingOrders)
-
+            .post('/ongoing', this.postOrder)
         return router;
     }
 
