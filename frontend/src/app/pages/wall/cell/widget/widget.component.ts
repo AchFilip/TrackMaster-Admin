@@ -99,6 +99,7 @@ export class WidgetComponent implements OnInit {
   }
   protected WidgetContentOptionsEnum = WidgetContentOptions;
   protected content_component: any;
+  protected audio!: any;
 
   constructor(
     private socketService: SocketsService
@@ -106,6 +107,9 @@ export class WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.audio = new Audio();
+    this.audio.src = "assets/sounds/click.wav";
+    this.audio.load();
     this.initState(this.initStateOn.display, this.initStateOn.name)
     console.log(this.initStateOn);
   }
@@ -114,11 +118,13 @@ export class WidgetComponent implements OnInit {
    * On click actions
    */
   protected onMenuClicked() {
+    this.audio.play();
     if (this.getContentDisplay() == WidgetContentOptions.menu) {
       this.closeMenu();
     } else {
       this.openMenu();
     }
+    console.log('-->' + this.getContentDisplay())
   }
 
   protected onMenuOptionClicked(name: string) {
@@ -545,8 +551,10 @@ export class WidgetComponent implements OnInit {
     // Update widget's icon
     this.setNavbarIcon('menu');
 
-    // Update widget's title
-    this.addSubpathTitle('menu');
+    if(this.widget.navbar.title.includes('menu') === false) {
+      // Update widget's title
+      this.addSubpathTitle('menu');
+    }
 
     // Request for order options
     this.widget.content.options = this.getMenuOptions(this.getContentDisplay());
