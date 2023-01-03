@@ -30,6 +30,13 @@ export class WallComponent implements OnInit {
     this.initStateSocket();
   }
 
+  getActiveCells(): CellModel[] {
+    return this.cells.filter((cell: CellModel) => {
+      let id = cell.id;
+      return this.cells_size[id].colspan > 0 && this.cells_size[id].rowspan > 0;
+    });
+  }
+
   getColSpan(cell_id:number):number{
     return this.cells_size[cell_id].colspan;
   }
@@ -62,7 +69,24 @@ export class WallComponent implements OnInit {
 
   resize(id:number, expand:number[]): void {
     console.log(id, expand);
+    
+    for(let i=0; i<expand.length; i++){
+      let cell_id = expand[i];
+      if(this.sameRow(id, cell_id)){
+        this.cells_size[id].colspan += 1;
+      }else{
+        this.cells_size[id].rowspan += 1;
+      }
 
+      this.cells_size[cell_id].colspan = 0;
+      this.cells_size[cell_id].rowspan = 0;
+    }
+
+    console.log(this.cells_size);
+  }
+
+  private sameRow(a:number, b:number):boolean{
+    return Math.floor(a/3) == Math.floor(b/3);
   }
 
   private initStateSocket(){

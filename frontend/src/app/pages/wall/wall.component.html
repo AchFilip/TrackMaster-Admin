@@ -2,7 +2,7 @@
     <div class="grid">
         <mat-grid-list [cols]="3" rowHeight="50%">
             <mat-grid-tile  
-                *ngFor="let cell of cells"
+                *ngFor="let cell of getActiveCells()"
                 [colspan]="getColSpan(cell.id)"
                 [rowspan]="getRowSpan(cell.id)"
                 [ngClass]="{ 'multi-row' : (getRowSpan(cell.id) === 2)}">
