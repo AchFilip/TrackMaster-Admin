@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {OrderModel} from "../../../../../../global/models/order/order.model";
+import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 
 @Component({
   selector: 'app-ongoing-orders-content',
@@ -7,28 +9,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OngoingOrdersContentComponent implements OnInit {
 
-  protected fields?: string[];
-  protected orders?: string[][];
+  protected fields = [
+    'id','address','st. num.','zip code','driver','pick-up time'
+  ];
+  protected orders: any[][] = [];
 
-  constructor() { }
+  constructor(
+    private orderService: OrdersService
+  ) { }
 
   ngOnInit(): void {
     this.getOrders();
   }
 
   protected getOrders(){
-    // DB will return [ {}, {}, ... ]
 
-    // Extract keys -> fields
-    this.fields = [
-      'id','address','St. Num.','zip code','driver','pick-up time'
-    ];
+    this.orderService.getOngoing().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available orders in db')
+        return;
+      }
 
-    // Extract values as rows
-    this.orders = [[
-        '352.', 'andreadaki', '79825', '76123','agapios volanakis', '25 august 1999, 23:23:23'
-      ]
-    ];
+      // Use timestamp->delivered as time
+      let orders = result.map((order)=>{
+        order.time = order.timestamp.picked_up;
+        return order;
+      });
+
+      // Add all orders
+      for(let i=0; i<orders.length; i++){
+        orders[i]._id = orders[i]._id.substr(orders[i]._id.length-4);
+        this.addOrder(orders[i])
+      }
+    });
   }
 
+  protected addOrder(order: OrderModel){
+    // TODO: do something with id size
+    let d = new Date(order.timestamp.delivered);
+    this.orders.push([
+      order._id,order.address,order.street_number,
+      order.zip_code,order.driver,d.toLocaleDateString("en-US")
+    ])
+  }
 }

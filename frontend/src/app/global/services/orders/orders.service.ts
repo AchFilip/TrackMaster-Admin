@@ -29,6 +29,12 @@ export class OrdersService {
       .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
   }
 
+  public getOngoing(): Observable<OrderModel[]> {
+    return this.http
+      .get<OrderModel[]>(`${this.hostURl}/api/orders/ongoing`)
+      .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
+  }
+
   public addOrder(data: OrderModel): Observable<OrderModel>{
     return this.http
       .post<OrderModel>(`${this.hostURl}/api/orders/available`, data)
