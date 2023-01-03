@@ -27,6 +27,18 @@
   </div>
   <div *ngIf="closeDriver === false">
     <div class="selected-card">
+      <div class="info">
+        <img class="delivery" [src]="imageBasePath + 'delivery.png'" >
+        <p class="name text text-black">AIKATERINI</p>
+        <p class="surname text text-black">AGAMEMNODAKI</p>
+        <img class="phone-img" [src]="imageBasePath + 'phone.png'" >
+        <p class="phone text text-black">6976271951</p>
+      </div>
+      <div class="spinner">
+        <mat-spinner mode="determinate" [value]="spinnerValue"></mat-spinner>
+        <p class="text workshift-text text-black">WORK SHIFT</p>
+        <p>12 : 59 HOURS</p>
+      </div>
       <button class="close-button" (click)="closeCard('driver')">
         <mat-icon>close</mat-icon>
       </button>
