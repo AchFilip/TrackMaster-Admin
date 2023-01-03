@@ -19,6 +19,7 @@ export class CellComponent implements OnInit {
   protected display?: Display;
   protected widgetDisplay!: string;
   protected audio!: any;
+  protected initWidgetState ={display: WidgetContentOptions.widget_options, name: 'widgets'};
 
   constructor(
     private socketService: SocketsService
@@ -33,12 +34,12 @@ export class CellComponent implements OnInit {
   }
 
   public onAddClick(){
-      this.openWidget()
+      this.openWidget(this.initWidgetState);
     this.audio.play();
   }
 
-  private openWidget(){
-    this.socketService.publish("cell-state", {wallID: this.self.wallID,cellID: this.self.id,action:'open', state: {display: WidgetContentOptions.widget_options, name: 'widgets'}})
+  private openWidget(state:any){
+    this.socketService.publish("cell-state", {wallID: this.self.wallID,cellID: this.self.id,action:'open', state: state})
   }
 
   private closeWidget(){
@@ -54,8 +55,14 @@ export class CellComponent implements OnInit {
         if(data.action === "close") {
           this.display=this.DisplayEnum.empty;
         }else if(data.action === "open"){
+          console.log(data)
           this.display=this.DisplayEnum.widget;
           this.widgetDisplay=data.state
+        }else if(data.action === "resize"){
+          this.display=this.DisplayEnum.empty;
+          // this.display=this.DisplayEnum.widget;
+          // this.widgetDisplay=data.state
+          this.openWidget(data.state);
         }else{
           console.log("Unknown action");
         }

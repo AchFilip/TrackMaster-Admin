@@ -155,6 +155,16 @@ export class SocketServer {
         // inform manager 
 
         //inform wall
+
+        //inform cell to change state
+        let dest_data = {
+          wallID: data.wallID,
+          cellID: data.cellID,
+          action: data.action,
+          state: data.state
+        }
+        console.log(dest_data)
+        this.io.emit('cell-state', dest_data);
         break;
       }
 

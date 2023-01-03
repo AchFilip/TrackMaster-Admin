@@ -13,6 +13,7 @@ export class ResizeComponent implements OnInit {
   public rotated:boolean = false;
   @Input() public wallID: any;
   @Input() public cellID: any;
+  @Input() public state: any;
 
   constructor(private socketService: SocketsService) { }
 
@@ -34,7 +35,8 @@ export class ResizeComponent implements OnInit {
       wallID: this.wallID,
       cellID: this.cellID,
       action:'resize',
-      expand: this.expand(i)
+      expand: this.expand(i),
+      state:this.state
     });
   }
 

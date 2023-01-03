@@ -31,10 +31,11 @@ export class WallComponent implements OnInit {
   }
 
   getActiveCells(): CellModel[] {
-    return this.cells.filter((cell: CellModel) => {
+    let active_cells = this.cells.filter((cell: CellModel) => {
       let id = cell.id;
       return this.cells_size[id].colspan > 0 && this.cells_size[id].rowspan > 0;
     });
+    return active_cells;
   }
 
   getColSpan(cell_id:number):number{
@@ -68,8 +69,6 @@ export class WallComponent implements OnInit {
   }
 
   resize(id:number, expand:number[]): void {
-    console.log(id, expand);
-    
     for(let i=0; i<expand.length; i++){
       let cell_id = expand[i];
       if(this.sameRow(id, cell_id)){
@@ -81,8 +80,6 @@ export class WallComponent implements OnInit {
       this.cells_size[cell_id].colspan = 0;
       this.cells_size[cell_id].rowspan = 0;
     }
-
-    console.log(this.cells_size);
   }
 
   private sameRow(a:number, b:number):boolean{

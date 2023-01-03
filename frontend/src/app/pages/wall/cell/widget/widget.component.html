@@ -51,7 +51,10 @@
     </div>
 
   <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.resize">
-      <app-resize [wallID]="wallID" [cellID]="cellID"></app-resize>
+      <app-resize 
+      [wallID]="wallID"
+      [cellID]="cellID"
+      [state]="getCurrentState()"></app-resize>
   </div>
 
   <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.move">
