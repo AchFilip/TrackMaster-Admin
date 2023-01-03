@@ -24,8 +24,6 @@ export class WallComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.initCells()
     this.socketService.publish("wall-subscribe", {id: this.id});
-    // console.log(this.cells_size[this.cells[0].id].colspan)
-    let cell_id:number = this.cells[0].id;
 
     this.initStateSocket();
   }
@@ -68,31 +66,57 @@ export class WallComponent implements OnInit {
     }
   }
 
-  resize(id:number, expand:number[]): void {
+  // BUG: if resize is done from bottom-up,
+  // the grid puts the top cells and then their is no 
+  // right place from the resized cell
+  // USE: only TOP>BOTTOM resize
+  resize(id:number, expand:number[], wall:any): void {
+    console.log(expand)
+    // can only expand one col/row
+    let expanded_row = false;
+    let expanded_col = false;
     for(let i=0; i<expand.length; i++){
       let cell_id = expand[i];
       if(this.sameRow(id, cell_id)){
-        this.cells_size[id].colspan += 1;
+        if(!expanded_col){
+          this.cells_size[id].colspan += 1;
+          expanded_col = true;
+        }
+        
       }else{
-        this.cells_size[id].rowspan += 1;
+        if(!expanded_row){
+          this.cells_size[id].rowspan += 1;
+          expanded_row = true;
+        }
       }
 
       this.cells_size[cell_id].colspan = 0;
       this.cells_size[cell_id].rowspan = 0;
     }
+    console.log(wall)
   }
 
   private sameRow(a:number, b:number):boolean{
     return Math.floor(a/3) == Math.floor(b/3);
   }
 
+  private free(cells: number[]){
+    for(let i=0; i<cells.length; i++){
+      this.cells_size[cells[i]].colspan = 1;
+      this.cells_size[cells[i]].rowspan = 1;
+    }
+  }
+
   private initStateSocket(){
     this.socketService.subscribe("wall-state", (data: any) => {
+      console.log(this.id, data)
       if(
         data.wallID === this.id
       ){
         if(data.action === "resize") {
-          this.resize(data.cellID, data.expand);
+          this.resize(data.cellID, data.expand, data.wall);
+        }else if(data.action === 'close-widget') {
+          this.free(data.free)
         }else{
           console.log("Unknown action: "+data.action);
         }

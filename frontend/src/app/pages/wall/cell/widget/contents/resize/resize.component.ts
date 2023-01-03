@@ -11,6 +11,8 @@ export class ResizeComponent implements OnInit {
   public buttons:any[] = [true,true,true, true,true,true, true,true,true];
   public arrowFolderPath: string = "assets\\wall\\cell\\widget\\arrows\\";
   public rotated:boolean = false;
+  protected wall!:any;
+
   @Input() public wallID: any;
   @Input() public cellID: any;
   @Input() public state: any;
@@ -18,13 +20,28 @@ export class ResizeComponent implements OnInit {
   constructor(private socketService: SocketsService) { }
 
   ngOnInit(): void {
-    this.socketService.publish("wall-state", {wallID: this.wallID,cellID: this.cellID,action:'getEnabledGrid'});
+    this.socketService.publish("wall-state", {wallID: this.wallID,cellID: this.cellID,action:'getActiveWalls'});
 
     this.positionCases();
 
     this.socketService.subscribe("wall-state",(data:any)=>{
-      if(data.wallID == this.wallID && data.cellID == this.cellID && data.action == 'getEnabledGrid'){
-        this.checkWidgetsPositions(data.enabled_grid);
+      if(data.wallID == this.wallID && data.cellID == this.cellID && data.action == 'getActiveWalls'){
+        
+        // We need to consider resized widgets 
+        let enabled_grid = [];
+        this.wall = data.activeWallsState[this.wallID]
+
+        for(let i = 0; i < this.wall.grid.length; i++){
+          if(this.wall.enabled_grid[i] == true){
+            for(let j = i+1; j < this.wall.grid.length; j++){
+              if(this.wall.grid[j] == i){
+                this.wall.enabled_grid[j] = false;
+              }
+            }
+          }
+        }
+
+        this.checkWidgetsPositions(this.wall.enabled_grid);
       }
     })
 
@@ -48,7 +65,7 @@ export class ResizeComponent implements OnInit {
         break;
       }
       case 1:{
-        expand = [this.expandTop(pressed)];
+        expand = this.expandTop(pressed);
         break;
       }
       case 2:{
@@ -72,7 +89,7 @@ export class ResizeComponent implements OnInit {
         break;
       }
       case 7:{
-        expand = [this.expandBottom(pressed)];
+        expand = this.expandBottom(pressed);
         break;
       }
       case 8:{
@@ -85,18 +102,37 @@ export class ResizeComponent implements OnInit {
   }
 
   expandTop(pressed: number){
-    return this.cellID-3;
+    let list = []
+    for(let i = 3; i < 6; i++){
+      if(this.wall.grid[i] == this.cellID){
+        list.push(i-3);
+      }
+    }
+    return list;
   }
 
   expandBottom(pressed: number){
-    return this.cellID+3;
+    let list = []
+    for(let i = 0; i < 3; i++){
+      if(this.wall.grid[i] == this.cellID){
+        list.push(i+3);
+      }
+    }
+    return list;
   }
 
   expandLeft(pressed: number){
+    if(this.wall.grid[this.cellID-1] == this.cellID){
+      return this.cellID-2;
+    }
     return this.cellID-1;
   }
 
   expandRight(pressed: number){
+    // Check if already resized 
+    if(this.wall.grid[this.cellID+1] == this.cellID){
+      return this.cellID+2;
+    }
     return this.cellID+1;
   }
 
@@ -116,6 +152,8 @@ export class ResizeComponent implements OnInit {
     return [this.expandRight(pressed), this.expandBottom(pressed), this.cellID+4];
   }
 
+  // This does not consider resized widgets
+  // THIS IS A BUG 
   positionCases(): void{
     if(this.cellID >= 0 && this.cellID <= 2){ //Common disables
       this.buttons[0] = false;

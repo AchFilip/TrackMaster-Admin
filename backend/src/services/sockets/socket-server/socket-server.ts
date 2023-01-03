@@ -131,7 +131,6 @@ export class SocketServer {
       }
 
       case 'move':{
-        console.log(data)
         // Open widget to destination 
         let dest_data = {
           wallID: data.toWallID,
@@ -139,22 +138,33 @@ export class SocketServer {
           action: 'open',
           state: data.state
         }
-        // console.log(topic, dest_data)
         this.io.emit('cell-state', dest_data);
         this.gridManager.widgetOpened(data.toWallID, data.toCellID);
 
+        // Inform wall to reorganize cell,
+        // if the widget closed was resized
+        let freed_cells = this.gridManager.widgetClosed(data.wallID, data.cellID);
+        let wall_data = {
+          wallID: String(data.wallID),
+          action: 'close-widget',
+          free: freed_cells
+        }
+        this.io.emit('wall-state', wall_data);
+
+        // Close source widget 
         data.action = 'close';
         data.wallID = String(data.wallID);
-        // Close source widget 
         this.io.emit('cell-state', data);
-        this.gridManager.widgetClosed(data.wallID, data.cellID);
         return;
       }
 
       case 'resize':{
         // inform manager 
+        this.gridManager.widgetResize(data.wallID, data.cellID, data.expand);
 
         //inform wall
+        //Happens with final emit
+        data.wall = this.gridManager.getActiveWallsState()[data.wallID];
 
         //inform cell to change state
         let dest_data = {
@@ -163,7 +173,6 @@ export class SocketServer {
           action: data.action,
           state: data.state
         }
-        console.log(dest_data)
         this.io.emit('cell-state', dest_data);
         break;
       }
@@ -182,7 +191,15 @@ export class SocketServer {
 
     switch(action){
       case 'close':{
-        this.gridManager.widgetClosed(wallID, cellID);
+        // Inform wall to reorganize cell,
+        // if the widget closed was resized
+        let freed_cells = this.gridManager.widgetClosed(wallID, cellID);
+        let dest_data = {
+          wallID: data.wallID,
+          action: 'close-widget',
+          free: freed_cells
+        }
+        this.io.emit('wall-state', dest_data);
         break;
       }
       case 'open':{
@@ -225,7 +242,24 @@ class GridManager{
   }
 
   public widgetClosed(wallID:number, cellID: number){
-    this.grids[wallID].enabled_grid[cellID] = false;
+    let freed_cells= []
+    // Find if this cell was resized    
+    for(let i = 0; i < this.grids[wallID].grid.length; i++){
+      if(this.grids[wallID].grid[i] === cellID){
+        this.grids[wallID].enabled_grid[i] = false;
+        this.grids[wallID].grid[i] = i;
+        freed_cells.push(i);
+      }
+    }
+    return freed_cells;
+  }
+
+  public widgetResize(wallID:number, cellID: number, expanded: number[]){
+    for(let i = 0; i < expanded.length; i++){
+      this.grids[wallID].grid[expanded[i]] = cellID;
+      this.grids[wallID].enabled_grid[expanded[i]] = true;
+    }
+    console.log(this.grids)
   }
 
   public getEnabledGrid(wallID: number){

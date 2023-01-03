@@ -55,13 +55,10 @@ export class CellComponent implements OnInit {
         if(data.action === "close") {
           this.display=this.DisplayEnum.empty;
         }else if(data.action === "open"){
-          console.log(data)
           this.display=this.DisplayEnum.widget;
           this.widgetDisplay=data.state
         }else if(data.action === "resize"){
           this.display=this.DisplayEnum.empty;
-          // this.display=this.DisplayEnum.widget;
-          // this.widgetDisplay=data.state
           this.openWidget(data.state);
         }else{
           console.log("Unknown action");
