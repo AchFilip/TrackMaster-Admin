@@ -1,10 +1,11 @@
 <div class="main-container">
     <div class="grid">
         <mat-grid-list [cols]="3" rowHeight="50%">
-            <mat-grid-tile 
+            <mat-grid-tile  
                 *ngFor="let cell of cells"
                 [colspan]="getColSpan(cell.id)"
-                [rowspan]="getRowSpan(cell.id)">
+                [rowspan]="getRowSpan(cell.id)"
+                [ngClass]="{ 'multi-row' : (getRowSpan(cell.id) === 2)}">
                 <cell 
                     [self]=cell
                 ></cell>

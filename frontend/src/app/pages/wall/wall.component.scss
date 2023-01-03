@@ -9,25 +9,26 @@
     justify-content: center;
 
     .grid{
-        background-color: black;
+        background-color: rgb(224, 70, 70);
         width: 95%;
         height: 95%;
         padding: 0px;
     }
 
     .mat-grid-list{
-        background-color: #FCFCFC;
+        background-color: rgb(43, 6, 6);
     }
 
     .mat-grid-tile{
-    
         // LET ME DO WHATEVER I WANT, SQUIIIIIRREL
         ::ng-deep .mat-figure {
             display: block !important; /* or whichever you need */
         }
     }
     
-
+    .multi-row{
+        height: 100% !important;
+    }
 
 }
 

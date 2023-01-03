@@ -1,13 +1,16 @@
 .container{
     height:100%;
     width:100%;
+    max-width: none;
     margin:0;
     padding:2px;
     min-width:31.5vw;
+
+    display: flex;
+    flex-direction: column;
     
     .navbar{
-        height:13%;
-        width:100%;
+        flex: 0 0 70px;
         margin:0;
         padding:0;
         background-color:#698CAD;
@@ -40,8 +43,7 @@
     }
 
     .content{
-        height:87%;
-        width:100%;
+        flex: 1 0 auto;
         background-color: #F0F6FF;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
@@ -50,13 +52,12 @@
         flex-wrap:wrap;
         justify-content: start;
         gap: 3px;
-        padding-top: 3px;
-        padding-left: 3px;
-        padding-bottom: 3px;
+        justify-content: space-around;
+        margin-top: 3px;
         
         .widget-option{
             background-color: #85A8C9;
-            width: 33.05%;
+            width: 33.15%;
 
             display: flex;
             flex-direction: column;
