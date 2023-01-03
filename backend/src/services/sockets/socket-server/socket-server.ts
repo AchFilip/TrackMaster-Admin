@@ -151,11 +151,17 @@ export class SocketServer {
         return;
       }
 
+      case 'resize':{
+        // inform manager 
+
+        //inform wall
+        break;
+      }
+
       default:{
         this.logger.error('Wrong action for wall state: ', data.action);
       }
     }
-
     this.io.emit(topic, data);
   }
   /** CELLS */

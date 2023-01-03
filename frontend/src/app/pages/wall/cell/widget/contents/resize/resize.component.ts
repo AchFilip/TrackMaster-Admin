@@ -22,13 +22,20 @@ export class ResizeComponent implements OnInit {
     this.positionCases();
 
     this.socketService.subscribe("wall-state",(data:any)=>{
-      this.checkWidgetsPositions(data.enabled_grid);
+      if(data.wallID == this.wallID && data.cellID == this.cellID && data.action == 'getEnabledGrid'){
+        this.checkWidgetsPositions(data.enabled_grid);
+      }
     })
 
   }
 
   onResize(i:number){
-    console.log(this.expand(i))
+    this.socketService.publish("wall-state", {
+      wallID: this.wallID,
+      cellID: this.cellID,
+      action:'resize',
+      expand: this.expand(i)
+    });
   }
 
   expand(pressed: number){
@@ -72,7 +79,7 @@ export class ResizeComponent implements OnInit {
       }
     }
 
-    console.log(expand)
+    return expand;
   }
 
   expandTop(pressed: number){

@@ -26,6 +26,8 @@ export class WallComponent implements OnInit {
     this.socketService.publish("wall-subscribe", {id: this.id});
     // console.log(this.cells_size[this.cells[0].id].colspan)
     let cell_id:number = this.cells[0].id;
+
+    this.initStateSocket();
   }
 
   getColSpan(cell_id:number):number{
@@ -58,8 +60,8 @@ export class WallComponent implements OnInit {
     }
   }
 
-  resize(): void {
-    let resized_grid = [0,0,2,3,4,5];
+  resize(id:number, expand:number[]): void {
+    console.log(id, expand);
 
   }
 
@@ -69,7 +71,7 @@ export class WallComponent implements OnInit {
         data.wallID === this.id
       ){
         if(data.action === "resize") {
-          console.log(data)
+          this.resize(data.cellID, data.expand);
         }else{
           console.log("Unknown action: "+data.action);
         }
