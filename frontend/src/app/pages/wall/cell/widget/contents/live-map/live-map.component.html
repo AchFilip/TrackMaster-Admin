@@ -15,13 +15,13 @@
       <div class="active-drivers">
         <img [src]="imageBasePath + 'delivery.png'" >
         <p class="text text-black">ACTIVE DRIVERS:</p>
-        <div class="num-active text text-black">100</div>
+        <div class="num-active text text-black">{{infoCard['active_drivers']}}</div>
         <div class="line"></div>
       </div>
       <div class="ongoing-orders">
         <img [src]="imageBasePath + 'available.png'" >
         <p class="text text-black">ONGOING ORDERS:</p>
-        <div class="num-active text text-black">100</div>
+        <div class="num-active text text-black">{{infoCard['ongoing']}}</div>
       </div>
     </div>
   </div>
@@ -33,6 +33,14 @@
         <p class="surname text text-black">AGAMEMNODAKI</p>
         <img class="phone-img" [src]="imageBasePath + 'phone.png'" >
         <p class="phone text text-black">6976271951</p>
+        <div class="ongoing-orders">
+          <img [src]="imageBasePath + 'available.png'">
+          <p class="text text-black">TOTAL ORDERS:  5</p>
+        </div>
+        <div class="total-distance">
+          <img [src]="imageBasePath + 'distance.png'">
+          <p class="text text-black">DISTANCE COVERED:  10 KM</p>
+        </div>
       </div>
       <div class="spinner">
         <mat-spinner mode="determinate" [value]="spinnerValue"></mat-spinner>

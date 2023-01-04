@@ -12,11 +12,11 @@
   </div>
   <div class="line-right"></div>
 <!--  Driver Data-->
-  <ng-container *ngIf="this.phone != 0">
+  <ng-container *ngIf="this.getNumberOfSelected() != 0">
     <div class="driver-content">
       <div class="titles text">
-        <p>{{this.name}} {{this.surname}}</p>
-        <p style="position:relative; bottom: 20px; left: 30px;">{{this.phone}}</p>
+        <p>{{this.selectedDriver['name']}} {{this.selectedDriver['surname']}}</p>
+        <p style="position:relative; bottom: 20px; left: 30px;">{{this.selectedDriver['phone']}}</p>
         <img class="phone_img" src="/assets/wall/cell/widget/phone.png">
         <img class="driver_img" src="/assets/wall/cell/widget/driver.png">
               <canvas style="position: absolute;; height: 100%; width: 40%; top: 200px; left: -80px;"
