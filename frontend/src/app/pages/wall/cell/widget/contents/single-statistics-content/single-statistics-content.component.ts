@@ -14,6 +14,7 @@ export class SingleStatisticsContentComponent implements OnInit {
 
   protected driverInfo!: DriverInfos[];
   protected myChart!: Chart;
+  protected chartID!: string;
   protected selectedDriver: {
     [index: string]: string} = {
     'name': '',
@@ -28,6 +29,7 @@ export class SingleStatisticsContentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.chartID = "";
     this.driverInfo = [];
     this.getDrivers();
   }
@@ -38,6 +40,8 @@ export class SingleStatisticsContentComponent implements OnInit {
       this.myChart.destroy()
     }
 
+    this.chartID = String(Math.floor(Math.random() * 1000));
+    console.log(this.chartID)
     this.myChart = new Chart("single-stats-1", {
       type: 'bar',
       data: {
@@ -94,8 +98,6 @@ export class SingleStatisticsContentComponent implements OnInit {
     this.selectedDriver['surname'] = <string>this.driverInfo?.[index].surname;
     // @ts-ignore
     this.selectedDriver['phone'] = this.driverInfo?.[index].phone;
-
-    this.RenderChart()
   }
 
   public getNumberOfSelected(): number{

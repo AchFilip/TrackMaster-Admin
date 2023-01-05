@@ -36,6 +36,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
+import { EditOrderComponent } from './pages/wall/cell/widget/contents/edit-order/edit-order.component';
 
 
 
@@ -58,7 +59,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     MoveComponent,
     LiveMapComponent,
     CreateOrderComponent,
-    StatisicsCompanyComponent
+    StatisicsCompanyComponent,
+    EditOrderComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

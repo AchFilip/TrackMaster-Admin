@@ -1,0 +1,43 @@
+<div class="order-info">
+  <input class="box-address" type="text" [ngModel]="address" (ngModelChange)="canClear();canSubmit()" id="adr" maxlength="30">
+  <input class="box-st"  type="text" [ngModel]="st_num" (ngModelChange)="canClear(); canSubmit()" id="st" maxlength="4">
+  <input class="box-zip"  type="text" [ngModel]="zip_code" (ngModelChange)="canClear();canSubmit()"  id="zip" maxlength="6">
+  <div  class="box-floor">
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="floor">
+        <mat-option  value="0">GROUND FLOOR</mat-option>
+        <mat-option  value="1">1st Floor</mat-option>
+        <mat-option  value="2">2nd Floor</mat-option>
+        <mat-option  value="3">3nd Floor</mat-option>
+        <mat-option  value="4">4nd Floor</mat-option>
+        <mat-option  value="5">5nd Floor</mat-option>
+        <mat-option  value="6">6nd Floor</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <input class="box-volume" [ngModel]="volume" (ngModelChange)="canClear();canSubmit()" id="vol" maxlength="6">
+  <section class="box-delivery">
+    <mat-checkbox id="delivery" [checked]=fast></mat-checkbox>
+  </section>
+  <div class="titles">
+    <p>ADDRESS:</p>
+    <p>ST. NUMBER:</p>
+    <p>ZIP CODE:</p>
+    <p>FLOOR LEVEL:</p>
+  </div>
+  <div class="titles2">
+    <p>PACKAGE VOLUME:</p>
+    <p>FAST DELIVERY:</p>
+  </div>
+  <div class="line"></div>
+</div>
+<div class="bottom-buttons">
+  <button mat-button class="clear" (click)="clearAll()"
+          [ngClass]="{enable: canClear()===true, disable: canClear()===false}">
+    <p>DELETE</p>
+  </button>
+  <button mat-button class="submit" (click)="submit()"
+          [ngClass]="{enable: canSubmit()===true, disable: canSubmit()===false}">
+    <p>UPDATE</p>
+  </button>
+</div>
