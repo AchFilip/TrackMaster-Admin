@@ -4,6 +4,7 @@ import {marker} from "leaflet";
 import 'leaflet-routing-machine';
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import opacity = _default.defaults.animations.opacity;
+import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 
 
 @Component({
@@ -17,14 +18,19 @@ export class LiveMapComponent implements AfterViewInit {
 
   private map!: L.Map;
   private marker!: L.Marker[];
-  public spinnerValue: number = 50; //0 to 100
-  private lat!: any;
-  private lng!: any;
+  public spinnerValue: number = 100; //0 to 100
 
   public closeInfo: boolean = true;
   public closeDriver: boolean = false;
   public coordinates: any;
-  constructor() {
+
+  public infoCard: { [index:string]:number} = {
+    'active_drivers': -1,
+    'ongoing': -1
+  }
+  constructor(
+    private orderService: OrdersService
+  ) {
   }
 
   private myLocation(): void {
@@ -41,12 +47,12 @@ export class LiveMapComponent implements AfterViewInit {
       console.log("Your browser doesn't support geolocation feature!")
     } else {
       navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
         let accuracy = position.coords.accuracy
 
-        var marker = L.marker([this.lat, this.lng]);
-        var circle = L.circle([this.lat, this.lng], {radius: accuracy})
+        var marker = L.marker([lat, lng]);
+        var circle = L.circle([lat, lng], {radius: accuracy})
 
         if (marker) {
           map.removeLayer(marker)
@@ -96,9 +102,33 @@ export class LiveMapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     L.Icon.Default.imagePath = "assets\\wall\\cell\\widget\\leaflet\\";
+    this.fillInfoCard();
     this.createRoute();
   }
 
+  public fillInfoCard(): void{
+    this.orderService.getOngoing().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available orders in db')
+        return;
+      }
+
+      // Use timestamp->delivered as time
+      let orders = result.map((order)=>{
+        order.time = order.timestamp.picked_up;
+        return order;
+      });
+
+      this.infoCard['ongoing'] = orders.length;
+      let drivers: string[] = [];
+      for(let i=0; i<orders.length;i++){
+        if(drivers.includes(orders[i].driver) === false){
+          drivers.push(orders[i].driver);
+        }
+      }
+      this.infoCard['active_drivers'] = drivers.length;
+    });
+  }
   public closeCard(card: string): void {
     if (card === "info") {
       this.closeInfo = true;

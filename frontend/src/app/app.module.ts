@@ -38,6 +38,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import { TabletComponent } from './pages/tablet/tablet.component';
 import { TabletCellComponent } from './pages/tablet/cell/cell.component';
+import { EditOrderComponent } from './pages/wall/cell/widget/contents/edit-order/edit-order.component';
 
 
 
@@ -62,7 +63,8 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     CreateOrderComponent,
     StatisicsCompanyComponent,
     TabletComponent,
-    TabletCellComponent
+    TabletCellComponent,
+    EditOrderComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

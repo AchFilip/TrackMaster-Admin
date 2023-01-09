@@ -15,6 +15,7 @@ import {SocketsService} from 'src/app/global/services/sockets/sockets.service';
 import {CreateOrderComponent} from "./contents/create-order/create-order.component";
 import {StatisicsCompanyComponent} from "./contents/statisics-company/statisics-company.component";
 import {LiveMapComponent} from "./contents/live-map/live-map.component";
+import {EditOrderComponent} from "./contents/edit-order/edit-order.component";
 
 @Component({
   selector: 'Widget',
@@ -32,7 +33,7 @@ export class WidgetComponent implements OnInit {
   ];
 
   protected db_order_options = [
-    'completed', 'available', 'ongoing', 'add'
+    'completed', 'available', 'ongoing', 'add', 'edit'
   ];
 
   protected db_completed_order_fields = [
@@ -65,6 +66,7 @@ export class WidgetComponent implements OnInit {
     'available': 'available.png',
     'ongoing': 'ongoing.png',
     'add': 'add.png',
+    'edit': 'edit.png',
     // Menu options
     'resize': 'resize.png',
     'move': 'move.png',
@@ -342,6 +344,10 @@ export class WidgetComponent implements OnInit {
         this.initCreateOrder(name);
         break;
       }
+      case OrderOptions.edit: {
+        this.initEditOrder(name);
+        break;
+      }
 
       /** STATISTICS */
       case WidgetContentOptions.statistics_options: {
@@ -467,6 +473,25 @@ export class WidgetComponent implements OnInit {
     this.widget.chosen_option = OrderOptions.add;
 
     this.content_component = CreateOrderComponent;
+  }
+
+  initEditOrder(name: string) {
+    // Request for order options
+    this.widget.content.options = this.getOrderOptions();
+
+    // Update widget's icon
+    this.setNavbarIcon(name)
+
+    // Update widget's title
+    this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.edit);
+
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.edit;
+
+    this.content_component = EditOrderComponent;
   }
 
   /** INIT STATISTICS OPTIONS */

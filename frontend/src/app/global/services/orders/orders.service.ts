@@ -40,11 +40,11 @@ export class OrdersService {
       .post<OrderModel>(`${this.hostURl}/api/orders/available`, data)
       .pipe(map(result => new OrderModel(result)));
   }
-//   public create(resource: ItemModel): Observable<ItemModel> {
-//     return this.http
-//       .post<ItemModel>(`${this.hostURl}/api/item-shop`, resource)
-//       .pipe(map(result => new ItemModel(result)));
-//   }
 
-
+  public updateOrder(data: OrderModel): Observable<OrderModel>{
+    console.log(this.hostURl + "/api/orders/available/" + data["_id"]);
+    return this.http
+      .put<OrderModel>(`${this.hostURl}/api/orders/available/${data['_id']}`, data)
+      .pipe(map(result => new OrderModel(result)));
+  }
 }

@@ -21,6 +21,7 @@ export class OrdersController extends ResourceController<Order>{
             .get('/completed', this.getCompletedOrders)
             .get('/ongoing', this.getOngoingOrders)
             .post('/ongoing', this.postOrder)
+            .put('/available/:id', this.updateOrder)
         return router;
     }
 
@@ -62,6 +63,14 @@ export class OrdersController extends ResourceController<Order>{
 
         const task = await this.create(req, res);
 
+        return res
+            .status(StatusCodes.OK)
+            .json(task);
+    }
+    
+    updateOrder = async (req: Request, res: Response) => {
+        this.logger.debug('updateOrder request');
+        const task = await this.update(req.params.id, req.body.blacklist, req, res);
         return res
             .status(StatusCodes.OK)
             .json(task);
