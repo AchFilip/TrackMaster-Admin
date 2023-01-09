@@ -9,6 +9,7 @@ import {LiveMapComponent} from "./pages/wall/cell/widget/contents/live-map/live-
 import {
   StatisicsCompanyComponent
 } from "./pages/wall/cell/widget/contents/statisics-company/statisics-company.component";
+import { TabletComponent } from './pages/tablet/tablet.component';
 
 const routes: Routes = [
   // { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'phone-app/login', component: LoginComponent},
   { path: 'phone-app/orders', component: OrdersComponent},
   { path: 'wall/:id', component: WallComponent},
+  { path: 'tablet', component: TabletComponent},
   { path: 'map', component: LiveMapComponent},
   { path: 'stats', component: StatisicsCompanyComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

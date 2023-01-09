@@ -1,0 +1,15 @@
+<div class="main-container">
+    
+    <!-- Empty Cell -->
+    <div *ngIf="this.display===DisplayEnum.empty" class="empty-cell" (click)="onAddClick()">
+        <button mat-fab>
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+    <!-- Widget -->
+    <div *ngIf="this.display===DisplayEnum.widget" class="widget">
+        <p>hi</p>
+    </div>
+    
+</div>

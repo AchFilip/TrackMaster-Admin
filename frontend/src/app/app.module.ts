@@ -36,6 +36,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
+import { TabletComponent } from './pages/tablet/tablet.component';
+import { TabletCellComponent } from './pages/tablet/cell/cell.component';
 
 
 
@@ -58,7 +60,9 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     MoveComponent,
     LiveMapComponent,
     CreateOrderComponent,
-    StatisicsCompanyComponent
+    StatisicsCompanyComponent,
+    TabletComponent,
+    TabletCellComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

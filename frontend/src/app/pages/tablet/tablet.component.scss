@@ -1,0 +1,35 @@
+.main-container{
+    background-color: #F0F6FF;
+    // DAE2ED COLOR FOR BESSEL
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .grid{
+        background-color: #F0F6FF;
+        width: 95%;
+        height: 95%;
+        padding: 0px;
+    }
+
+    .mat-grid-list{
+        background-color: #F0F6FF;
+    }
+
+    .mat-grid-tile{
+        // LET ME DO WHATEVER I WANT, SQUIIIIIRREL
+        ::ng-deep .mat-figure {
+            display: block !important; /* or whichever you need */
+        }
+    }
+    
+    .multi-row{
+        height: 100% !important;
+    }
+
+}
+
+
