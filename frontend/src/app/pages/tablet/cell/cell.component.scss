@@ -9,7 +9,7 @@
     .empty-cell{
         width: 100%;
         height: 100%;
-    
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,5 +26,14 @@
     .widget{
         width: 100%;
         height: 100%;
+
+      .middle-alignment{
+        position: relative;
+        top: 150px;
+        margin: auto;
+        text-align: center;
+        width: 90%;
+        padding: 10px;
+      }
     }
 }

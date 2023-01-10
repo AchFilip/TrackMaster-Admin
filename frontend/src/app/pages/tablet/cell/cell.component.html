@@ -1,5 +1,5 @@
 <div class="main-container">
-    
+
     <!-- Empty Cell -->
     <div *ngIf="this.display===DisplayEnum.empty" class="empty-cell" (click)="onAddClick()">
         <button mat-fab>
@@ -11,5 +11,13 @@
     <div *ngIf="this.display===DisplayEnum.widget" class="widget">
         <p>hi</p>
     </div>
-    
+
+<!--  example-->
+  <div *ngIf="this.display===DisplayEnum.orders" class="widget">
+    <div class="middle-alignment text text-size-title text-black">
+      <img [src]="imageBasePath + 'available.png'">
+      <p>AVAILABLE ORDERS</p>
+    </div>
+  </div>
+
 </div>
