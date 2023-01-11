@@ -15,10 +15,10 @@ export class TabletComponent implements OnInit {
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
   protected gridFlag:boolean = false;
 
-
   protected cells: CellModel[] = [];
   protected cells_size: {[index: string]:any}={};
 
+  protected selectedScreen: number = 2;
   constructor() { }
 
   ngOnInit(): void {
@@ -58,42 +58,12 @@ export class TabletComponent implements OnInit {
     }
   }
 
+  public isSelectedScreen(screen: number): boolean{
+    return this.selectedScreen === screen;
+  }
+
   public selectScreen(oldScreen: number): void{
-    let oldButton =  document.getElementById('left');
-    if(oldButton != null) {
-      if (oldButton.style.background === 'rgb(133, 168, 201)') {
-        oldButton.style.background = '#6990B5';
-        oldButton.style.color = '#000000';
-      }
-    }
-    oldButton =  document.getElementById('middle');
-    if(oldButton != null) {
-      if (oldButton.style.background === 'rgb(133, 168, 201)') {
-        oldButton.style.background = '#6990B5';
-        oldButton.style.color = '#000000';
-      }
-    }
-    oldButton =  document.getElementById('right');
-    if(oldButton != null) {
-      if (oldButton.style.background === 'rgb(133, 168, 201)') {
-        oldButton.style.background = '#6990B5';
-        oldButton.style.color = '#000000';
-      }
-    }
-
-    let newButton
-    if(oldScreen === 1){
-      newButton = document.getElementById('left');
-    }else if(oldScreen === 2){
-      newButton = document.getElementById('middle');
-    }else if(oldScreen === 3){
-      newButton = document.getElementById('right');
-    }
-
-    if(newButton != null){
-      newButton.style.background = '#85A8C9';
-      newButton.style.color = '#F2F2F2';
-    }
+    this.selectedScreen = oldScreen;
   }
 
   public setGrid(flag: boolean): void{
