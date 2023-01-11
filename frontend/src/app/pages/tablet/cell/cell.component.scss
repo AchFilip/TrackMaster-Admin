@@ -21,6 +21,20 @@
         .mat-fab{
             background: #698CAD;
         }
+
+        button{
+          transform: scale(2);
+        }
+
+        mat-icon{
+          transform: scale(1.5);
+        }
+
+        p{
+          position: absolute;
+          top: 70%;
+          font-size: 24px;
+        }
     }
 
     .widget{
