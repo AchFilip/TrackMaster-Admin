@@ -11,10 +11,14 @@ interface CellModel {
   styleUrls: ['./tablet.component.scss']
 })
 export class TabletComponent implements OnInit {
-  
+
+  protected imageBasePath = 'assets\\wall\\cell\\widget\\';
+  protected gridFlag:boolean = false;
+
+
   protected cells: CellModel[] = [];
   protected cells_size: {[index: string]:any}={};
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -36,7 +40,7 @@ export class TabletComponent implements OnInit {
   getRowSpan(cell_id:number):number{
     return this.cells_size[cell_id].rowspan;
   }
-  
+
   initCells(): void {
 
     this.cells_size[0] = {colspan: 1, rowspan: 1};
@@ -51,6 +55,54 @@ export class TabletComponent implements OnInit {
         id: i,
         selected: false
       }));
+    }
+  }
+
+  public selectScreen(oldScreen: number): void{
+    let oldButton =  document.getElementById('left');
+    if(oldButton != null) {
+      if (oldButton.style.background === 'rgb(133, 168, 201)') {
+        oldButton.style.background = '#6990B5';
+        oldButton.style.color = '#000000';
+      }
+    }
+    oldButton =  document.getElementById('middle');
+    if(oldButton != null) {
+      if (oldButton.style.background === 'rgb(133, 168, 201)') {
+        oldButton.style.background = '#6990B5';
+        oldButton.style.color = '#000000';
+      }
+    }
+    oldButton =  document.getElementById('right');
+    if(oldButton != null) {
+      if (oldButton.style.background === 'rgb(133, 168, 201)') {
+        oldButton.style.background = '#6990B5';
+        oldButton.style.color = '#000000';
+      }
+    }
+
+    let newButton
+    if(oldScreen === 1){
+      newButton = document.getElementById('left');
+    }else if(oldScreen === 2){
+      newButton = document.getElementById('middle');
+    }else if(oldScreen === 3){
+      newButton = document.getElementById('right');
+    }
+
+    if(newButton != null){
+      newButton.style.background = '#85A8C9';
+      newButton.style.color = '#F2F2F2';
+    }
+  }
+
+  public setGrid(flag: boolean): void{
+    this.gridFlag = !flag;
+    let gridButton =  document.getElementById('grid-button');
+    if(this.gridFlag === false && gridButton != null) {
+      gridButton.style.background = '#6990B5';
+    }else if(this.gridFlag && gridButton != null){
+      gridButton.style.background = '#85A8C9';
     }
   }
 }

@@ -1,15 +1,27 @@
 <div class="main-container">
     <div class="grid">
         <mat-grid-list [cols]="3" rowHeight="50%">
-            <mat-grid-tile  
+            <mat-grid-tile
                 *ngFor="let cell of getActiveCells()"
                 [colspan]="getColSpan(cell.id)"
                 [rowspan]="getRowSpan(cell.id)"
                 [ngClass]="{ 'multi-row' : (getRowSpan(cell.id) === 2)}">
-                <Cell 
+                <Cell
                     [self]=cell
                 ></Cell>
             </mat-grid-tile>
         </mat-grid-list>
     </div>
+
+    <div class="screen_buttons">
+      <button class="left text" id="left" (click)="selectScreen(1)">LEFT</button>
+      <button class="middle text" id="middle" (click)="selectScreen(2)">CENTER</button>
+      <button class="right text" id="right" (click)="selectScreen(3)">RIGHT</button>
+
+      <button class="grid-button text" id="grid-button" (click)="setGrid(this.gridFlag)">
+        <img [src]="imageBasePath + 'grid.png'">
+        {{this.gridFlag}}
+      </button>
+    </div>
+
 </div>

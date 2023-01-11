@@ -6,6 +6,7 @@ export class DriverModel {
   public ongoing_orders!: number;
   public delivered_orders!: number;
   public canceled_orders!: number;
+  public checked_in!: Date;
   constructor(model?: any) {
     Object.assign(this,model);
   }

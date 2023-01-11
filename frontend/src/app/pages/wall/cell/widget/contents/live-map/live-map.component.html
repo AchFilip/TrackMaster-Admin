@@ -3,7 +3,7 @@
 </div>
 
 <div class="box-container">
-  <div *ngIf="closeInfo === false">
+  <ng-template [ngIf]="closeInfo===false">
     <div class="info-card">
       <button class="close-button" (click)="closeCard('info')">
         <mat-icon>close</mat-icon>
@@ -24,22 +24,22 @@
         <div class="num-active text text-black">{{infoCard['ongoing']}}</div>
       </div>
     </div>
-  </div>
-  <div *ngIf="closeDriver === false">
+  </ng-template>
+  <ng-template [ngIf]="closeDriver === false">
     <div class="selected-card">
       <div class="info">
         <img class="delivery" [src]="imageBasePath + 'delivery.png'" >
-        <p class="name text text-black">AIKATERINI</p>
-        <p class="surname text text-black">AGAMEMNODAKI</p>
+        <p class="name text text-black">{{this.selectedDriverInfo['name']}}</p>
+        <p class="surname text text-black">{{this.selectedDriverInfo['surname']}}</p>
         <img class="phone-img" [src]="imageBasePath + 'phone.png'" >
-        <p class="phone text text-black">6976271951</p>
+        <p class="phone text text-black">{{this.selectedDriverInfo['phone']}}</p>
         <div class="ongoing-orders">
           <img [src]="imageBasePath + 'available.png'">
-          <p class="text text-black">TOTAL ORDERS:  5</p>
+          <p class="text text-black">TOTAL ORDERS:  {{this.selectedDriverInfo['total_orders']}}</p>
         </div>
         <div class="total-distance">
           <img [src]="imageBasePath + 'distance.png'">
-          <p class="text text-black">DISTANCE COVERED:  10 KM</p>
+          <p class="text text-black">DISTANCE COVERED:  {{this.selectedDriverInfo['distance']}} KM</p>
         </div>
       </div>
       <div class="spinner">
@@ -51,5 +51,5 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
-  </div>
+  </ng-template>
 </div>

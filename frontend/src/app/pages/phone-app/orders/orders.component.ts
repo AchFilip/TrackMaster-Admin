@@ -22,6 +22,9 @@ export class OrdersComponent implements OnInit {
 
   inAvailable: boolean = true;
   canClear: boolean = false;
+
+  public audio: any;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -30,9 +33,14 @@ export class OrdersComponent implements OnInit {
 
     this.topDescription = "AVAILABLE ORDERS";
     this.bottomDescription = "SELECTED ORDERS";
+
+    this.audio = new Audio();
+    this.audio.src = "assets/sounds/click.wav";
+    this.audio.load();
   }
 
   changeOrders(): void {
+    this.audio.play();
     if (this.topIconPath.includes(this.avOrdersPath)) {
       this.topIconPath = this.iconsPath + this.delPath;
       this.bottomIconPath = this.iconsPath + this.avOrdersPath;

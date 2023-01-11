@@ -11,6 +11,7 @@ export interface Driver extends Document {
     ongoing_orders: number;
     delivered_orders: number;
     canceled_orders: number;
+    checked_in: Date;
 }
 
 // ------------------------------------------
@@ -22,7 +23,8 @@ const driverSchema = new Schema(
         phone: {type: Number, required:true},
         ongoing_orders: {type: Number, required:true},
         delivered_orders: {type: Number, required:true},
-        canceled_orders: {type: Number, required:true}
+        canceled_orders: {type: Number, required:true},
+        checked_in: {type: Date, required:true}
     },
     {...DefaultSchemaOptions}
 );

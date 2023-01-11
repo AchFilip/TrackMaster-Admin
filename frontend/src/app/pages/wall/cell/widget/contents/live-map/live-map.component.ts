@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
-import {marker} from "leaflet";
+import {icon, marker} from "leaflet";
 import 'leaflet-routing-machine';
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import opacity = _default.defaults.animations.opacity;
 import {OrdersService} from "../../../../../../global/services/orders/orders.service";
+import {DriversService} from "../../../../../../global/services/drivers/drivers.service";
 
 
 @Component({
@@ -13,14 +14,15 @@ import {OrdersService} from "../../../../../../global/services/orders/orders.ser
   styleUrls: ['./live-map.component.scss']
 })
 export class LiveMapComponent implements AfterViewInit {
-  //todo: change element 'map' to be dynamically so that we can open multiple maps
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
+
+  protected botPath = 'assets\\BotDrivers\\AchilleasToGiorgos.txt';
 
   private map!: L.Map;
   private marker!: L.Marker[];
   public spinnerValue: number = 100; //0 to 100
 
-  public closeInfo: boolean = true;
+  public closeInfo: boolean = false;
   public closeDriver: boolean = false;
   public coordinates: any;
 
@@ -28,14 +30,28 @@ export class LiveMapComponent implements AfterViewInit {
     'active_drivers': -1,
     'ongoing': -1
   }
+
+  public selectedDriverInfo: { [index:string]: string} = {
+    'name': "Achilleas",
+    'surname': "Filippidis",
+    'phone': "6976271951",
+    'total_orders': "10",
+    'distance': "10"
+  }
+
+
   constructor(
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private driverService: DriversService
   ) {
   }
 
   private myLocation(): void {
     // Map initialization
-    let map = L.map('map').setView([14.0860746, 100.608406], 6);
+    let map = L.map('map',{
+      zoomControl: false,
+      dragging: false
+    }).setView([14.0860746, 100.608406], 6);
 
     //osm layer
     let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,7 +67,18 @@ export class LiveMapComponent implements AfterViewInit {
         let lng = position.coords.longitude;
         let accuracy = position.coords.accuracy
 
-        var marker = L.marker([lat, lng]);
+        var marker = L.marker([lat, lng]).on('click', (e) => {
+          this.closeDriver = false;
+          this.closeInfo = true;
+        });
+
+        var iconTest = marker.options.icon;
+        if(iconTest) {
+          iconTest.options.iconSize = [100, 120];
+          marker.setIcon(iconTest);
+        }
+
+
         var circle = L.circle([lat, lng], {radius: accuracy})
 
         if (marker) {
@@ -92,6 +119,48 @@ export class LiveMapComponent implements AfterViewInit {
     control.addTo(this.map);
   }
 
+  private setUpMap(): void{
+    // Map initialization
+    this.map = L.map('map',{
+      zoomControl: false,
+      dragging: false
+    }).setView([35.34093,25.13219], 16);
+
+    //osm layer
+    let osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(this.map);
+  }
+
+  private addDrivers(): void{
+    this.driverService.getDrivers().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available drivers in db')
+        return;
+      }
+
+      // Use timestamp->delivered as time
+      let drivers = result.map((order)=>{
+        return order;
+      });
+
+      this.marker = [];
+      for(let i=0; i<drivers.length;i++){
+        var marker = L.marker([35.34093,25.13219]).on('click', (e) => {
+          this.closeDriver = false;
+          this.closeInfo = true;
+        });
+
+        this.marker.push(marker)
+      }
+
+      for(let i =0; i <this.marker.length;i++){
+      }
+      this.marker[0].addTo(this.map);
+      this.infoCard['active_drivers'] = drivers.length
+    });
+  }
 
   public updateMarker(id: number, lat:number, lng:number, deleteMarker: boolean): void{
     let myMarker = this.marker[id];
@@ -102,8 +171,13 @@ export class LiveMapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     L.Icon.Default.imagePath = "assets\\wall\\cell\\widget\\leaflet\\";
+
+    this.closeInfo = false;
+    this.closeDriver = true;
+
     this.fillInfoCard();
-    this.createRoute();
+    this.setUpMap();
+    this.addDrivers();
   }
 
   public fillInfoCard(): void{
@@ -126,9 +200,9 @@ export class LiveMapComponent implements AfterViewInit {
           drivers.push(orders[i].driver);
         }
       }
-      this.infoCard['active_drivers'] = drivers.length;
     });
   }
+
   public closeCard(card: string): void {
     if (card === "info") {
       this.closeInfo = true;

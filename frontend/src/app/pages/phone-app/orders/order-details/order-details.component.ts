@@ -13,7 +13,7 @@ export class OrderDetailsComponent implements OnInit {
 
   public avOrdersToggle!: boolean[];
   public chosenOrdersToggle!: boolean[];
-
+  public audio: any;
   @Input() inAvailable!: boolean;
   @Output("GetChosenOrdersLength") selectedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -23,6 +23,9 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.inAvailable = true;
     this.getOrders();
+    this.audio = new Audio();
+    this.audio.src = "assets/sounds/click.wav";
+    this.audio.load();
   }
 
   protected getOrders() {
@@ -64,13 +67,13 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   protected addOrder(order: OrderModel){
-    // TODO: do something with id size
     this.avOrders.push([
       order._id,order.address,order.volume,order.timestamp
     ])
   }
 
   public SelectOrder(i: number) {
+    this.audio.play();
     if (this.avOrdersToggle[i] === false) {
       //Push the order to our current orders
       this.chosenOrders?.push(this.avOrders[i]);
