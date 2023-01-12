@@ -39,6 +39,8 @@ import {FormsModule} from "@angular/forms";
 import { TabletComponent } from './pages/tablet/tablet.component';
 import { TabletCellComponent } from './pages/tablet/cell/cell.component';
 import { EditOrderComponent } from './pages/wall/cell/widget/contents/edit-order/edit-order.component';
+import { EmptyComponent } from './pages/tablet/cell/content/empty/empty.component';
+import { TabletWidgetComponent } from './pages/tablet/cell/content/widget/widget.component';
 
 
 
@@ -64,7 +66,9 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     StatisicsCompanyComponent,
     TabletComponent,
     TabletCellComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    EmptyComponent,
+    TabletWidgetComponent
   ],
   imports: [
     SocketIoModule.forRoot(socketIoConfig),

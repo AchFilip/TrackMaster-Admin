@@ -112,6 +112,7 @@ export class WidgetComponent implements OnInit {
     this.audio = new Audio();
     this.audio.src = "assets/sounds/click.wav";
     this.audio.load();
+    console.log(this.initStateOn.display, this.initStateOn.name)
     this.initState(this.initStateOn.display, this.initStateOn.name)
     console.log(this.initStateOn);
   }
@@ -367,6 +368,9 @@ export class WidgetComponent implements OnInit {
         console.error('Not such state', display);
       }
     }
+
+    this.socketService.publish("cell-state", {wallID: this.wallID,cellID: this.cellID,action:'update-state', state: name})
+
   }
 
   /** INIT WIDGET OPTIONS */

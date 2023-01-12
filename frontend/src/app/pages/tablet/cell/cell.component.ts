@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, InjectionToken, Injector, Input, OnInit, ReflectiveInjector, SimpleChanges } from '@angular/core';
 import { Display } from 'src/app/global/models/cell/cell.enum.display';
+import { EmptyComponent } from './content/empty/empty.component';
 
 interface CellModel {
   id: number;
+  wall: number;
   selected: boolean;
+  state: string;
 }
 
 @Component({
@@ -13,18 +16,27 @@ interface CellModel {
 })
 export class TabletCellComponent implements OnInit {
   @Input() self!: CellModel;
-
+  
   protected DisplayEnum = Display;
   protected display?: Display;
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
 
   constructor() { }
-
+  
   ngOnInit(): void {
-    this.display = Display.empty;
+    this.setState(this.self.state);
   }
 
-  public onAddClick(){
-}
+  private setState(state:string){
+    this.display = (this.DisplayEnum as any)[state];
+  }
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log(changes);
+  // }
+
+  public openWidget(){
+    this.setState('widget');
+  }
 
 }

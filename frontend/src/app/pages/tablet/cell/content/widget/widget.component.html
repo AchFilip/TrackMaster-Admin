@@ -1,0 +1,12 @@
+<div class="container">
+
+    <!-- Widget options -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.widget_options">
+        <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
+            (click)="onWidgetOptionClicked(option)">
+            <img src="{{getIconPath(option)}}" class="icon">
+            <p class=" text text-size-title text-white">{{option}}</p>
+        </button>
+    </div>
+
+</div>

@@ -1,5 +1,4 @@
 export enum Display{
-    empty,
-    widget,
-    orders
+    empty='empty',
+    widget='widget'
 }

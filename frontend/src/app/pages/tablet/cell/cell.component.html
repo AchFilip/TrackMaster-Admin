@@ -1,24 +1,12 @@
 <div class="main-container">
-
-    <!-- Empty Cell -->
-    <div *ngIf="this.display===DisplayEnum.empty" class="empty-cell" (click)="onAddClick()">
-        <button mat-fab>
-            <mat-icon>add</mat-icon>
-        </button>
-      <p class="text text-black text-size-title">ADD WIDGET</p>
-    </div>
-
-    <!-- Widget -->
-    <div *ngIf="this.display===DisplayEnum.widget" class="widget">
-        <p>hi</p>
-    </div>
-
+  <Empty *ngIf="this.display===DisplayEnum.empty" (openWidget)="openWidget()"></Empty>
+  <Tablet-Widget *ngIf="this.display===DisplayEnum.widget" [self]="this.self"></Tablet-Widget>
 <!--  example-->
-  <div *ngIf="this.display===DisplayEnum.orders" class="widget">
+  <!-- <div *ngIf="this.display===DisplayEnum.orders" class="widget">
     <div class="middle-alignment text text-size-title text-black">
       <img [src]="imageBasePath + 'available.png'">
       <p>AVAILABLE ORDERS</p>
     </div>
-  </div>
+  </div> -->
 
 </div>
