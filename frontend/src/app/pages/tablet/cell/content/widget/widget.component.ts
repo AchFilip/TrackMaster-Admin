@@ -161,8 +161,8 @@ export class TabletWidgetComponent implements OnInit {
       cellID: this.self.id,
       action:'open-from-table', 
       state: { 
-        display: 'widget_options', 
-        name: 'widgets'
+        display: display, 
+        name: name
       }})
   }
 
