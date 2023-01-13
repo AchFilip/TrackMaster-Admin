@@ -21,7 +21,7 @@ export class TabletCellComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.display = Display.empty;
+    this.display = Display.orders;
   }
 
   public onAddClick(){

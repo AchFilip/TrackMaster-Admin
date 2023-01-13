@@ -13,7 +13,6 @@ interface CellModel {
 export class TabletComponent implements OnInit {
 
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
-  protected gridFlag:boolean = false;
 
   protected cells: CellModel[] = [];
   protected cells_size: {[index: string]:any}={};
@@ -64,15 +63,5 @@ export class TabletComponent implements OnInit {
 
   public selectScreen(oldScreen: number): void{
     this.selectedScreen = oldScreen;
-  }
-
-  public setGrid(flag: boolean): void{
-    this.gridFlag = !flag;
-    let gridButton =  document.getElementById('grid-button');
-    if(this.gridFlag === false && gridButton != null) {
-      gridButton.style.background = '#6990B5';
-    }else if(this.gridFlag && gridButton != null){
-      gridButton.style.background = '#85A8C9';
-    }
   }
 }

@@ -18,10 +18,4 @@
         <button class="text" [ngClass]="isSelectedScreen(2) ? 'selected' : 'unselected'" (click)="selectScreen(2)">CENTER</button>
         <button class="text" [ngClass]="isSelectedScreen(3) ? 'selected' : 'unselected'"(click)="selectScreen(3)">RIGHT</button>
     </div>
-        
-    <button class="grid-button text" id="grid-button" (click)="setGrid(this.gridFlag)">
-        <img [src]="imageBasePath + 'grid.png'">
-        <p>{{this.gridFlag}}</p>
-    </button>
-    
 </div>

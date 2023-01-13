@@ -113,7 +113,7 @@ export class WidgetComponent implements OnInit {
     this.audio.src = "assets/sounds/click.wav";
     this.audio.load();
     this.initState(this.initStateOn.display, this.initStateOn.name)
-    console.log(this.initStateOn);
+    this.widget.navbar.menu_icon_path = this.getIconPath('snackbar');
   }
 
   /**
