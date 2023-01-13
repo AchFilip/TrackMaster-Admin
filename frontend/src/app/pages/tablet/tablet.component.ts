@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
 interface CellModel {
   id: number;
+  wall: number;
   selected: boolean;
+  state: string;
 }
 
 @Component({
@@ -18,10 +21,19 @@ export class TabletComponent implements OnInit {
   protected cells_size: {[index: string]:any}={};
 
   protected selectedScreen: number = 2;
-  constructor() { }
+  constructor(
+    private socketService: SocketsService
+  ) { }
 
   ngOnInit(): void {
-    this.initCells()
+    this.initStateSocket();
+    this.getWallState();
+  }
+
+  getWallState(){
+    this.socketService.publish("tablet-state", {
+      wallID: this.selectedScreen,
+      action:'get-wall'});
   }
 
   getActiveCells(): CellModel[] {
@@ -40,7 +52,7 @@ export class TabletComponent implements OnInit {
     return this.cells_size[cell_id].rowspan;
   }
 
-  initCells(): void {
+  initCells(wallState:any): void {
 
     this.cells_size[0] = {colspan: 1, rowspan: 1};
     this.cells_size[1] = {colspan: 1, rowspan: 1};
@@ -52,7 +64,9 @@ export class TabletComponent implements OnInit {
     for (let i = 0; i < 2 * 3; i++) {
       this.cells.push(<CellModel>({
         id: i,
-        selected: false
+        wall: this.selectedScreen,
+        selected: false,
+        state: wallState.state[i]
       }));
     }
   }
@@ -63,5 +77,26 @@ export class TabletComponent implements OnInit {
 
   public selectScreen(oldScreen: number): void{
     this.selectedScreen = oldScreen;
+  }
+
+  // private initWall(wallState: any): void {
+  //   console.log(wallState)
+  //   for(let i = 0; i < wallState.state.length; i++){
+  //     this.cells[i].state = wallState.state[i];
+  //   }
+  // }
+
+  public initStateSocket(): void {
+    this.socketService.subscribe("tablet-state", (data: any) => {
+        if(data.action === "get-wall") {
+          if(data.wallState === undefined){
+            console.warn("Wall state is undefined");
+            return;
+          }
+          this.initCells(data.wallState);
+        }else{
+          console.log("Unknown action: " + data.action);
+        }
+      });
   }
 }

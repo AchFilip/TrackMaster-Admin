@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {OrdersComponent} from "../orders/orders.component";
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,19 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   logoPath: string = "/assets/phone-app/Logo.png";
   passCode: string = "INSERT THE SPECIAL CODE";
+  test:string = "";
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
 
   btnClick(): void {
-    console.log("Relocate to another URL");
+    const loginValue = document.getElementById('login') as HTMLInputElement | null;
+    if(loginValue != null){
+      if(loginValue.value === "VOLANAKIS123"){
+        this.router.navigate(['/phone-app/orders']);
+      }
+    }
   };
 
   ngOnInit(): void {

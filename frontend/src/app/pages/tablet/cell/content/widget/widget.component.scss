@@ -1,0 +1,34 @@
+.container{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    .content{
+        flex: 1 0 auto;
+        background-color: #F0F6FF;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        
+        padding-left:3px;
+        width:100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        gap: 3px;
+        justify-content: flex-start;
+        
+        .widget-option{
+            background-color: #85A8C9;
+            width: 48%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .icon{
+                padding-bottom: 15px;
+            }
+        }
+    }
+}

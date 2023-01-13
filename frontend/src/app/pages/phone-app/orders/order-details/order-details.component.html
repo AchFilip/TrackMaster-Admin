@@ -1,7 +1,7 @@
 <div class="main-container">
     <div *ngIf="this.inAvailable === true; else ChosenOrders">
         <div class="orderDetails" *ngFor="let row of avOrders let j=index;">
-            <button class="box" (click)="SelectOrder(j)"
+            <button class="box"  *ngIf="avOrdersToggle[j] === false" (click)="SelectOrder(j)"
             [ngClass]="{green: this.avOrdersToggle[j]}">  <!-- On Click, set color to green-->
                 <div *ngFor="let field of row;let i=index;"
                 [ngClass]="{ id: i===0,address: i===1,volume: i===2, dist: i===3 }">
@@ -14,7 +14,7 @@
 
 <ng-template #ChosenOrders>
     <div class="orderDetails" *ngFor="let row of chosenOrders let j=index;">
-        <button class="box" (click)="RemoveOrder(j)"
+        <button class="box" (click)="SelectOrder(j)"
         [ngClass]="{red: this.chosenOrdersToggle[j]}">  <!-- On Click, set color to green-->
             <div *ngFor="let field of row;let i=index;"
             [ngClass]="{ id: i===0,address: i===1,volume: i===2, dist: i===3 }">

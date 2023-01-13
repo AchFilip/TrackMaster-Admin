@@ -1,4 +1,5 @@
 import http, { Server } from 'http';
+import { interfaces } from 'inversify';
 import io from 'socket.io';
 import { Logger } from '../../../api/shared/utils/logger';
 import { config, getHostDomain } from '../../../config/environment';
@@ -200,12 +201,42 @@ export class SocketServer {
           free: freed_cells
         }
         this.io.emit('wall-state', dest_data);
+
+        this.gridManager.updateCellState(wallID, cellID, 'empty');
+        console.log(this.gridManager.print());
         break;
       }
+
       case 'open':{
         this.gridManager.widgetOpened(wallID, cellID);
         break;
       }
+
+      case 'update-state':{
+        this.gridManager.updateCellState(wallID, cellID, data.state);
+        console.log(this.gridManager.print());
+        // let dest_data = {
+        //   wallID: data.wallID,
+        //   cellID: data.cellID,
+        //   action: 'update',
+        //   free: freed_cells
+        // }
+        // this.io.emit('tablet-state', dest_data);
+        break;
+      }
+
+      case 'open-from-table':{
+        console.log(data)
+        let dest_data = {
+          wallID: String(data.wallID),
+          cellID: data.cellID,
+          action: 'open',
+          state: data.state
+        }
+        this.io.emit('cell-state', dest_data);
+        return;
+      }
+
       default: {
         this.logger.error('Wrong action: ', action)
         break;
@@ -215,6 +246,23 @@ export class SocketServer {
     this.io.emit(topic, data);
   }
 
+  handleTabletState = (topic:string, data:any) => {
+    let action: string = data.action;
+
+    switch(action){
+      case 'get-wall':{
+        data.wallState = this.gridManager.getWallState(data.wallID);
+        this.io.emit(topic, data);
+        break;
+      }
+
+      default: {
+        this.logger.error('Wrong action: ', action)
+        break;
+      }
+    }
+  }
+  
   private hasHandler(topic: string){
     return Object.keys(this.handlers).some(e => e === topic);
   }
@@ -222,13 +270,14 @@ export class SocketServer {
     'wall-subscribe': this.onWallSubscribe,
     'wall-unsubscribe': this.onWallunSubscribe,
     'wall-state': this.onWallState,
-    'cell-state': this.handleCellState
+    'cell-state': this.handleCellState,
+    'tablet-state': this.handleTabletState
   }
 }
 
 class GridManager{
   // Shows current grid with cell's ids
-  private grids: {[key: number]: {grid:number[], enabled_grid:boolean[]}};
+  private grids: {[key: number]: {grid:number[], enabled_grid:boolean[], state:string[]}};
 
   // Shows current cells that have opened a widget
   private enabled_grid: boolean[]= [];
@@ -274,10 +323,12 @@ class GridManager{
     // Create new wall
     this.grids[id] = {
       grid: [],
-      enabled_grid:[]
+      enabled_grid:[],
+      state: []
     }
     this.initGrid(id,2,3);
     this.initEnabledGrid(id,2,3);
+    this.initState(id,2,3);
   }
 
   public deleteWall(id: number){
@@ -295,6 +346,20 @@ class GridManager{
     for (let i = 0; i < rows*cols; i++) { 
       this.grids[wallID].enabled_grid.push(false);
     }
+  }
+
+  private initState(wallID: number, rows: number, cols: number){
+    for (let i = 0; i < rows*cols; i++) { 
+      this.grids[wallID].state.push('empty');
+    }
+  }
+
+  public updateCellState(wallID:number, cellID: number, state: string){
+    this.grids[wallID].state[cellID] = state;
+  }
+
+  public getWallState(wallID: number){
+    return this.grids[wallID];
   }
 
   public print(){
