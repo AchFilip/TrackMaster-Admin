@@ -60,7 +60,8 @@ export class TabletComponent implements OnInit {
     this.cells_size[3] = {colspan: 1, rowspan: 1};
     this.cells_size[4] = {colspan: 1, rowspan: 1};
     this.cells_size[5] = {colspan: 1, rowspan: 1};
-
+    console.log(wallState)
+    this.cells = [];
     for (let i = 0; i < 2 * 3; i++) {
       this.cells.push(<CellModel>({
         id: i,

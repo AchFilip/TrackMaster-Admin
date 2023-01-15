@@ -409,6 +409,12 @@ export class TabletWidgetComponent implements OnInit {
       wallID: this.self.wall,
       cellID: this.self.id,
       action:'submit-order'})
+
+    setTimeout(() => {
+      this.socketService.publish("tablet-state", {
+        wallID: this.self.wall,
+        action:'get-wall'});
+    }, 100);
   }
 
 
