@@ -9,4 +9,79 @@
         </button>
     </div>
 
+    <!-- Order options -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_options">
+        <button mat-button class="order-option" *ngFor="let option of this.widget.content.options"
+            (click)="onOrderOptionClicked(option)">
+            <img src="{{getIconPath(option)}}" class="icon">
+            <p class=" text text-size-title text-white">{{option}}</p>
+        </button>
+    </div>
+
+    <!-- Order create -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.create">
+        <div class="order-add">
+            <div class="container">
+                <div class="address">
+                    <div class="title">ADDRESS:</div>
+                    <input class="input" type="text" [ngModel]="address" (ngModelChange)="canClear();canSubmit();onInput()" id="adr" maxlength="30">
+                </div>
+                
+                <div class="st_number">
+                    <div class="title">ST. NUMBER:</div>
+                    <input class="input"  type="text" [ngModel]="st_num" (ngModelChange)="canClear(); canSubmit();onInput()" id="st" maxlength="4">
+                </div>
+                
+                <div class="floor">
+                    <div class="title">FLOOR LEVEL:</div>
+                    <mat-form-field class="options" appearance="fill">
+                        <mat-select [(ngModel)]="floor" (ngModelChange)="onInput();canClear(); canSubmit()">
+                            <mat-option  value="0">GROUND FLOOR</mat-option>
+                            <mat-option  value="1">1st Floor</mat-option>
+                            <mat-option  value="2">2nd Floor</mat-option>
+                            <mat-option  value="3">3nd Floor</mat-option>
+                            <mat-option  value="4">4nd Floor</mat-option>
+                            <mat-option  value="5">5nd Floor</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="zip_code">
+                    <div class="title">ZIP CODE:</div>
+                    <input class="input"  type="text" [ngModel]="zip_code" (ngModelChange)="canClear();canSubmit();onInput()"  id="zip" maxlength="6">
+                </div>
+
+                <div class="line"></div>
+
+                <div class="extra">
+
+                    <div class="volume">
+                        <div class="title">PACKAGE VOLUME:</div>
+                        <input class="input" [ngModel]="volume" (ngModelChange)="canClear();canSubmit();onInput()" id="vol" maxlength="6">
+                    </div>
+                    
+                    <div class="fast">
+                        <div class="title">FAST DELIVERY:</div>
+                        <section class="checkbox">
+                            <mat-checkbox id="delivery" [checked]="this.fast" (click)="checkboxClicked()"></mat-checkbox>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="actions">
+
+                    <button mat-button class="clear" (click)="clearAll()"
+                            [ngClass]="{enable: canClear()===true, disable: canClear()===false}">
+                        CLEAR
+                    </button>
+
+                    <button mat-button class="submit" (click)="submit()"
+                        [ngClass]="{enable: canSubmit()===true, disable: canSubmit()===false}">
+                        Submit
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

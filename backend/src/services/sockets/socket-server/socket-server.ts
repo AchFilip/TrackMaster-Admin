@@ -226,11 +226,10 @@ export class SocketServer {
       }
 
       case 'open-from-table':{
-        console.log(data)
         let dest_data = {
           wallID: String(data.wallID),
           cellID: data.cellID,
-          action: 'open',
+          action: 'open-on',
           state: data.state
         }
         this.io.emit('cell-state', dest_data);
@@ -253,6 +252,14 @@ export class SocketServer {
       case 'get-wall':{
         data.wallState = this.gridManager.getWallState(data.wallID);
         this.io.emit(topic, data);
+        break;
+      }
+
+      case 'update-order-text':{
+        console.log(data)
+        data.wallID = String(data.wallID)
+        data.action = 'update-order-text';
+        this.io.emit(data.action, data);
         break;
       }
 

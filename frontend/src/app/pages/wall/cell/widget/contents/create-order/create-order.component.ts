@@ -18,7 +18,7 @@ export class CreateOrderComponent implements OnInit {
   protected zip_code: string = "";
   protected floor: string = "";
   protected volume: string = "";
-  protected fast: boolean = true;
+  protected fast: boolean = false;
 
   @Input() public wallID: any;
   @Input() public cellID: any;
@@ -31,6 +31,20 @@ constructor(
   ngOnInit(): void {
 
     this.socketService.publish("wall-state", {wallID: this.wallID,cellID: this.cellID,action:'getActiveWalls'});
+
+    this.socketService.subscribe("update-order-text", (data: any) => {
+      if(
+        data.wallID === this.wallID
+        && data.cellID === this.cellID
+      ){
+        this.address = data.order.address;
+        this.st_num = data.order.street;
+        this.zip_code = data.order.zip;
+        this.volume = data.order.volume;
+        this.fast = data.order.fast;
+        this.floor = data.order.floor;
+      }
+    });
   }
 
   public clearAll(): void{

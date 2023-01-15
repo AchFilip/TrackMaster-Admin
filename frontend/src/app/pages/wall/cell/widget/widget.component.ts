@@ -205,7 +205,11 @@ export class WidgetComponent implements OnInit {
 
   // Manipulate Title
   protected addSubpathTitle(name: string) {
-    this.widget.navbar.title = this.widget.navbar.title + '>' + name
+    if(this.widget.navbar.title === ''){
+      this.widget.navbar.title = name;
+    }else{
+      this.widget.navbar.title = this.widget.navbar.title + '>' + name
+    }
   }
 
   protected changeTitle(name: string) {
@@ -304,6 +308,7 @@ export class WidgetComponent implements OnInit {
 
   // For each new state/view add it's init function here
   protected initState(display: string, name: string) {
+    console.warn('Init state: ', display, name)
     switch (display) {
 
       /** WIDGET */

@@ -60,6 +60,9 @@ export class CellComponent implements OnInit {
         }else if(data.action === "resize"){
           this.display=this.DisplayEnum.empty;
           this.openWidget(data.state);
+        }else if(data.action === "open-on"){
+          this.display=this.DisplayEnum.empty;
+          this.openWidget(data.state);
         }else{
           console.log("Unknown action");
         }
