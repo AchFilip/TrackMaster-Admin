@@ -16,7 +16,6 @@ interface CellModel {
 export class TabletComponent implements OnInit {
 
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
-  protected gridFlag:boolean = false;
 
   protected cells: CellModel[] = [];
   protected cells_size: {[index: string]:any}={};
@@ -80,16 +79,13 @@ export class TabletComponent implements OnInit {
     this.selectedScreen = oldScreen;
   }
 
-  public setGrid(flag: boolean): void{
-    this.gridFlag = !flag;
-  }
-
   // private initWall(wallState: any): void {
   //   console.log(wallState)
   //   for(let i = 0; i < wallState.state.length; i++){
   //     this.cells[i].state = wallState.state[i];
   //   }
   // }
+
   public initStateSocket(): void {
     this.socketService.subscribe("tablet-state", (data: any) => {
         if(data.action === "get-wall") {

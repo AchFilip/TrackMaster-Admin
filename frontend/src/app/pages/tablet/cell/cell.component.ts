@@ -16,13 +16,13 @@ interface CellModel {
 })
 export class TabletCellComponent implements OnInit {
   @Input() self!: CellModel;
-  
+
   protected DisplayEnum = Display;
   protected display?: Display;
   protected imageBasePath = 'assets\\wall\\cell\\widget\\';
 
   constructor() { }
-  
+
   ngOnInit(): void {
     this.setState(this.self.state);
   }
