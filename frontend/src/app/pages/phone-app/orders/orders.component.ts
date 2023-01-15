@@ -22,6 +22,7 @@ export class OrdersComponent implements OnInit {
 
   inAvailable: boolean = true;
   canClear: boolean = false;
+  clearPressed: boolean = false;
 
   public audio: any;
 
@@ -61,11 +62,15 @@ export class OrdersComponent implements OnInit {
 
   setCanClear(event: boolean){
     this.canClear = event;
+    if(this.canClear === false)
+    {
+      this.clearPressed = false
+    }
     console.log("Can clear: ",this.canClear)
   }
 
   clearSelectedOrders() {
-    console.log("Start working..");
+    this.clearPressed = true;
   }
 
   startWork() {

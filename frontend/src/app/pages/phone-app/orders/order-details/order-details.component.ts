@@ -15,10 +15,19 @@ export class OrderDetailsComponent implements OnInit {
   public chosenOrdersToggle!: boolean[];
   public audio: any;
   @Input() inAvailable!: boolean;
+  @Input() clearPressed!: boolean;
+
   @Output("GetChosenOrdersLength") selectedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(    private orderService: OrdersService
   ) { }
+
+  ngOnChanges(){
+    if(this.clearPressed){
+      this.ClearOrders();
+      this.clearPressed = false;
+    }
+  }
 
   ngOnInit(): void {
     this.inAvailable = true;
@@ -105,4 +114,11 @@ export class OrderDetailsComponent implements OnInit {
     }
   }
 
+  public ClearOrders(): void{
+    for(let i = 0; i < this.avOrdersToggle.length; i++){
+      this.avOrdersToggle[i] = false;
+    }
+    this.chosenOrders.splice(0,this.chosenOrders.length)
+    this.selectedEmitter.emit(this.chosenOrders.length > 0);
+  }
 }
