@@ -256,9 +256,15 @@ export class SocketServer {
       }
 
       case 'update-order-text':{
-        console.log(data)
         data.wallID = String(data.wallID)
         data.action = 'update-order-text';
+        this.io.emit(data.action, data);
+        break;
+      }
+
+      case 'submit-order':{
+        data.wallID = String(data.wallID)
+        data.action = 'submit-order';
         this.io.emit(data.action, data);
         break;
       }

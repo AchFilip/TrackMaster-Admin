@@ -308,7 +308,6 @@ export class WidgetComponent implements OnInit {
 
   // For each new state/view add it's init function here
   protected initState(display: string, name: string) {
-    console.warn('Init state: ', display, name)
     switch (display) {
 
       /** WIDGET */

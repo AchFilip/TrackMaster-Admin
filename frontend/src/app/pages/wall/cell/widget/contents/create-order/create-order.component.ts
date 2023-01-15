@@ -45,6 +45,10 @@ constructor(
         this.floor = data.order.floor;
       }
     });
+
+    this.socketService.subscribe("submit-order", (data: any) => {
+        this.submit();
+    });
   }
 
   public clearAll(): void{

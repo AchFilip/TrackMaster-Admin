@@ -299,8 +299,8 @@ export class TabletWidgetComponent implements OnInit {
   public address: string = "";
   protected st_num: string = "";
   protected zip_code: string = "";
-  protected floor: string = "";
   protected volume: string = "";
+  protected floor: string = "";
   protected fast: boolean = false;
 
   // WHYYYYYY IT DOES NOT CHANGE THE FIRST TIME ????
@@ -387,7 +387,7 @@ export class TabletWidgetComponent implements OnInit {
     this.updateWallWidget(order)
   }
 
-  public submit(): void{
+  public submit(): void{ 
     let test = new OrderModel();
     const adr = document.getElementById('adr') as HTMLInputElement;
     const st = document.getElementById('st') as HTMLInputElement;
@@ -402,8 +402,13 @@ export class TabletWidgetComponent implements OnInit {
     test.timestamp =  {};
     test.timestamp['added'] = new Date();
     test.time = new Date();
-    this.orderService.addOrder(test).subscribe(response => {console.log(response)});
+    // this.orderService.addOrder(test).subscribe(response => {console.log(response)});
     // this.socketService.publish("cell-state", {wallID: this.wallID,cellID: this.cellID,action:'close'})
+    
+    this.socketService.publish("tablet-state", {
+      wallID: this.self.wall,
+      cellID: this.self.id,
+      action:'submit-order'})
   }
 
 
