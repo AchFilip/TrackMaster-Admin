@@ -58,6 +58,7 @@ export class LiveMapComponent implements AfterViewInit {
     
     this.socketService.subscribe("get-live-locations", (data: any) => {
       this.locations[data.id] = data.locations;
+      console.log(this.locations);
     });
 
   }

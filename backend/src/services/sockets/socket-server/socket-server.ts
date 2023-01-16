@@ -394,6 +394,15 @@ class DriverData{
   }
 
   load_data(id: number){
-    return fs.readFileSync(this.basePath + 'Driver'+id+'.txt', 'utf-8');
+    let data = fs.readFileSync(this.basePath + 'Driver'+id+'.txt', 'utf-8').split("\n");
+    let locations = [];
+    for(let i = 0; i < data.length; i++){
+      let coords = {
+        lat: parseFloat(data[i].split(",")[0]),
+        lon: parseFloat(data[i].split(",")[1])
+      }
+      locations.push(coords);
+    }
+    return locations;
   }
 }
