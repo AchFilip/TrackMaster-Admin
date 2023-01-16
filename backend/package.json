@@ -9,7 +9,7 @@
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
   },
   "keywords": [],
-  "author": "",
+  "author": "lek_guru",
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.12",

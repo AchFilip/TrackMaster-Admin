@@ -7,6 +7,7 @@ import opacity = _default.defaults.animations.opacity;
 import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 import {DriversService} from "../../../../../../global/services/drivers/drivers.service";
 import {forEach} from "lodash";
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LiveMapComponent implements AfterViewInit {
   public closeInfo: boolean = false;
   public closeDriver: boolean = false;
   public coordinates: any;
+  private locations:any ={};
 
   public infoCard: { [index:string]:number} = {
     'active_drivers': -1,
@@ -43,8 +45,22 @@ export class LiveMapComponent implements AfterViewInit {
 
   constructor(
     private orderService: OrdersService,
-    private driverService: DriversService
+    private driverService: DriversService,
+    private socketService: SocketsService
   ) {
+    // Request for location data from driver 1
+    this.socketService.publish("cell-state", {
+      action:'get-live-locations',
+      id: 1});
+    // Request for location data from driver 2
+    this.socketService.publish("cell-state", {
+      action:'get-live-locations',
+      id: 2});
+
+    this.socketService.subscribe("get-live-locations", (data: any) => {
+      this.locations[data.id] = data.locations;
+    });
+
   }
 
   private myLocation(): void {

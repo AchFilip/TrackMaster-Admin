@@ -3,14 +3,17 @@ import { interfaces } from 'inversify';
 import io from 'socket.io';
 import { Logger } from '../../../api/shared/utils/logger';
 import { config, getHostDomain } from '../../../config/environment';
-
+import * as fs from 'fs';
 
 export class SocketServer {
   private logger: Logger = new Logger();
   public io!: io.Server;
   private gridManager: GridManager;
+  private driverData: DriverData;
+
   constructor() {
     this.gridManager = new GridManager();
+    this.driverData = new DriverData();
   }
 
   /**
@@ -214,14 +217,6 @@ export class SocketServer {
 
       case 'update-state':{
         this.gridManager.updateCellState(wallID, cellID, data.state);
-        console.log(this.gridManager.print());
-        // let dest_data = {
-        //   wallID: data.wallID,
-        //   cellID: data.cellID,
-        //   action: 'update',
-        //   free: freed_cells
-        // }
-        // this.io.emit('tablet-state', dest_data);
         break;
       }
 
@@ -233,6 +228,16 @@ export class SocketServer {
           state: data.state
         }
         this.io.emit('cell-state', dest_data);
+        return;
+      }
+
+      case 'get-live-locations':{
+        let locs = this.driverData.load_data(data.id)
+        let dest_data = {
+          id: data.id,
+          locations: locs
+        }
+        this.io.emit('get-live-locations', dest_data);
         return;
       }
 
@@ -377,5 +382,18 @@ class GridManager{
 
   public print(){
     console.log(this.grids)
+  }
+}
+
+class DriverData{
+  private driverData:any;
+  private basePath:string;
+  constructor(){
+    this.driverData = {};
+    this.basePath = './src/database/content/DriversPositions/'
+  }
+
+  load_data(id: number){
+    return fs.readFileSync(this.basePath + 'Driver'+id+'.txt', 'utf-8');
   }
 }
