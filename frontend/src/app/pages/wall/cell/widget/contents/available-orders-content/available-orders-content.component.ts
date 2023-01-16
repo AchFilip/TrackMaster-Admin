@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 import {OrderModel} from "../../../../../../global/models/order/order.model";
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
 @Component({
   selector: 'app-available-orders-content',
@@ -15,7 +16,8 @@ export class AvailableOrdersContentComponent implements OnInit {
   protected orders: any[][] = [];
 
   constructor(
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private socketService: SocketsService
   ) { }
 
   ngOnInit(): void {
@@ -57,5 +59,8 @@ export class AvailableOrdersContentComponent implements OnInit {
     this.orders = [];
   }
 
-
+  onClick(event:any){
+    this.orderService.deleteOrder(event[0])
+    this.getOrders()
+  }
 }

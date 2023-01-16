@@ -22,7 +22,24 @@ export class OrdersController extends ResourceController<Order>{
             .get('/ongoing', this.getOngoingOrders)
             .post('/ongoing', this.postOrder)
             .put('/available/:id', this.updateOrder)
+            .delete('/:id', this.deleteOrder)
         return router;
+    }
+    
+    deleteOrder = async (req: Request, res: Response) => {
+        this.logger.debug('DELETE order request');
+        const id = req.params.id;
+
+        const allOrders = await this.getAll(req, res);
+
+        let order_id = ""
+        for(let i = 0; i < allOrders.length; i++){
+            order_id = allOrders[i]._id.toString();
+            if(order_id.substr(order_id.length - 4) === id){
+                break;
+            }
+        }
+        return await this.delete(order_id, req, res);
     }
 
     getAvailableOrders = async (req: Request, res: Response) => {

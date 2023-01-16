@@ -77,7 +77,7 @@
       flex-direction: row;
       font-size: 22px;
       flex-wrap:nowrap;
-      align-items: center;
+      align-items: flex-start;
       width: 100%;
 
       box-sizing: border-box;
@@ -89,42 +89,60 @@
       .id{
         position: relative;
         left: 10px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .address{
         position: relative;
         width: 300px;
         left: 40px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .st{
         position: relative;
         left: 95px;
         width: 95px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .zip{
         position: relative;
         left: 170px;
         width: 95px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .floor{
         position: relative;
         left: 250px;
         width: 120px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .volume{
         position: relative;
         left: 268px;
         width: 65px;
+        display: flex;
+        justify-content: flex-start;
       }
 
       .time{
         position: relative;
         left: 330px;
+        display: flex;
+        justify-content: flex-start;
       }
+      
+      
     }
+
+    
   }
 }

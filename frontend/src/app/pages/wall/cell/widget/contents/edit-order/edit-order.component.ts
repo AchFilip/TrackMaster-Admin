@@ -56,18 +56,11 @@ export class EditOrderComponent implements OnInit {
     });
   }
 
-  public clearAll(): void{
-    const adr = document.getElementById('adr') as HTMLInputElement | null;
-    adr!.value = "";
-    const st = document.getElementById('st') as HTMLInputElement | null;
-    st!.value = "";
-    const zip = document.getElementById('zip') as HTMLInputElement | null;
-    zip!.value = "";
-    const vol = document.getElementById('vol') as HTMLInputElement | null;
-    vol!.value = "";
-
-    this.floor = "";
-    this.fast = false;
+  public delete(): void{
+    this.socketService.publish("cell-state", {
+      wallID: this.wallID,
+      cellID: this.cellID,
+      action:'close'})
   }
 
   public submit(): void{

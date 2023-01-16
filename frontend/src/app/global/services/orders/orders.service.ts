@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { environment } from 'src/environments/environment';
@@ -24,8 +24,13 @@ export class OrdersService {
   }
 
   public getAvailable(): Observable<OrderModel[]> {
+    let headers = new HttpHeaders({
+              'Cache-Control':  'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+              'Pragma': 'no-cache',
+              'Expires': '0'
+          });
     return this.http
-      .get<OrderModel[]>(`${this.hostURl}/api/orders/available`)
+      .get<OrderModel[]>(`${this.hostURl}/api/orders/available`,{headers: headers})
       .pipe(map(result => _.map(result, (t) => new OrderModel(t))));
   }
 
@@ -46,5 +51,10 @@ export class OrdersService {
     return this.http
       .put<OrderModel>(`${this.hostURl}/api/orders/available/${data['_id']}`, data)
       .pipe(map(result => new OrderModel(result)));
+  }
+
+  public deleteOrder(id: string):any{
+    console.log('delete? '+ `${this.hostURl}/api/orders/${id}`)
+    this.http.delete(`${this.hostURl}/api/orders/63c4106e516c6733ba56aee8`).subscribe(res=>console.log(res));
   }
 }
