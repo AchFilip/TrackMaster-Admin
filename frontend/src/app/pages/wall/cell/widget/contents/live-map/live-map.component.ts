@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
-import {icon, marker} from "leaflet";
+import {Draggable, icon, marker} from "leaflet";
 import 'leaflet-routing-machine';
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import opacity = _default.defaults.animations.opacity;
 import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 import {DriversService} from "../../../../../../global/services/drivers/drivers.service";
+import {forEach} from "lodash";
 
 
 @Component({
@@ -100,8 +101,11 @@ export class LiveMapComponent implements AfterViewInit {
   private createRoute(): void {
     this.map = L.map('map').setView([28.2380, 83.9956], 11);
     let titleLayer = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: "OSM"}).addTo(this.map);
-    let marker = L.marker([35.340900,25.132150]).addTo(this.map);
-    this.marker.push(L.marker([35.340900,25.132150]).addTo(this.map));
+    let marker = L.marker([35.340900,25.132150],
+      {
+        draggable: true
+      }).addTo(this.map);
+    //this.marker.push(L.marker([35.340900,25.132150]).addTo(this.map));
     var control = L.Routing.control({
       router: L.Routing.osrmv1({
         serviceUrl: `http://router.project-osrm.org/route/v1/`
@@ -111,10 +115,15 @@ export class LiveMapComponent implements AfterViewInit {
       addWaypoints: false,
       waypoints: [
         L.latLng(35.340900,25.132150),
-        L.latLng(35.324510,25.133440)
+        L.latLng(35.324510,25.133440),
+        L.latLng(35.336183,25.131898),
+        L.latLng(35.340900,25.132150)
       ]
     }).on('routesfound', function(e){
-      console.log(e['routes'][0]['coordinates']);
+      for(let i = 0; i < e['routes'][0]['coordinates'].length; i++){
+        let ll = e['routes'][0]['coordinates'][i];
+        console.log(ll['lat'] + ',' + ll['lng']);
+      }
     });
     control.addTo(this.map);
   }
@@ -147,7 +156,9 @@ export class LiveMapComponent implements AfterViewInit {
 
       this.marker = [];
       for(let i=0; i<drivers.length;i++){
-        var marker = L.marker([35.34093,25.13219]).on('click', (e) => {
+        var marker = L.marker([35.34093,25.13219],{
+          draggable: true
+        }).on('click', (e) => {
           this.closeDriver = false;
           this.closeInfo = true;
         });
@@ -178,6 +189,8 @@ export class LiveMapComponent implements AfterViewInit {
     this.fillInfoCard();
     this.setUpMap();
     this.addDrivers();
+
+    // this.createRoute();
   }
 
   public fillInfoCard(): void{
