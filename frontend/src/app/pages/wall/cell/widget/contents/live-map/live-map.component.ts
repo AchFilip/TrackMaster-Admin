@@ -34,8 +34,9 @@ export class LiveMapComponent implements AfterViewInit {
     'ongoing': -1
   }
 
+  public control:any ;
   public test:any = {};
-
+  public driversLocationBenn:any = {};
   public selectedDriverInfo: { [index:string]: string} = {
     'name': "Sample",
     'surname': "Sample",
@@ -65,34 +66,22 @@ export class LiveMapComponent implements AfterViewInit {
 
   }
 
-  private createRoute(): void {
-    this.map = L.map('map').setView([28.2380, 83.9956], 11);
-    let titleLayer = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: "OSM"}).addTo(this.map);
-    let marker = L.marker([35.340900,25.132150],
-      {
-        draggable: true
-      }).addTo(this.map);
-    //this.marker.push(L.marker([35.340900,25.132150]).addTo(this.map));
-    var control = L.Routing.control({
+  private createRoute(locationsBeen:any): void {
+    let customWaypoints = [];
+
+    for(let i = 0;i < locationsBeen.length;i++){
+      customWaypoints.push(L.latLng(locationsBeen[i]['lat'],locationsBeen[i]['lon']))
+    }
+    this.control = L.Routing.control({
       router: L.Routing.osrmv1({
         serviceUrl: `http://router.project-osrm.org/route/v1/`
       }),
       showAlternatives: false,
       show: false,
       addWaypoints: false,
-      waypoints: [
-        L.latLng(35.340900,25.132150),
-        L.latLng(35.324510,25.133440),
-        L.latLng(35.336183,25.131898),
-        L.latLng(35.340900,25.132150)
-      ]
-    }).on('routesfound', function(e){
-      for(let i = 0; i < e['routes'][0]['coordinates'].length; i++){
-        let ll = e['routes'][0]['coordinates'][i];
-        console.log(ll['lat'] + ',' + ll['lng']);
-      }
-    });
-    control.addTo(this.map);
+      waypoints: customWaypoints
+    })
+    this.control.addTo(this.map);
   }
 
   private setUpMap(): void{
@@ -137,7 +126,7 @@ export class LiveMapComponent implements AfterViewInit {
 
           this.closeDriver = false;
           this.closeInfo = true;
-
+          this.createRoute(this.driversLocationBenn[i])
           this.map.setView(this.marker[i].getLatLng(), 16);
         });
 
@@ -169,11 +158,12 @@ export class LiveMapComponent implements AfterViewInit {
   public driverCoroutine(id: number){
     (async () => {
       console.log('--------' + id)
-      await this.delay(2000)
+      await this.delay(500)
       let driver = this.locations[id]
       for(let i = 0; i < driver.length;i++){
         let localPos = driver[i];
         this.updateMarker(id-1,localPos['lat'],localPos['lon'],false)
+        this.driversLocationBenn[id-1].push({'lat': localPos['lat'],'lon': localPos['lon']})
         await this.delay(1000);
       }
     })();
@@ -198,6 +188,7 @@ export class LiveMapComponent implements AfterViewInit {
       await this.delay(2000)
       for(let i = 0; i < this.infoCard['active_drivers']; i++){
         this.driverCoroutine(i+1);
+        this.driversLocationBenn[i] = [];
       }
     })();
   }
@@ -231,6 +222,7 @@ export class LiveMapComponent implements AfterViewInit {
     } else if (card === "driver") {
       this.closeDriver = true;
       this.map.setView([35.333992,25.132460], 14);
+      this.map.removeControl(this.control)
     } else {
       console.error("Wrong input!");
     }
