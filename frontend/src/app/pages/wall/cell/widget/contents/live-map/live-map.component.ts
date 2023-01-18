@@ -9,7 +9,6 @@ import {DriversService} from "../../../../../../global/services/drivers/drivers.
 import {forEach} from "lodash";
 import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 
-
 @Component({
   selector: 'app-live-map',
   templateUrl: './live-map.component.html',
@@ -28,7 +27,7 @@ export class LiveMapComponent implements AfterViewInit {
   public closeDriver: boolean = false;
   public coordinates: any;
   private locations:any ={};
-
+  private updateInterval:any = null;
   public infoCard: { [index:string]:number} = {
     'active_drivers': -1,
     'ongoing': -1
@@ -72,14 +71,24 @@ export class LiveMapComponent implements AfterViewInit {
     for(let i = 0;i < locationsBeen.length;i++){
       customWaypoints.push(L.latLng(locationsBeen[i]['lat'],locationsBeen[i]['lon']))
     }
+
+    let j = L.Routing.plan(
+      customWaypoints,
+      {
+        draggableWaypoints: false,
+        addWaypoints: false,
+      }
+    );
+
     this.control = L.Routing.control({
       router: L.Routing.osrmv1({
         serviceUrl: `http://router.project-osrm.org/route/v1/`
       }),
       showAlternatives: false,
-      show: false,
+      show: true,
       addWaypoints: false,
-      waypoints: customWaypoints
+      plan:j
+      //waypoints: customWaypoints
     })
     this.control.addTo(this.map);
   }
@@ -126,8 +135,10 @@ export class LiveMapComponent implements AfterViewInit {
 
           this.closeDriver = false;
           this.closeInfo = true;
-          this.createRoute(this.driversLocationBenn[i])
-          this.map.setView(this.marker[i].getLatLng(), 16);
+          //this.createRoute(this.driversLocationBenn[i])
+          this.updateInterval = setInterval(() => {
+            this.map.setView(this.marker[i].getLatLng(), 16);
+          },1000)
         });
 
         this.test[i] = {};
@@ -157,7 +168,6 @@ export class LiveMapComponent implements AfterViewInit {
 
   public driverCoroutine(id: number){
     (async () => {
-      console.log('--------' + id)
       await this.delay(500)
       let driver = this.locations[id]
       for(let i = 0; i < driver.length;i++){
@@ -222,9 +232,8 @@ export class LiveMapComponent implements AfterViewInit {
     } else if (card === "driver") {
       this.closeDriver = true;
       this.map.setView([35.333992,25.132460], 14);
-      this.map.removeControl(this.control)
-    } else {
-      console.error("Wrong input!");
+      //this.map.removeControl(this.control)
+      clearInterval(this.updateInterval)
     }
   }
 }
