@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
+import {SmartSpeakerService} from "../../smart-speaker.service";
 
 interface CellModel {
   id: number;
@@ -22,12 +23,14 @@ export class TabletComponent implements OnInit {
 
   protected selectedScreen: number = 2;
   constructor(
-    private socketService: SocketsService
+    private socketService: SocketsService,
+    private smartSpeaker: SmartSpeakerService
   ) { }
 
   ngOnInit(): void {
     this.initStateSocket();
     this.getWallState();
+    this.voiceCommands();
   }
 
   getWallState(){
@@ -99,5 +102,33 @@ export class TabletComponent implements OnInit {
           console.log("Unknown action: " + data.action);
         }
       });
+  }
+
+  protected voiceCommands(): void{
+    this.smartSpeaker.addCommand("Select Screen One", () => {
+      this.selectScreen(1);
+    });
+    this.smartSpeaker.addCommand("Go to Screen One", () => {
+      this.selectScreen(1);
+    });
+    this.smartSpeaker.addCommand("Select Screen Two", () => {
+      this.selectScreen(2);
+    });
+    this.smartSpeaker.addCommand("Go to Screen Two", () => {
+      this.selectScreen(2);
+    });
+    this.smartSpeaker.addCommand("Select Screen Three", () => {
+      this.selectScreen(3);
+    });
+    this.smartSpeaker.addCommand("Go to Screen Three", () => {
+      this.selectScreen(3);
+    });
+    this.smartSpeaker.addCommand("Do something", () => {
+      console.log("Doing something");
+      //this.smartSpeaker.speak("Dont tell me what to do");
+    });
+    this.smartSpeaker.initialize();
+
+    this.smartSpeaker.start();
   }
 }

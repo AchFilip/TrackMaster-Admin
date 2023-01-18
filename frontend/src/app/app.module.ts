@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import  {SmartSpeakerService } from "./smart-speaker.service";
 import { environment } from 'src/environments/environment';
 
 // Our Components
@@ -87,7 +88,9 @@ const socketIoConfig: SocketIoConfig = { url: environment.host, options: {} };
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    SmartSpeakerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
