@@ -33,7 +33,7 @@ export class LiveMapComponent implements AfterViewInit {
     'ongoing': -1
   }
 
-  public control:any ;
+  public driverPath:any ;
   public test:any = {};
   public driversLocationBenn:any = {};
   public selectedDriverInfo: { [index:string]: string} = {
@@ -72,25 +72,10 @@ export class LiveMapComponent implements AfterViewInit {
       customWaypoints.push(L.latLng(locationsBeen[i]['lat'],locationsBeen[i]['lon']))
     }
 
-    let j = L.Routing.plan(
-      customWaypoints,
-      {
-        draggableWaypoints: false,
-        addWaypoints: false,
-      }
-    );
-
-    this.control = L.Routing.control({
-      router: L.Routing.osrmv1({
-        serviceUrl: `http://router.project-osrm.org/route/v1/`
-      }),
-      showAlternatives: false,
-      show: true,
-      addWaypoints: false,
-      plan:j
-      //waypoints: customWaypoints
-    })
-    this.control.addTo(this.map);
+    if(this.driverPath != null) {
+      this.map.removeLayer(this.driverPath);
+    }
+    this.driverPath = L.polyline(customWaypoints,{color: 'red'}).addTo(this.map);
   }
 
   private setUpMap(): void{
@@ -135,9 +120,11 @@ export class LiveMapComponent implements AfterViewInit {
 
           this.closeDriver = false;
           this.closeInfo = true;
-          //this.createRoute(this.driversLocationBenn[i])
+          this.createRoute(this.driversLocationBenn[i])
+          this.map.setView(this.marker[i].getLatLng(), 16);
           this.updateInterval = setInterval(() => {
             this.map.setView(this.marker[i].getLatLng(), 16);
+            this.createRoute(this.driversLocationBenn[i])
           },1000)
         });
 
@@ -232,6 +219,7 @@ export class LiveMapComponent implements AfterViewInit {
     } else if (card === "driver") {
       this.closeDriver = true;
       this.map.setView([35.333992,25.132460], 14);
+      this.map.removeLayer(this.driverPath)
       //this.map.removeControl(this.control)
       clearInterval(this.updateInterval)
     }
