@@ -7,18 +7,50 @@
     .menu{
         background-color: #F0F6FF;
         width: 100%;
-        height: 42px;
         display: flex;
         justify-content: flex-end;
 
         .menu_button{
             width: 18%;
-            height: 100%;
+            height: 42px;
+
             justify-content: center;
             display: flex;
             
             .icon{
                 transform: scale(0.7);
+            }
+        }
+
+        .open_menu{
+            height: 82px;
+            width: 100%;
+            background-color: #A6CFE2;
+            display: flex;
+
+            .back{
+                background-color: #708EAA;
+                height: 100%;
+                width: 30%;
+                
+                .icon{
+                    transform: scale(0.4);
+                    filter: brightness(6%)
+                }
+            }
+
+            column-gap: 5px;
+            .menu-option{
+                background-color: #85A8C9;
+                display: flex;
+                justify-content: center;
+
+                .icon{
+                    transform: scale(0.4);
+                }
+                .legend{
+                    font-size:24px;
+                }
             }
         }
     }

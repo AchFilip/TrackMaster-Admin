@@ -71,7 +71,9 @@ export class TabletWidgetComponent implements OnInit {
       'title_icon_path': '',
       'title': '',
       'menu_icon_path': '',
-      'active': false
+      'active': false,
+      'open':false,
+      'options': ['']
     },
 
     'content': {
@@ -210,6 +212,12 @@ export class TabletWidgetComponent implements OnInit {
     return this.imageBasePath + icon;
   }
 
+  initMenu() {
+    this.widget.navbar.active = true;
+    this.widget.navbar.options = this.getMenuOptions();
+    console.log(this.widget.navbar.options)
+  }
+
   initWidgetOptions(name: string) {
     // Init navbar
     this.widget.navbar.title = name;
@@ -284,11 +292,11 @@ export class TabletWidgetComponent implements OnInit {
     // this.widget.chosen_option = OrderOptions.completed;
 
     // this.content_component = CompletedOrdersContentComponent;
-    this.widget.navbar.active = true;
+    this.initMenu();
   }
 
   // Get menu options based on state this widget was before
-  protected getMenuOptions(state: WidgetContentOptions) {
+  protected getMenuOptions() {
     return this.db_menu_options;
   }
 
@@ -437,5 +445,7 @@ export class TabletWidgetComponent implements OnInit {
     }, 100);
   }
 
-
+  protected toggleMenu(): void {
+    this.widget.navbar.open = !this.widget.navbar.open;
+  }
 }

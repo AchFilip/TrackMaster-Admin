@@ -1,9 +1,21 @@
 <div class="container">
 
     <div class="menu" *ngIf="this.widget.navbar.active">
-        <button mat-button class="menu_button">
+        <button  *ngIf="!this.widget.navbar.open" mat-button class="menu_button" (click)="this.toggleMenu()">
             <img src="{{this.imageBasePath + 'snackbar.png'}}" class="icon">
         </button>
+
+        <div  *ngIf="this.widget.navbar.open" class="open_menu">
+
+            <button mat-button class="menu-option" *ngFor="let option of this.widget.navbar.options"
+                >
+                <img src="{{getIconPath(option)}}" class="icon">
+            </button>
+
+            <button mat-button class="back" (click)="this.toggleMenu()">
+                <img src="{{this.imageBasePath + '\\arrows\\3.png'}}" class="icon">
+            </button>
+        </div>
     </div>
     <!-- Navbar -->
     <!-- <div class="navbar">
