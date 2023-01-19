@@ -127,7 +127,7 @@ export class TabletWidgetComponent implements OnInit {
         break;
       }
       case OrderOptions.completed: {
-        // this.initCompleted(name);
+        this.initCompleted(name);
         break;
       }
       case OrderOptions.ongoing: {
@@ -265,6 +265,24 @@ export class TabletWidgetComponent implements OnInit {
 
   protected getStatisticsOptions(): string[] {
     return this.db_statistics_options;
+  }
+
+  /** INIT ORDERS */
+
+  initCompleted(name: string) {
+    // Update widget's icon
+    // this.setNavbarIcon(name)
+
+    // Update widget's title
+    // this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.order_completed);
+
+    // Store chosen option
+    // this.widget.chosen_option = OrderOptions.completed;
+
+    // this.content_component = CompletedOrdersContentComponent;
   }
 
   // Get menu options based on state this widget was before

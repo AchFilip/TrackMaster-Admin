@@ -4,6 +4,8 @@
     padding: 0;
     margin: 0;
 
+    
+
     .content{
         flex: 1 0 auto;
         background-color: #F0F6FF;
@@ -20,6 +22,8 @@
 
         overflow-y: scroll;
         
+    
+
         .widget-option{
             background-color: #85A8C9;
             width: 48%;
@@ -218,10 +222,24 @@
                 }
 
             }
-            
-            
-        
         }
-        
+
+        .icon_content{
+            width: 80%;
+            height: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: 35px;
+            padding-top:25px;
+            .main_icon{
+                transform: scale(1.5);
+            }
+            .legend{
+                font-size: 24px;
+            }
+        }
     }
 }

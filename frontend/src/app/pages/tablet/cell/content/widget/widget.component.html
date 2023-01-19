@@ -1,5 +1,14 @@
 <div class="container">
 
+    <!-- Navbar -->
+    <!-- <div class="navbar">
+        <img src="{{this.widget.navbar.title_icon_path}}" class="icon">
+        <div class="title text text-size-title text-white">{{this.widget.navbar.title}}</div>
+        <button mat-button class="menu" (click)="onMenuClicked()">
+            <img src="{{this.widget.navbar.menu_icon_path}}">
+        </button>
+    </div> -->
+
     <!-- Widget options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.widget_options">
         <button mat-button class="widget-option" *ngFor="let option of this.widget.content.options"
@@ -82,6 +91,14 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Order completed -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.order_completed">
+        <div class="icon_content">
+            <img src="{{this.imageBasePath + 'completed.png'}}" class="main_icon">
+            <div class="legend text">completed orders</div>
         </div>
     </div>
 </div>
