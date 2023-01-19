@@ -64,7 +64,7 @@ export class CellComponent implements OnInit {
           this.display=this.DisplayEnum.empty;
           this.openWidget(data.state);
         }else{
-          console.log("Unknown action");
+          console.log("Unknown action: " + data.action);
         }
       }
     });

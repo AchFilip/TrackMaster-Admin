@@ -219,11 +219,14 @@ export class SocketServer {
       }
 
       case 'open':{
+        console.log('speech')
+        console.log(this.gridManager.print());
         this.gridManager.widgetOpened(wallID, cellID);
         break;
       }
 
       case 'update-state':{
+        console.log('from speech')
         this.gridManager.updateCellState(wallID, cellID, data.state);
         break;
       }

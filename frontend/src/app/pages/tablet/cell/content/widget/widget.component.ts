@@ -93,26 +93,30 @@ export class TabletWidgetComponent implements OnInit {
   protected WidgetContentOptionsEnum = WidgetContentOptions;
   
   ngOnInit(): void {
-    console.log(this.self)
-    if(this.self.state === 'completed'){
-      this.initState('completed','completed')
-    }if(this.self.state === 'live'){
-      this.initState('live','live')
-    }else{
-      this.initState(WidgetContentOptions.widget_options, 'widget');
-    }
+    
+      if(this.self.state === 'completed'){
+        this.initState('completed','completed')
+      }if(this.self.state === 'live'){
+        this.initState('live','live')
+      }else{
+        this.initState(WidgetContentOptions.widget_options, 'widget');
+        console.log(this.widget.content.display)
+      }
+    
   }
 
   protected initState(display: string, name: string) {
+    console.log(display, name, this.widget.content.display)
     switch (display) {
 
       /** WIDGET */
       case WidgetContentOptions.widget_options: {
+        if(this.widget.content.display==='order_completed') break;
+
         this.initWidgetOptions(name);
         break;
       }
       case WidgetOptions.orders: {
-        console.log('orders')
         this.initOrderOptions(name);
         break;
       }
@@ -221,7 +225,6 @@ export class TabletWidgetComponent implements OnInit {
   initMenu() {
     this.widget.navbar.active = true;
     this.widget.navbar.options = this.getMenuOptions();
-    console.log(this.widget.navbar.options)
   }
 
   initWidgetOptions(name: string) {

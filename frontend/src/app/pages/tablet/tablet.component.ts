@@ -98,6 +98,7 @@ export class TabletComponent implements OnInit {
             console.warn("Wall state is undefined");
             return;
           }
+          console.log(data.wallState);
           this.initCells(data.wallState);
         }else{
           console.log("Unknown action: " + data.action);
@@ -129,6 +130,26 @@ export class TabletComponent implements OnInit {
     this.smartSpeaker.addCommand("Do something", () => {
       console.log("Doing something");
       //this.smartSpeaker.speak("Dont tell me what to do");
+    });
+    this.smartSpeaker.addCommand("Do it", () => {
+      
+      this.socketService.publish("cell-state", {
+        wallID: '1',
+        cellID: 3,
+        action:'open-from-table', 
+        state: { 
+          display: 'completed', 
+          name: 'completed'
+        }});
+
+
+
+      this.selectScreen(1);
+
+      setTimeout(() => {
+        this.getWallState();
+      }, 50);
+
     });
     this.smartSpeaker.initialize();
 
