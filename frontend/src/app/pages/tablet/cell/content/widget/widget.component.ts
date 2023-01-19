@@ -71,6 +71,7 @@ export class TabletWidgetComponent implements OnInit {
       'title_icon_path': '',
       'title': '',
       'menu_icon_path': '',
+      'active': false
     },
 
     'content': {
@@ -283,6 +284,7 @@ export class TabletWidgetComponent implements OnInit {
     // this.widget.chosen_option = OrderOptions.completed;
 
     // this.content_component = CompletedOrdersContentComponent;
+    this.widget.navbar.active = true;
   }
 
   // Get menu options based on state this widget was before

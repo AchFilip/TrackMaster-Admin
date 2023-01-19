@@ -1,5 +1,10 @@
 <div class="container">
 
+    <div class="menu" *ngIf="this.widget.navbar.active">
+        <button mat-button class="menu_button">
+            <img src="{{this.imageBasePath + 'snackbar.png'}}" class="icon">
+        </button>
+    </div>
     <!-- Navbar -->
     <!-- <div class="navbar">
         <img src="{{this.widget.navbar.title_icon_path}}" class="icon">

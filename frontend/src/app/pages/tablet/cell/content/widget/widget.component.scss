@@ -4,7 +4,24 @@
     padding: 0;
     margin: 0;
 
-    
+    .menu{
+        background-color: #F0F6FF;
+        width: 100%;
+        height: 42px;
+        display: flex;
+        justify-content: flex-end;
+
+        .menu_button{
+            width: 18%;
+            height: 100%;
+            justify-content: center;
+            display: flex;
+            
+            .icon{
+                transform: scale(0.7);
+            }
+        }
+    }
 
     .content{
         flex: 1 0 auto;
