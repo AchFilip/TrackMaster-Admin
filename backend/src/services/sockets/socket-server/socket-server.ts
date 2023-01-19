@@ -207,6 +207,14 @@ export class SocketServer {
 
         this.gridManager.updateCellState(wallID, cellID, 'empty');
         console.log(this.gridManager.print());
+
+        // Inform tablet to close widget
+        let tablet_data = {
+          'wallState': this.gridManager.getWallState(data.wallID),
+          'action': 'get-wall',
+          'wallID': data.wallID
+        }
+        this.io.emit('tablet-state', tablet_data);
         break;
       }
 

@@ -448,4 +448,14 @@ export class TabletWidgetComponent implements OnInit {
   protected toggleMenu(): void {
     this.widget.navbar.open = !this.widget.navbar.open;
   }
+
+  protected onMenuOption(option: string):void{
+    if(option == "close"){
+      console.log("close")
+      this.socketService.publish("cell-state", {
+        wallID: String(this.self.wall),
+        cellID: this.self.id,
+        action:'close'})
+    }
+  }
 }

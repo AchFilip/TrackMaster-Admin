@@ -8,7 +8,7 @@
         <div  *ngIf="this.widget.navbar.open" class="open_menu">
 
             <button mat-button class="menu-option" *ngFor="let option of this.widget.navbar.options"
-                >
+                (click)="onMenuOption(option)">
                 <img src="{{getIconPath(option)}}" class="icon">
             </button>
 
@@ -17,14 +17,6 @@
             </button>
         </div>
     </div>
-    <!-- Navbar -->
-    <!-- <div class="navbar">
-        <img src="{{this.widget.navbar.title_icon_path}}" class="icon">
-        <div class="title text text-size-title text-white">{{this.widget.navbar.title}}</div>
-        <button mat-button class="menu" (click)="onMenuClicked()">
-            <img src="{{this.widget.navbar.menu_icon_path}}">
-        </button>
-    </div> -->
 
     <!-- Widget options -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.widget_options">
