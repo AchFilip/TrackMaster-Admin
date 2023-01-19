@@ -25,6 +25,11 @@ export class TabletCellComponent implements OnInit {
 
   ngOnInit(): void {
     this.setState(this.self.state);
+    if(this.self.state == 'empty'){
+      this.setState('empty');
+    }else{
+      this.setState('widget');
+    }
   }
 
   private setState(state:string){

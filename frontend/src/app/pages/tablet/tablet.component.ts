@@ -81,6 +81,7 @@ export class TabletComponent implements OnInit {
 
   public selectScreen(oldScreen: number): void{
     this.selectedScreen = oldScreen;
+    this.getWallState();
   }
 
   // private initWall(wallState: any): void {
@@ -103,6 +104,8 @@ export class TabletComponent implements OnInit {
         }
       });
   }
+
+  
 
   protected voiceCommands(): void{
     this.smartSpeaker.addCommand("Select Screen One", () => {

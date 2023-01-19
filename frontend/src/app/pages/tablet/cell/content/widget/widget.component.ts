@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { timeout } from 'rxjs';
+import { throwIfEmpty, timeout } from 'rxjs';
 import { OrderOptions, Statistics } from 'src/app/global/models/cell/orders.enum.options';
 import { WidgetContentOptions } from 'src/app/global/models/cell/widget.enum.content.options';
 import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
@@ -93,8 +93,14 @@ export class TabletWidgetComponent implements OnInit {
   protected WidgetContentOptionsEnum = WidgetContentOptions;
   
   ngOnInit(): void {
-    // this.initState(this.initStateOn.display, this.initStateOn.name)
-    this.initState(WidgetContentOptions.widget_options, 'widgets');
+    console.log(this.self)
+    if(this.self.state === 'completed'){
+      this.initState('completed','completed')
+    }if(this.self.state === 'live'){
+      this.initState('live','live')
+    }else{
+      this.initState(WidgetContentOptions.widget_options, 'widget');
+    }
   }
 
   protected initState(display: string, name: string) {
@@ -112,6 +118,7 @@ export class TabletWidgetComponent implements OnInit {
       }
       case WidgetOptions.live: {
         // this.initLiveMap(name);
+        console.log(WidgetOptions.live,name)
         break;
       }
       case WidgetOptions.statistics: {
@@ -121,7 +128,6 @@ export class TabletWidgetComponent implements OnInit {
 
       /** ORDERS */
       case WidgetContentOptions.order_options: {
-        console.log('order_options')
         // this.initOrderOptions(name);
         break;
       }
