@@ -32,7 +32,20 @@
                 background-color: #708EAA;
                 height: 100%;
                 width: 30%;
-                
+
+                .mat-button {
+                    padding: 0 6px 0 6px;
+                    margin: 6px 8px 6px 8px;
+                    min-width: 100px;
+                    border-radius: 0px;
+                    font-size: 14px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    text-decoration:none;
+                    border: none;
+                    outline: none;
+                 }
+
                 .icon{
                     transform: scale(0.4);
                     filter: brightness(6%)
@@ -60,7 +73,7 @@
         background-color: #F0F6FF;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         
-        padding-left:3px;
+        padding:6px;
         width:100%;
         height:100%;
         display: flex;
@@ -70,12 +83,11 @@
         justify-content: flex-start;
 
         overflow-y: scroll;
-        
-    
 
         .widget-option{
             background-color: #85A8C9;
-            width: 48%;
+            width: 49.5%;
+            height: 49%;
 
             display: flex;
             flex-direction: column;
@@ -84,12 +96,13 @@
 
             .icon{
                 padding-bottom: 15px;
+                margin-top:10px;
             }
         }
 
         .order-option{
             background-color: #85A8C9;
-            width: 48%;
+            width: 49.5%;
 
             display: flex;
             flex-direction: column;
@@ -98,6 +111,7 @@
 
             .icon{
                 padding-bottom: 15px;
+                margin-top:10px;
             }
         }
 
