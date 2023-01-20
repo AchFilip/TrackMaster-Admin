@@ -21,7 +21,7 @@ export class LiveMapComponent implements AfterViewInit {
 
   private map!: L.Map;
   private marker!: L.Marker[];
-  public spinnerValue: number = 100; //0 to 100
+  public spinnerValue: number = 87.5; //0 to 100
 
   public closeInfo: boolean = false;
   public closeDriver: boolean = false;
@@ -69,7 +69,8 @@ export class LiveMapComponent implements AfterViewInit {
     let customWaypoints = [];
 
     for(let i = 0;i < locationsBeen.length;i++){
-      customWaypoints.push(L.latLng(locationsBeen[i]['lat'],locationsBeen[i]['lon']))
+      customWaypoints
+        .push(L.latLng(locationsBeen[i]['lat'],locationsBeen[i]['lon']))
     }
 
     if(this.driverPath != null) {
@@ -133,7 +134,11 @@ export class LiveMapComponent implements AfterViewInit {
         this.test[i].surname = drivers[i].surname
         this.test[i].phone = drivers[i].phone
         this.test[i].total_orders = drivers[i].ongoing_orders + drivers[i].delivered_orders + drivers[i].canceled_orders
-        this.test[i].distance = 555;
+        this.test[i].distance = 10;
+
+        if(i === 1){
+          this.test[i].distance = 5;
+        }
 
         this.marker.push(marker)
         this.marker[i].options.title = String(i);

@@ -22,6 +22,22 @@
         top: 252px;
     }
 
+    .logo-left {
+      position: absolute;
+      width: 80px;
+      height: 120px;
+      left: 110px;
+      top: 300px;
+    }
+
+    .logo-right {
+      position: absolute;
+      width: 80px;
+      height: 120px;
+      left: 200px;
+      top: 275px;
+    }
+
     .description{
         position: absolute;
         width: 248px;
@@ -37,7 +53,7 @@
         display: flex;
         align-items: center;
         text-align: center;
-    
+
         color: #FFFFFF;
     }
 }

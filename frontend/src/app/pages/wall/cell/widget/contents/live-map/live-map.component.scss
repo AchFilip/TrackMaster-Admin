@@ -28,8 +28,8 @@
 
     position: absolute;
     width: 300px;
-    height: 260px;
-    left: 900px;
+    height: 200px;
+    left: 74%;
     top: 16%;
 
     background: #F0F6FF;
@@ -58,7 +58,7 @@
       position: absolute;
 
       left: 3%;
-      top: 35%;
+      top: 45%;
       img{
         position: absolute;
         width: 35px;
@@ -84,7 +84,7 @@
         position: absolute;
         width: 280px;
         height: 0px;
-        top: 40px;
+        top: 42.5px;
         border: 0.5px solid #9A9A9A;
       }
     }
@@ -94,7 +94,7 @@
       position: absolute;
 
       left: 3%;
-      top: 55%;
+      top: 70%;
       img{
         position: absolute;
         width: 35px;
@@ -135,7 +135,7 @@
 
     position: absolute;
     width: 300px;
-    height: 450px;
+    height: 400px;
     left: 900px;
     top: 16%;
 
@@ -210,7 +210,7 @@
       .total-distance{
         position: absolute;
 
-        top: 200px;
+        top: 150px;
         left: -35px;
         width: 250px;
         font-size: 22px;
@@ -233,22 +233,30 @@
 
     .spinner{
       position: relative;
-      top: 300px;
+      top: 250px;
       left: 95px;
 
+      .my-spinner{
+        height: 100px;
+        width: 100px;
+      }
       .hours-left{
         position: relative;
-        top: 50px;
-        left: 0px;
+        top: -130px;
+        left: 30px;
+        width: 55px;
+
+        font-size: 24;
       }
 
       .workshift-text{
         position: relative;
-        left: -5px;
+        left: -12.5px;
         top: 10px;
 
         font-size: 30px;
       }
+
     }
 
     .close-button{
@@ -257,7 +265,7 @@
       background-color: #F0F6FF;
 
       left: 83%;
-      bottom: 40%;
+      bottom: 52%;
       width: 40px;
       height: 40px;
     }
