@@ -110,4 +110,12 @@
             <div class="legend text">completed orders</div>
         </div>
     </div>
+
+    <!-- Order available -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.available">
+        <div class="icon_content">
+            <img src="{{this.imageBasePath + 'available.png'}}" class="main_icon">
+            <div class="legend text">available orders</div>
+        </div>
+    </div>
 </div>

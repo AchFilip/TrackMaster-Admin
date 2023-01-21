@@ -5,6 +5,7 @@ export enum WidgetContentOptions{
     widget_options='widget_options',
     reset='reset',
     create='create',
+    available='available',
     edit='edit',
     order_options='order_options',
     order_completed='order_completed',

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   host: 'http://localhost:8080', // change "localhost" to your IP address
-  // host: 'http://139.91.96.119:8080'
+  // host: 'http://139.91.96.175:8080'
 };
 /*
  * For easier debugging in development mode, you can import the following file
