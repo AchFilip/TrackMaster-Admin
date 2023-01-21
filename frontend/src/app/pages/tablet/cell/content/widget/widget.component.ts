@@ -34,6 +34,10 @@ export class TabletWidgetComponent implements OnInit {
     'resize', 'move', 'close'
   ];
 
+  protected db_live_menu_options = [
+    'resize', 'move', 'close', 'staff', 'focus'
+  ];
+
   //Statistics
   protected db_statistics_options = [
     'single', 'company'
@@ -45,7 +49,7 @@ export class TabletWidgetComponent implements OnInit {
      'snackbar': 'snackbar.png',
      'cross': 'cross.png',
      'menu': 'menu.png',
- 
+
      'widget': 'widgets.png',
      // Widget options
      'orders': 'completed.png',
@@ -63,7 +67,10 @@ export class TabletWidgetComponent implements OnInit {
      'close': 'close.png',
      // Statistics options
      'single': 'single.png',
-     'company': 'company.png'
+     'company': 'company.png',
+     'staff': 'company.png',
+     'focus': 'single.png'
+
    }
 
    protected widget = {
@@ -91,9 +98,9 @@ export class TabletWidgetComponent implements OnInit {
   }
 
   protected WidgetContentOptionsEnum = WidgetContentOptions;
-  
+
   ngOnInit(): void {
-    
+
       if(this.self.state === 'completed'){
         this.initState('completed','completed')
       }if(this.self.state === 'live'){
@@ -102,7 +109,7 @@ export class TabletWidgetComponent implements OnInit {
         this.initState(WidgetContentOptions.widget_options, 'widget');
         console.log(this.widget.content.display)
       }
-    
+
   }
 
   protected initState(display: string, name: string) {
@@ -121,7 +128,7 @@ export class TabletWidgetComponent implements OnInit {
         break;
       }
       case WidgetOptions.live: {
-        // this.initLiveMap(name);
+        this.initLiveMap(name);
         console.log(WidgetOptions.live,name)
         break;
       }
@@ -178,9 +185,9 @@ export class TabletWidgetComponent implements OnInit {
     this.socketService.publish("cell-state", {
       wallID: this.self.wall,
       cellID: this.self.id,
-      action:'open-from-table', 
-      state: { 
-        display: display, 
+      action:'open-from-table',
+      state: {
+        display: display,
         name: name
       }})
   }
@@ -227,6 +234,11 @@ export class TabletWidgetComponent implements OnInit {
     this.widget.navbar.options = this.getMenuOptions();
   }
 
+  initLiveMenu() {
+    this.widget.navbar.active = true;
+    this.widget.navbar.options = this.db_live_menu_options;
+  }
+
   initWidgetOptions(name: string) {
     // Init navbar
     this.widget.navbar.title = name;
@@ -254,6 +266,13 @@ export class TabletWidgetComponent implements OnInit {
 
     // Request for order options
     this.widget.content.options = this.getOrderOptions();
+  }
+
+  initLiveMap(name: string) {
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.chosen_live_map);
+
+    this.initLiveMenu();
   }
 
   initCreateOrder(name: string) {
@@ -350,10 +369,10 @@ export class TabletWidgetComponent implements OnInit {
     this.socketService.publish("tablet-state", {
       wallID: this.self.wall,
       cellID: this.self.id,
-      action:'update-order-text', 
+      action:'update-order-text',
       order: order})
   }
-  
+
   public onInput(): void {
     const adr = document.getElementById('adr') as HTMLInputElement | null;
     const st = document.getElementById('st') as HTMLInputElement | null;
@@ -424,7 +443,7 @@ export class TabletWidgetComponent implements OnInit {
     this.updateWallWidget(order)
   }
 
-  public submit(): void{ 
+  public submit(): void{
     let test = new OrderModel();
     const adr = document.getElementById('adr') as HTMLInputElement;
     const st = document.getElementById('st') as HTMLInputElement;
@@ -441,7 +460,7 @@ export class TabletWidgetComponent implements OnInit {
     test.time = new Date();
     // this.orderService.addOrder(test).subscribe(response => {console.log(response)});
     // this.socketService.publish("cell-state", {wallID: this.wallID,cellID: this.cellID,action:'close'})
-    
+
     this.socketService.publish("tablet-state", {
       wallID: this.self.wall,
       cellID: this.self.id,
@@ -465,6 +484,12 @@ export class TabletWidgetComponent implements OnInit {
         wallID: String(this.self.wall),
         cellID: this.self.id,
         action:'close'})
+    }else if(option === "focus"){
+      console.log("focus to driver")
+      this.widget.content.display = WidgetContentOptions.focus_driver;
+      this.widget.navbar.active = false;
+    }else if(option === 'backFromFocus'){
+      console.log("back from focus");
     }
   }
 }

@@ -16,7 +16,7 @@
 
             justify-content: center;
             display: flex;
-            
+
             .icon{
                 transform: scale(0.7);
             }
@@ -72,7 +72,7 @@
         flex: 1 0 auto;
         background-color: #F0F6FF;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        
+
         padding:6px;
         width:100%;
         height:100%;
@@ -83,6 +83,56 @@
         justify-content: flex-start;
 
         overflow-y: scroll;
+
+        .navbar{
+          position: absolute;
+          width: 100%;
+          top: 2%;
+          left: -2%;
+
+          .kelanto{
+            position: absolute;
+            top: -50%;
+            left: 0%;
+            width: 361px;
+            height: 44px;
+            background: #85A8C9;
+            border-radius: 5px 5px 0px 0px;
+
+            img{
+              height: 24px;
+              position: absolute;
+              z-index: 99;
+              top: 11px;
+              left: 88.5%;
+              width: 24px;
+            }
+          }
+
+          .ponaw{
+            position: absolute;
+            z-index: 90;
+            top: -2.5px;
+            left: 90%;
+            width: 30px;
+            height: 35px;
+            background: #708EAA;
+            border-radius: 5px;
+          }
+
+          img{
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 2%;
+          }
+
+          p{
+            position: absolute;
+            left: 15%;
+            top: 8%;
+          }
+        }
 
         .widget-option{
             background-color: #85A8C9;
@@ -114,7 +164,6 @@
                 margin-top:10px;
             }
         }
-
 
         .order-add{
             font-family: 'Koulen', sans-serif;
@@ -154,9 +203,9 @@
 
                     .input{
                         width: 95%;
-                    }  
+                    }
                 }
-                
+
                 .st_number{
                     width: 31%;
                     height: auto;
@@ -250,7 +299,7 @@
                     flex-direction: row;
                     justify-content: center;
                     column-gap: 15px;
-            
+
                     .clear {
                         height: 36px;
                         justify-content: center;
@@ -260,7 +309,7 @@
                         background: #B1C8DD;
                         border-radius: 21px;
                     }
-                
+
                     .submit {
                         height: 36px;
                         display: flex;
@@ -270,13 +319,13 @@
                         background: #EEAC2D;
                         border-radius: 21px;
                     }
-                
+
                     .enable {
                         pointer-events: all;
                         cursor: default;
                         background: #EEAC2D;
                     }
-                
+
                     .disable {
                         pointer-events: none;
                         cursor: default;

@@ -44,12 +44,12 @@
                     <div class="title">ADDRESS:</div>
                     <input class="input" type="text" [ngModel]="address" (ngModelChange)="canClear();canSubmit();onInput()" id="adr" maxlength="30">
                 </div>
-                
+
                 <div class="st_number">
                     <div class="title">ST. NUMBER:</div>
                     <input class="input"  type="text" [ngModel]="st_num" (ngModelChange)="canClear(); canSubmit();onInput()" id="st" maxlength="4">
                 </div>
-                
+
                 <div class="floor">
                     <div class="title">FLOOR LEVEL:</div>
                     <mat-form-field class="options" appearance="fill">
@@ -77,7 +77,7 @@
                         <div class="title">PACKAGE VOLUME:</div>
                         <input class="input" [ngModel]="volume" (ngModelChange)="canClear();canSubmit();onInput()" id="vol" maxlength="6">
                     </div>
-                    
+
                     <div class="fast">
                         <div class="title">FAST DELIVERY:</div>
                         <section class="checkbox">
@@ -110,4 +110,27 @@
             <div class="legend text">completed orders</div>
         </div>
     </div>
+
+
+    <!-- Live Map -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.chosen_live_map">
+      <div class="icon_content">
+        <img src="{{this.imageBasePath + 'live.png'}}" class="main_icon">
+        <div class="legend text">live map</div>
+      </div>
+    </div>
+
+  <!-- Focus Driver -->
+  <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.focus_driver">
+    <div class="navbar">
+      <button class="ponaw" (click)="this.onMenuOption('backFromFocus')"></button>
+      <div class="kelanto">
+        <img src="{{this.imageBasePath + 'back.png'}}">
+      </div>
+      <img src="{{this.imageBasePath + 'single.png'}}">
+      <div class="text text-black text-size-content">
+        <p>FOCUS DRIVER</p>
+      </div>
+    </div>
+  </div>
 </div>

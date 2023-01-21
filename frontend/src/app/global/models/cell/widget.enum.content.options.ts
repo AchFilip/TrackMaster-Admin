@@ -13,5 +13,6 @@ export enum WidgetContentOptions{
     chosen_live_map='chosen_live_map',
     //statistics
     statistics_options='statistics_options',
-    company_option='company_option'
+    company_option='company_option',
+    focus_driver='focus_driver'
 }

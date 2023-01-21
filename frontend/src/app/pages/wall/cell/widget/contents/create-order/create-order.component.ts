@@ -74,7 +74,7 @@ constructor(
     test.address = adr.value;
     test.street_number = Number(st.value);
     test.volume = Number(vol.value);
-    test.floor_level = 5;//Number(this.floor);
+    test.floor_level = Number(this.floor);
     test.zip_code = Number(zip.value);
     test.status = "available";
     test.timestamp =  {};
