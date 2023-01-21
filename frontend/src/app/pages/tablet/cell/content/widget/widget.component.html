@@ -132,7 +132,13 @@
         <p>FOCUS DRIVER</p>
       </div>
     </div>
+    <div class="live-drivers">
+      <button class="row" *ngFor="let row of orders;let i=index;" (click)="focusDriver(i)">
+        {{row}}
+      </button>
+    </div>
   </div>
+
     <!-- Order available -->
     <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.available">
         <div class="icon_content">

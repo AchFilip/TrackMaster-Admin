@@ -6,6 +6,8 @@ import { WidgetOptions } from 'src/app/global/models/cell/widget.enum.options';
 import { OrderModel } from 'src/app/global/models/order/order.model';
 import { OrdersService } from 'src/app/global/services/orders/orders.service';
 import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
+import {DriversService} from "../../../../../global/services/drivers/drivers.service";
+import * as L from "leaflet";
 
 @Component({
   selector: 'Tablet-Widget',
@@ -16,6 +18,7 @@ export class TabletWidgetComponent implements OnInit {
   @Input() self?: any;
   constructor(
     private orderService: OrdersService,
+    private driverService: DriversService,
     private socketService: SocketsService
   ) { }
   protected db_widget_options = [
@@ -25,6 +28,8 @@ export class TabletWidgetComponent implements OnInit {
   protected db_order_options = [
     'completed', 'available', 'ongoing', 'add', 'edit'
   ];
+
+  protected orders = ['Driver1','Driver2'];
 
   protected db_completed_order_fields = [
     'id', 'address', 'St. Num.', 'zip code', 'floor level', 'volume*', 'time listed'
@@ -112,7 +117,28 @@ export class TabletWidgetComponent implements OnInit {
         console.log(this.widget.content.display)
       }
 
+      this.initDrivers();
   }
+
+  protected initDrivers(){
+    this.driverService.getDrivers().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available drivers in db')
+        return;
+      }
+
+      // Use timestamp->delivered as time
+      let drivers = result.map((order)=>{
+        return order;
+      });
+
+      this.orders = [];
+      for(let i=0; i<drivers.length;i++){
+        this.orders.push( drivers[i].name + ' ' + drivers[i].surname);
+      }
+    });
+  }
+
 
   protected initState(display: string, name: string) {
     console.log(display, name, this.widget.content.display)
@@ -510,7 +536,13 @@ export class TabletWidgetComponent implements OnInit {
       this.widget.content.display = WidgetContentOptions.focus_driver;
       this.widget.navbar.active = false;
     }else if(option === 'backFromFocus'){
-      console.log("back from focus");
+      this.widget.content.display = WidgetContentOptions.chosen_live_map;
+      this.widget.navbar.active = true;
+      this.widget.navbar.open = false;
     }
+  }
+
+  protected focusDriver(index:number){
+    console.log('Focus driver: ' + index);
   }
 }
