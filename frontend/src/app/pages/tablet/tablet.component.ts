@@ -56,6 +56,17 @@ export class TabletComponent implements OnInit {
   }
 
   initCells(wallState:any): void {
+    // If state is available let it be 
+    if(this.cells[0] !== undefined){
+      let state = ''
+      console.log('Careful about available state')
+      for (let i = 0; i < 2 * 3; i++) {
+        if(this.cells[i].state === 'available'){
+          wallState.state[i] = 'available'
+          console.log('FOUND AVAILABALE STATE')
+        }
+      }
+    }
 
     this.cells_size[0] = {colspan: 1, rowspan: 1};
     this.cells_size[1] = {colspan: 1, rowspan: 1};
@@ -66,6 +77,30 @@ export class TabletComponent implements OnInit {
     console.log(wallState)
     this.cells = [];
     for (let i = 0; i < 2 * 3; i++) {
+      this.cells.push(<CellModel>({
+        id: i,
+        wall: this.selectedScreen,
+        selected: false,
+        state: wallState.state[i]
+      }));
+    }
+  }
+
+  updateState(wallState:any){
+    if(this.cells[0] === undefined){
+      this.initCells(wallState)
+      return
+    }
+    let state = ''
+    for (let i = 0; i < 2 * 3; i++) {
+      if(this.cells[i].state === 'available'){
+        state = 'available'
+      }else{
+        state = wallState.state[i]
+      }
+      console.log('old: ' + this.cells[i].state)
+      console.log('new: ' + state)
+      this.cells = []
       this.cells.push(<CellModel>({
         id: i,
         wall: this.selectedScreen,
@@ -98,7 +133,7 @@ export class TabletComponent implements OnInit {
             console.warn("Wall state is undefined");
             return;
           }
-          console.log(data.wallState);
+          // this.updateState(data.wallState)
           this.initCells(data.wallState);
         }else{
           console.log("Unknown action: " + data.action);

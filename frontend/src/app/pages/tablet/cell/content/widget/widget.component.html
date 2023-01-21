@@ -74,7 +74,7 @@
                 <div class="extra">
 
                     <div class="volume">
-                        <div class="title">PACKAGE VOLUME:</div>
+                        <div class="title">PACKAGE VOLUME (cm<sup>3</sup>)</div>
                         <input class="input" [ngModel]="volume" (ngModelChange)="canClear();canSubmit();onInput()" id="vol" maxlength="6">
                     </div>
 
@@ -133,4 +133,11 @@
       </div>
     </div>
   </div>
+    <!-- Order available -->
+    <div class="content" *ngIf="this.widget.content.display===WidgetContentOptionsEnum.available">
+        <div class="icon_content">
+            <img src="{{this.imageBasePath + 'available.png'}}" class="main_icon">
+            <div class="legend text">available orders</div>
+        </div>
+    </div>
 </div>

@@ -105,6 +105,8 @@ export class TabletWidgetComponent implements OnInit {
         this.initState('completed','completed')
       }if(this.self.state === 'live'){
         this.initState('live','live')
+      }if(this.self.state === 'available'){
+        this.initState('available','available')
       }else{
         this.initState(WidgetContentOptions.widget_options, 'widget');
         console.log(this.widget.content.display)
@@ -143,7 +145,7 @@ export class TabletWidgetComponent implements OnInit {
         break;
       }
       case OrderOptions.available: {
-        // this.initAvailable(name);
+        this.initAvailableOrder(name);
         break;
       }
       case OrderOptions.completed: {
@@ -290,6 +292,25 @@ export class TabletWidgetComponent implements OnInit {
 
     // Store chosen option
     this.widget.chosen_option = OrderOptions.add;
+  }
+
+  initAvailableOrder(name: string) {
+    // Request for order options
+    // this.widget.content.options = this.getOrderOptions();
+
+    // Update widget's icon
+    // this.setNavbarIcon(name)
+
+    // Update widget's title
+    // this.changeTitle(name)
+
+    // Change widget's content display
+    this.setContentDisplay(WidgetContentOptions.available);
+
+    // Store chosen option
+    this.widget.chosen_option = OrderOptions.available;
+
+    this.initMenu();
   }
 
   protected getWidgetOptions(): string[] {

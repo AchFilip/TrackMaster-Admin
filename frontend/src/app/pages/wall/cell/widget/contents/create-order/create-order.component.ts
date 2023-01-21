@@ -28,6 +28,11 @@ constructor(
     private socketService: SocketsService
   ) { }
 
+  // ngOnDestroy(): void {
+  //   this.socketService.unsubscribe("update-order-text");
+  //   this.socketService.unsubscribe("submit-order");
+  // }
+
   ngOnInit(): void {
 
     this.socketService.publish("wall-state", {wallID: this.wallID,cellID: this.cellID,action:'getActiveWalls'});

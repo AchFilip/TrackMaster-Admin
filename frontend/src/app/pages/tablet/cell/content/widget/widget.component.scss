@@ -147,6 +147,7 @@
             .icon{
                 padding-bottom: 15px;
                 margin-top:10px;
+                transform: scale(0.9);
             }
         }
 
@@ -207,7 +208,7 @@
                 }
 
                 .st_number{
-                    width: 31%;
+                    width: 31.5%;
                     height: auto;
                     display: flex;
                     flex-direction: column;
