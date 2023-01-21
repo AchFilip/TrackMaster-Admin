@@ -6,7 +6,6 @@
 .order-info{
   font-family: 'Koulen', sans-serif;
   font-style: normal;
-  font-size: 30px;
 
   .titles{
     position: absolute;
@@ -30,6 +29,7 @@
     bottom: 72%;
     left: 22%;
     box-sizing: border-box;
+    font-size: 30px;
 
     background: #FFFFFF;
     border: 5px solid #ECE9E9;
@@ -43,6 +43,7 @@
     bottom: 58%;
     left: 22%;
     box-sizing: border-box;
+    font-size: 30px;
 
     background: #FFFFFF;
     border: 5px solid #ECE9E9;
@@ -56,6 +57,7 @@
     bottom: 45%;
     left: 22%;
     box-sizing: border-box;
+    font-size: 30px;
 
     background: #FFFFFF;
     border: 5px solid #ECE9E9;
@@ -65,7 +67,7 @@
   .box-floor{
     position: absolute;
     right: 40%;
-    top: 56%;
+    top: 57%;
     left: 22%;
 
     mat-form-field{
@@ -94,6 +96,8 @@
     background: #FFFFFF;
     border: 5px solid #ECE9E9;
     border-radius: 10px;
+    font-size: 30px;
+
   }
 
   .box-delivery{

@@ -83,36 +83,37 @@
 
       .id{
         position: relative;
+        width: 55px;
         left: 10px;
       }
 
       .address{
         position: relative;
-        width: 300px;
-        left: 45px;
+        width: 285px;
+        left: 23px;
       }
 
       .st{
         position: relative;
-        left: 100px;
-        width: 95px;
+        left: 95px;
+        width: 75px;
       }
 
       .zip{
         position: relative;
-        left: 170px;
+        left: 185px;
         width: 95px;
       }
 
       .driver{
         position: relative;
-        left: 250px;
+        left: 265px;
         width: 195px;
       }
 
       .time{
         position: relative;
-        left: 250px;
+        left: 270px;
       }
     }
   }

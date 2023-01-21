@@ -88,22 +88,23 @@
 
       .id{
         position: relative;
-        left: 10px;
+        left: 5px;
+        width: 55px;
         display: flex;
         justify-content: flex-start;
       }
 
       .address{
         position: relative;
-        width: 300px;
-        left: 40px;
+        width: 285px;
+        left: 20px;
         display: flex;
         justify-content: flex-start;
       }
 
       .st{
         position: relative;
-        left: 95px;
+        left: 85px;
         width: 95px;
         display: flex;
         justify-content: flex-start;
@@ -111,7 +112,7 @@
 
       .zip{
         position: relative;
-        left: 170px;
+        left: 160px;
         width: 95px;
         display: flex;
         justify-content: flex-start;
@@ -119,7 +120,7 @@
 
       .floor{
         position: relative;
-        left: 250px;
+        left: 240px;
         width: 120px;
         display: flex;
         justify-content: flex-start;
@@ -127,7 +128,7 @@
 
       .volume{
         position: relative;
-        left: 268px;
+        left: 260px;
         width: 65px;
         display: flex;
         justify-content: flex-start;
@@ -135,14 +136,14 @@
 
       .time{
         position: relative;
-        left: 330px;
+        left: 325px;
         display: flex;
         justify-content: flex-start;
       }
-      
-      
+
+
     }
 
-    
+
   }
 }
