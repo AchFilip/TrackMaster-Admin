@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   btnClick(): void {
     const loginValue = document.getElementById('login') as HTMLInputElement | null;
     if(loginValue != null){
-      if(loginValue.value === "SKIOUROS"){
+      if(loginValue.value.toLowerCase() === "skiouros"){
         this.router.navigate(['/phone-app/orders']);
       }
     }
