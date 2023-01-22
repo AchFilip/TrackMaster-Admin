@@ -64,7 +64,25 @@ export class LiveMapComponent implements AfterViewInit {
     });
 
     this.socketService.subscribe("focus-driver", (data: any) => {
-      console.log(data)
+      if(this.updateInterval != null){
+        this.map.removeLayer(this.driverPath)
+        clearInterval(this.updateInterval)
+      }
+      let i = data.driver;
+      this.selectedDriverInfo['name'] = this.test[i].name
+      this.selectedDriverInfo['surname'] = this.test[i].surname
+      this.selectedDriverInfo['phone'] = this.test[i].phone
+      this.selectedDriverInfo['total_orders'] = this.test[i].total_orders
+      this.selectedDriverInfo['distance'] = this.test[i].distance
+
+      this.closeDriver = false;
+      this.closeInfo = true;
+      this.createRoute(this.driversLocationBenn[i])
+      this.map.setView(this.marker[i].getLatLng(), 16);
+      this.updateInterval = setInterval(() => {
+        this.map.setView(this.marker[i].getLatLng(), 16);
+        this.createRoute(this.driversLocationBenn[i])
+      },1000)
     });
 
   }
