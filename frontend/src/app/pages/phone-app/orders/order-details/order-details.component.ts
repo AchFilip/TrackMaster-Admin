@@ -128,5 +128,33 @@ export class OrderDetailsComponent implements OnInit {
 
   public startWork(): void{
     console.log("started work!!!");
+    this.orderService.getAvailable().subscribe((result) => {
+      if(result.length == 0){
+        console.warn('There are no available orders in db')
+        return;
+      }
+
+      // Use timestamp->delivered as time
+      let orders = result.map((order)=>{
+        order.time = order.timestamp.delivered;
+        return order;
+      });
+
+      // Add all orders
+      for(let i=0; i<orders.length; i++){
+        for(let j = 0; j < this.chosenOrders.length; j++){
+          if(orders[i]._id.substr(orders[i]._id.length-4) === this.chosenOrders[j][0]){
+            let newOrder = new OrderModel();
+            newOrder = orders[i];
+            newOrder.driver = "George Keladonakis";
+            newOrder.status = "ongoing";
+            newOrder.timestamp['picked_up'] = new Date();
+            this.orderService.updateOrder(newOrder).subscribe(response => {console.log(response)});
+          }
+        }
+      }
+
+      this.chosenOrders = [];
+    });
   }
 }
