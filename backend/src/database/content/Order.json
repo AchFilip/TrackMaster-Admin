@@ -1,0 +1,369 @@
+[{
+  "_id": {
+    "$oid": "63cd47efa9902666455415db"
+  },
+  "address": "Andreadaki 23",
+  "street_number": 25,
+  "zip_code": 71306,
+  "floor_level": 2,
+  "volume": 130,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674397679312"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674397679312"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd47fea9902666455415dd"
+  },
+  "address": "Ionias",
+  "street_number": 98,
+  "zip_code": 71356,
+  "floor_level": 1,
+  "volume": 150,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674397694810"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674397694810"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd480fa9902666455415df"
+  },
+  "address": "Alexandrou Papagou",
+  "street_number": 98,
+  "zip_code": 95443,
+  "floor_level": 0,
+  "volume": 15,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674397711974"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674397711974"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd48b0a9902666455415e4"
+  },
+  "address": "Ithakis",
+  "street_number": 54,
+  "zip_code": 12345,
+  "floor_level": 5,
+  "volume": 65,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "available",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674397872896"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674397872896"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd7245b18b887bd08b5b17"
+  },
+  "address": "Adreadaki kai filoi",
+  "street_number": 25,
+  "zip_code": 71306,
+  "floor_level": 2,
+  "volume": 130,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    }
+  },
+  "status": "completed",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408517636"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408517636"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd7266b18b887bd08b5b1b"
+  },
+  "address": "Ithomis",
+  "street_number": 87,
+  "zip_code": 71306,
+  "floor_level": 3,
+  "volume": 10,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    }
+  },
+  "status": "completed",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408550921"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408550921"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd7276b18b887bd08b5b1d"
+  },
+  "address": "Thessalonikis",
+  "street_number": 12,
+  "zip_code": 71333,
+  "floor_level": 1,
+  "volume": 190,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    }
+  },
+  "status": "completed",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408566542"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408566542"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd7298b18b887bd08b5b1f"
+  },
+  "address": "Leoforos 62 Martiron",
+  "street_number": 33,
+  "zip_code": 71202,
+  "floor_level": 3,
+  "volume": 20,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    }
+  },
+  "status": "completed",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408600726"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408600726"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd735db18b887bd08b5b25"
+  },
+  "address": "Zwgrafou",
+  "street_number": 3,
+  "zip_code": 71202,
+  "floor_level": 2,
+  "volume": 10,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "ongoing",
+  "driver": "Achilleas Filippidis",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd73ac974df7e48c527d17"
+  },
+  "address": "Lefthereou",
+  "street_number": 9,
+  "zip_code": 71202,
+  "floor_level": 2,
+  "volume": 15,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "ongoing",
+  "driver": "Achilleas Filippidis",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd73f6974df7e48c527d18"
+  },
+  "address": "Minoos",
+  "street_number": 62,
+  "zip_code": 71202,
+  "floor_level": 3,
+  "volume": 45,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "ongoing",
+  "driver": "George Keladonakis",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63cd75d7974df7e48c527d1b"
+  },
+  "address": "Atlantidos",
+  "street_number": 29,
+  "zip_code": 71305,
+  "floor_level": 0,
+  "volume": 10,
+  "timestamp": {
+    "added": {
+      "$date": {
+        "$numberLong": "1589811030000"
+      }
+    },
+    "picked_up": null,
+    "delivered": null
+  },
+  "status": "ongoing",
+  "driver": "George Keladonakis",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1674408797740"
+    }
+  }
+}]

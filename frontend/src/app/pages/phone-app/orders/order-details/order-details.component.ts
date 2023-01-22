@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import {OrdersService} from "../../../../global/services/orders/orders.service";
 import {OrderModel} from "../../../../global/models/order/order.model";
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -20,7 +21,8 @@ export class OrderDetailsComponent implements OnInit {
 
   @Output("GetChosenOrdersLength") selectedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(    private orderService: OrdersService
+  constructor(    private orderService: OrdersService,
+    private socketService: SocketsService
   ) { }
 
   ngOnChanges(){
@@ -150,6 +152,8 @@ export class OrderDetailsComponent implements OnInit {
             newOrder.status = "ongoing";
             newOrder.timestamp['picked_up'] = new Date();
             this.orderService.updateOrder(newOrder).subscribe(response => {console.log(response)});
+            this.socketService.publish("phone-state", {
+              action:'select-orders'});
           }
         }
       }

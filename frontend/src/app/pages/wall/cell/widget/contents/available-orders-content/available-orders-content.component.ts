@@ -22,6 +22,14 @@ export class AvailableOrdersContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrders();
+
+    this.socketService.subscribe("order-state", (data: any) => {
+      if(data.action === "reload-data") {
+        this.getOrders();
+      }else{
+        console.log("Unknown action: " + data.action);
+      }
+    });
   }
 
   protected getOrders(){

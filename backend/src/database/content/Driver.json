@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "63b5db02fcf4d3c4198ccf9b"
+  },
+  "name": "Achilleas",
+  "surname": "Filippidis",
+  "phone": {
+    "$numberLong": "6976271951"
+  },
+  "ongoing_orders": 2,
+  "delivered_orders": 5,
+  "canceled_orders": 1,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1672862466475"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1672862466475"
+    }
+  },
+  "checked_in": {
+    "$date": {
+      "$numberLong": "1672862466475"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "63b5db92e165a71f77618002"
+  },
+  "name": "George",
+  "surname": "Keladonakis",
+  "phone": {
+    "$numberLong": "6976271955"
+  },
+  "ongoing_orders": 2,
+  "delivered_orders": 3,
+  "canceled_orders": 4,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1672862610889"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1672862610889"
+    }
+  },
+  "checked_in": {
+    "$date": {
+      "$numberLong": "1672862466475"
+    }
+  }
+}]

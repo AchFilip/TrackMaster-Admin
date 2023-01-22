@@ -297,6 +297,23 @@ export class SocketServer {
     }
   }
   
+  handlePhoneState = (topic:string, data:any) => {
+    let action: string = data.action;
+
+    switch(action){
+
+      case 'select-orders':{
+        data.action = 'reload-data';
+        this.io.emit('order-state', data);
+        break;
+      }
+
+      default: {
+        this.logger.error('Wrong action: ', action)
+        break;
+      }
+    }
+  }
   private hasHandler(topic: string){
     return Object.keys(this.handlers).some(e => e === topic);
   }
@@ -305,7 +322,8 @@ export class SocketServer {
     'wall-unsubscribe': this.onWallunSubscribe,
     'wall-state': this.onWallState,
     'cell-state': this.handleCellState,
-    'tablet-state': this.handleTabletState
+    'tablet-state': this.handleTabletState,
+    'phone-state': this.handlePhoneState
   }
 }
 

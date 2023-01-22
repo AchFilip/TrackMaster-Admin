@@ -166,6 +166,9 @@ export class TabletComponent implements OnInit {
       console.log("Doing something");
       //this.smartSpeaker.speak("Dont tell me what to do");
     });
+    this.smartSpeaker.addCommand("hello", () => {
+      this.smartSpeaker.speak("GURU EISAI TRELA MAKARI NA EIXES MALLIA ");
+    });
     this.smartSpeaker.addCommand("Do it", () => {
       
       this.socketService.publish("cell-state", {
@@ -176,8 +179,6 @@ export class TabletComponent implements OnInit {
           display: 'completed', 
           name: 'completed'
         }});
-
-
 
       this.selectScreen(1);
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketsService } from 'src/app/global/services/sockets/sockets.service';
 import {OrderModel} from "../../../../../../global/models/order/order.model";
 import {OrdersService} from "../../../../../../global/services/orders/orders.service";
 
@@ -15,15 +16,24 @@ export class OngoingOrdersContentComponent implements OnInit {
   protected orders: any[][] = [];
 
   constructor(
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private socketService: SocketsService
   ) { }
 
   ngOnInit(): void {
     this.getOrders();
+
+    this.socketService.subscribe("order-state", (data: any) => {
+      if(data.action === "reload-data") {
+        this.getOrders();
+      }else{
+        console.log("Unknown action: " + data.action);
+      }
+    });
   }
 
   protected getOrders(){
-
+    this.orders = [];
     this.orderService.getOngoing().subscribe((result) => {
       if(result.length == 0){
         console.warn('There are no available orders in db')
