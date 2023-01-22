@@ -131,8 +131,16 @@ export class LiveMapComponent implements AfterViewInit {
       this.marker = [];
       for(let i=0; i<drivers.length;i++){
 
+        var greenIcon = L.icon({
+          iconUrl: this.imageBasePath + 'george.png',
+          iconSize:     [35, 35], // size of the icon
+        });
+        if(i === 0){
+          greenIcon.options.iconUrl = this.imageBasePath + 'achilleas.png';
+        }
         var marker = L.marker( [35.34093,25.13219],{
-          draggable: false
+          draggable: false,
+          icon: greenIcon
         }).on('click', (e) => {
 
           this.selectedDriverInfo['name'] = this.test[i].name
