@@ -23,7 +23,7 @@ export class OrdersComponent implements OnInit {
   inAvailable: boolean = true;
   canClear: boolean = false;
   clearPressed: boolean = false;
-
+  startPressed: boolean = false;
   public audio: any;
 
   constructor() { }
@@ -74,7 +74,7 @@ export class OrdersComponent implements OnInit {
   }
 
   startWork() {
-    console.log("Start working..");
+    this.startPressed = true;
   }
 
 }

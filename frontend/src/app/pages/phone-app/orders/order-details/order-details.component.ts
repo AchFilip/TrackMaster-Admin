@@ -16,6 +16,7 @@ export class OrderDetailsComponent implements OnInit {
   public audio: any;
   @Input() inAvailable!: boolean;
   @Input() clearPressed!: boolean;
+  @Input() startPressed!: boolean;
 
   @Output("GetChosenOrdersLength") selectedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -26,6 +27,9 @@ export class OrderDetailsComponent implements OnInit {
     if(this.clearPressed){
       this.ClearOrders();
       this.clearPressed = false;
+    }else if(this.startPressed){
+      this.startPressed = false;
+      this.startWork();
     }
   }
 
@@ -43,7 +47,7 @@ export class OrderDetailsComponent implements OnInit {
     this.avOrdersToggle = [ ];
     this.chosenOrdersToggle = [ ];
 
-      this.orderService.getCompleted().subscribe((result) => {
+      this.orderService.getAvailable().subscribe((result) => {
       if(result.length == 0){
         console.warn('There are no available orders in db')
         return;
@@ -120,5 +124,9 @@ export class OrderDetailsComponent implements OnInit {
     }
     this.chosenOrders.splice(0,this.chosenOrders.length)
     this.selectedEmitter.emit(this.chosenOrders.length > 0);
+  }
+
+  public startWork(): void{
+    console.log("started work!!!");
   }
 }

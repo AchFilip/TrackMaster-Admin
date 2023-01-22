@@ -1,7 +1,7 @@
 <div class="main-container">
   <div class="user-info">
     <img [src]="userPath"/>
-    <p>VOLANAKIS KOSTIS</p>
+    <p>GEORGE KELANTONAKIS</p>
   </div>
   <div class="menu-orders">
     <div class="boxes">
@@ -15,6 +15,7 @@
         <div class="testTT">
           <app-order-details [inAvailable]="this.inAvailable"
                              [clearPressed]="this.clearPressed"
+                             [startPressed]="this.startPressed"
                              (GetChosenOrdersLength)="setCanClear($event)"></app-order-details>
         </div>
       </div>
