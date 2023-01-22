@@ -544,5 +544,10 @@ export class TabletWidgetComponent implements OnInit {
 
   protected focusDriver(index:number){
     console.log('Focus driver: ' + index);
+    this.socketService.publish("tablet-state", {
+      wallID: String(this.self.wall),
+      cellID: this.self.id,
+      action:'focus-driver',
+      driver: index})
   }
 }

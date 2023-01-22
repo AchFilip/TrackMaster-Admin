@@ -285,6 +285,11 @@ export class SocketServer {
         break;
       }
 
+      case 'focus-driver':{
+        this.io.emit(data.action, data);
+        break;
+      }
+
       default: {
         this.logger.error('Wrong action: ', action)
         break;

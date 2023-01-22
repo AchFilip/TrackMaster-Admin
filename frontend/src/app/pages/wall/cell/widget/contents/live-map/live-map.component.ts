@@ -63,6 +63,10 @@ export class LiveMapComponent implements AfterViewInit {
       this.locations[data.id] = data.locations;
     });
 
+    this.socketService.subscribe("focus-driver", (data: any) => {
+      console.log(data)
+    });
+
   }
 
   private createRoute(locationsBeen:any): void {
