@@ -141,7 +141,22 @@ export class TabletComponent implements OnInit {
       });
   }
 
-  
+  openWidgetWithVoice(): void {
+    this.socketService.publish("cell-state", {
+      wallID: '2',
+      cellID: 0,
+      action:'open-from-table', 
+      state: { 
+        display: 'completed', 
+        name: 'completed'
+      }});
+
+    this.selectScreen(2);
+
+    setTimeout(() => {
+      this.getWallState();
+    }, 50);
+  }
 
   protected voiceCommands(): void{
     this.smartSpeaker.addCommand("Select Screen One", () => {
@@ -169,24 +184,17 @@ export class TabletComponent implements OnInit {
     this.smartSpeaker.addCommand("hello", () => {
       this.smartSpeaker.speak("GURU EISAI TRELA MAKARI NA EIXES MALLIA ");
     });
-    this.smartSpeaker.addCommand("Do it", () => {
-      
-      this.socketService.publish("cell-state", {
-        wallID: '1',
-        cellID: 3,
-        action:'open-from-table', 
-        state: { 
-          display: 'completed', 
-          name: 'completed'
-        }});
 
-      this.selectScreen(1);
-
-      setTimeout(() => {
-        this.getWallState();
-      }, 50);
-
-    });
+    // Add different phrases for the same command
+    let commands = [
+      'Open completed orders at screen 2 cell 1',
+      'Open completed orders at screen two cell one',
+      'Do it'];
+    for(let i = 0; i < commands.length; i++){
+      this.smartSpeaker.addCommand(commands[i], () => {
+        this.openWidgetWithVoice();
+      });
+    }
     this.smartSpeaker.initialize();
 
     this.smartSpeaker.start();
